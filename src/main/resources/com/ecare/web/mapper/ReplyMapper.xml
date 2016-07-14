@@ -21,7 +21,11 @@
         SELECT
         <include refid="Base_Column_List"/>
         FROM reply
-        where ReplyPostId= #{postid,jdbcType=INTEGER}
+        where ReplyPostId= #{postId,jdbcType=INTEGER}
+        <if test="pageStart>-1 and pageSize>-1">
+            limit #{pageStart,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+        </if>
+
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from reply

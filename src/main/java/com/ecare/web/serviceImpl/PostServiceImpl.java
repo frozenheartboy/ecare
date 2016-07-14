@@ -5,6 +5,7 @@ import com.ecare.web.service.PostService;
 import com.ecare.web.mapper.PostMapper;
 import com.ecare.web.mapper.ReplyMapper;
 import com.ecare.web.pojo.Reply;
+import com.ecare.web.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +20,13 @@ public class PostServiceImpl implements PostService {
     private PostMapper postMapper;
     @Autowired
     private ReplyMapper replyMapper;
-    public List<Post> findPostByClassId(Integer classid) {
-        List<Post> posts=postMapper.selectByClassId(classid);
+    public List<Post> findPostByClassId(Integer classId,PageVo page) {
+        List<Post> posts=postMapper.selectByClassId(classId,page.getPageStart(),page.getPageSize());
         return posts;
     }
 
-    public List<Reply> findReplyByPostId(Integer postid) {
-        List<Reply> replies=replyMapper.selectByPostId(postid);
+    public List<Reply> findReplyByPostId(Integer postId,PageVo page) {
+        List<Reply> replies=replyMapper.selectByPostId(postId,page.getPageStart(),page.getPageSize());
         return replies;
     }
 }
