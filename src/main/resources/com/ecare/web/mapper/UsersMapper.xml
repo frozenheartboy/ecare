@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ecare.web.mapper.UsersMapper" >
+  <resultMap id="BaseResultMap" type="com.ecare.web.pojo.Users" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="logintime" property="logintime" jdbcType="TIMESTAMP" />
+    <result column="regtime" property="regtime" jdbcType="TIMESTAMP" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="height" property="height" jdbcType="DOUBLE" />
+    <result column="weight" property="weight" jdbcType="DOUBLE" />
+    <result column="waistline" property="waistline" jdbcType="DOUBLE" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="head_url" property="headUrl" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="BMI" property="bmi" jdbcType="DOUBLE" />
+    <result column="diseases_ids" property="diseasesIds" jdbcType="VARCHAR" />
+    <result column="membership" property="membership" jdbcType="INTEGER" />
+    <result column="job_id" property="jobId" jdbcType="VARCHAR" />
+    <result column="pain_location_id" property="painLocationId" jdbcType="VARCHAR" />
+    <result column="tf_history" property="tfHistory" jdbcType="BIT" />
+    <result column="tf_jxgjy" property="tfJxgjy" jdbcType="BIT" />
+    <result column="now_vas" property="nowVas" jdbcType="TINYINT" />
+    <result column="last_vas" property="lastVas" jdbcType="TINYINT" />
+    <result column="sua" property="sua" jdbcType="VARCHAR" />
+    <result column="is_open_clock" property="isOpenClock" jdbcType="BIT" />
+    <result column="disease_last_updatetime" property="diseaseLastUpdatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, phone, password, logintime, regtime, name, nickname, sex, age, height, weight, 
+    waistline, education, email, head_url, city, BMI, diseases_ids, membership, job_id, 
+    pain_location_id, tf_history, tf_jxgjy, now_vas, last_vas, sua, is_open_clock, disease_last_updatetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from users
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from users
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ecare.web.pojo.Users" >
+    insert into users (id, phone, password, 
+      logintime, regtime, name, 
+      nickname, sex, age, 
+      height, weight, waistline, 
+      education, email, head_url, 
+      city, BMI, diseases_ids, 
+      membership, job_id, pain_location_id, 
+      tf_history, tf_jxgjy, now_vas, 
+      last_vas, sua, is_open_clock, 
+      disease_last_updatetime)
+    values (#{id,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{logintime,jdbcType=TIMESTAMP}, #{regtime,jdbcType=TIMESTAMP}, #{name,jdbcType=VARCHAR}, 
+      #{nickname,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{height,jdbcType=DOUBLE}, #{weight,jdbcType=DOUBLE}, #{waistline,jdbcType=DOUBLE}, 
+      #{education,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{headUrl,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{bmi,jdbcType=DOUBLE}, #{diseasesIds,jdbcType=VARCHAR}, 
+      #{membership,jdbcType=INTEGER}, #{jobId,jdbcType=VARCHAR}, #{painLocationId,jdbcType=VARCHAR}, 
+      #{tfHistory,jdbcType=BIT}, #{tfJxgjy,jdbcType=BIT}, #{nowVas,jdbcType=TINYINT}, 
+      #{lastVas,jdbcType=TINYINT}, #{sua,jdbcType=VARCHAR}, #{isOpenClock,jdbcType=BIT}, 
+      #{diseaseLastUpdatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ecare.web.pojo.Users" >
+    insert into users
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="logintime != null" >
+        logintime,
+      </if>
+      <if test="regtime != null" >
+        regtime,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="height != null" >
+        height,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="waistline != null" >
+        waistline,
+      </if>
+      <if test="education != null" >
+        education,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="headUrl != null" >
+        head_url,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="bmi != null" >
+        BMI,
+      </if>
+      <if test="diseasesIds != null" >
+        diseases_ids,
+      </if>
+      <if test="membership != null" >
+        membership,
+      </if>
+      <if test="jobId != null" >
+        job_id,
+      </if>
+      <if test="painLocationId != null" >
+        pain_location_id,
+      </if>
+      <if test="tfHistory != null" >
+        tf_history,
+      </if>
+      <if test="tfJxgjy != null" >
+        tf_jxgjy,
+      </if>
+      <if test="nowVas != null" >
+        now_vas,
+      </if>
+      <if test="lastVas != null" >
+        last_vas,
+      </if>
+      <if test="sua != null" >
+        sua,
+      </if>
+      <if test="isOpenClock != null" >
+        is_open_clock,
+      </if>
+      <if test="diseaseLastUpdatetime != null" >
+        disease_last_updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="logintime != null" >
+        #{logintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regtime != null" >
+        #{regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="height != null" >
+        #{height,jdbcType=DOUBLE},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="waistline != null" >
+        #{waistline,jdbcType=DOUBLE},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="headUrl != null" >
+        #{headUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="bmi != null" >
+        #{bmi,jdbcType=DOUBLE},
+      </if>
+      <if test="diseasesIds != null" >
+        #{diseasesIds,jdbcType=VARCHAR},
+      </if>
+      <if test="membership != null" >
+        #{membership,jdbcType=INTEGER},
+      </if>
+      <if test="jobId != null" >
+        #{jobId,jdbcType=VARCHAR},
+      </if>
+      <if test="painLocationId != null" >
+        #{painLocationId,jdbcType=VARCHAR},
+      </if>
+      <if test="tfHistory != null" >
+        #{tfHistory,jdbcType=BIT},
+      </if>
+      <if test="tfJxgjy != null" >
+        #{tfJxgjy,jdbcType=BIT},
+      </if>
+      <if test="nowVas != null" >
+        #{nowVas,jdbcType=TINYINT},
+      </if>
+      <if test="lastVas != null" >
+        #{lastVas,jdbcType=TINYINT},
+      </if>
+      <if test="sua != null" >
+        #{sua,jdbcType=VARCHAR},
+      </if>
+      <if test="isOpenClock != null" >
+        #{isOpenClock,jdbcType=BIT},
+      </if>
+      <if test="diseaseLastUpdatetime != null" >
+        #{diseaseLastUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ecare.web.pojo.Users" >
+    update users
+    <set >
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="logintime != null" >
+        logintime = #{logintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regtime != null" >
+        regtime = #{regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="height != null" >
+        height = #{height,jdbcType=DOUBLE},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="waistline != null" >
+        waistline = #{waistline,jdbcType=DOUBLE},
+      </if>
+      <if test="education != null" >
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="headUrl != null" >
+        head_url = #{headUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="bmi != null" >
+        BMI = #{bmi,jdbcType=DOUBLE},
+      </if>
+      <if test="diseasesIds != null" >
+        diseases_ids = #{diseasesIds,jdbcType=VARCHAR},
+      </if>
+      <if test="membership != null" >
+        membership = #{membership,jdbcType=INTEGER},
+      </if>
+      <if test="jobId != null" >
+        job_id = #{jobId,jdbcType=VARCHAR},
+      </if>
+      <if test="painLocationId != null" >
+        pain_location_id = #{painLocationId,jdbcType=VARCHAR},
+      </if>
+      <if test="tfHistory != null" >
+        tf_history = #{tfHistory,jdbcType=BIT},
+      </if>
+      <if test="tfJxgjy != null" >
+        tf_jxgjy = #{tfJxgjy,jdbcType=BIT},
+      </if>
+      <if test="nowVas != null" >
+        now_vas = #{nowVas,jdbcType=TINYINT},
+      </if>
+      <if test="lastVas != null" >
+        last_vas = #{lastVas,jdbcType=TINYINT},
+      </if>
+      <if test="sua != null" >
+        sua = #{sua,jdbcType=VARCHAR},
+      </if>
+      <if test="isOpenClock != null" >
+        is_open_clock = #{isOpenClock,jdbcType=BIT},
+      </if>
+      <if test="diseaseLastUpdatetime != null" >
+        disease_last_updatetime = #{diseaseLastUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ecare.web.pojo.Users" >
+    update users
+    set phone = #{phone,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      logintime = #{logintime,jdbcType=TIMESTAMP},
+      regtime = #{regtime,jdbcType=TIMESTAMP},
+      name = #{name,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      height = #{height,jdbcType=DOUBLE},
+      weight = #{weight,jdbcType=DOUBLE},
+      waistline = #{waistline,jdbcType=DOUBLE},
+      education = #{education,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      head_url = #{headUrl,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      BMI = #{bmi,jdbcType=DOUBLE},
+      diseases_ids = #{diseasesIds,jdbcType=VARCHAR},
+      membership = #{membership,jdbcType=INTEGER},
+      job_id = #{jobId,jdbcType=VARCHAR},
+      pain_location_id = #{painLocationId,jdbcType=VARCHAR},
+      tf_history = #{tfHistory,jdbcType=BIT},
+      tf_jxgjy = #{tfJxgjy,jdbcType=BIT},
+      now_vas = #{nowVas,jdbcType=TINYINT},
+      last_vas = #{lastVas,jdbcType=TINYINT},
+      sua = #{sua,jdbcType=VARCHAR},
+      is_open_clock = #{isOpenClock,jdbcType=BIT},
+      disease_last_updatetime = #{diseaseLastUpdatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

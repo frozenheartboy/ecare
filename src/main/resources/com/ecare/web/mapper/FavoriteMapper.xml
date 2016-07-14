@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ecare.web.mapper.FavoriteMapper" >
+  <resultMap id="BaseResultMap" type="com.ecare.web.pojo.Favorite" >
+    <id column="FavoriteId" property="favoriteid" jdbcType="INTEGER" />
+    <result column="FavoriteUserId" property="favoriteuserid" jdbcType="INTEGER" />
+    <result column="FavoritePostId" property="favoritepostid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    FavoriteId, FavoriteUserId, FavoritePostId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from favorite
+    where FavoriteId = #{favoriteid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from favorite
+    where FavoriteId = #{favoriteid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ecare.web.pojo.Favorite" >
+    insert into favorite (FavoriteId, FavoriteUserId, FavoritePostId
+      )
+    values (#{favoriteid,jdbcType=INTEGER}, #{favoriteuserid,jdbcType=INTEGER}, #{favoritepostid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ecare.web.pojo.Favorite" >
+    insert into favorite
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="favoriteid != null" >
+        FavoriteId,
+      </if>
+      <if test="favoriteuserid != null" >
+        FavoriteUserId,
+      </if>
+      <if test="favoritepostid != null" >
+        FavoritePostId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="favoriteid != null" >
+        #{favoriteid,jdbcType=INTEGER},
+      </if>
+      <if test="favoriteuserid != null" >
+        #{favoriteuserid,jdbcType=INTEGER},
+      </if>
+      <if test="favoritepostid != null" >
+        #{favoritepostid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ecare.web.pojo.Favorite" >
+    update favorite
+    <set >
+      <if test="favoriteuserid != null" >
+        FavoriteUserId = #{favoriteuserid,jdbcType=INTEGER},
+      </if>
+      <if test="favoritepostid != null" >
+        FavoritePostId = #{favoritepostid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FavoriteId = #{favoriteid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ecare.web.pojo.Favorite" >
+    update favorite
+    set FavoriteUserId = #{favoriteuserid,jdbcType=INTEGER},
+      FavoritePostId = #{favoritepostid,jdbcType=VARCHAR}
+    where FavoriteId = #{favoriteid,jdbcType=INTEGER}
+  </update>
+</mapper>

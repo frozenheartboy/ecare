@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ecare.web.mapper.PostMapper" >
+  <resultMap id="BaseResultMap" type="com.ecare.web.pojo.Post" >
+    <id column="PostId" property="postid" jdbcType="INTEGER" />
+    <result column="PostTitle" property="posttitle" jdbcType="VARCHAR" />
+    <result column="PostBody" property="postbody" jdbcType="VARCHAR" />
+    <result column="PostTime" property="posttime" jdbcType="TIMESTAMP" />
+    <result column="PostUserId" property="postuserid" jdbcType="INTEGER" />
+    <result column="PostClassId" property="postclassid" jdbcType="INTEGER" />
+    <result column="PostSort" property="postsort" jdbcType="BIT" />
+    <result column="PostLike" property="postlike" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PostId, PostTitle, PostBody, PostTime, PostUserId, PostClassId, PostSort, PostLike
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from post
+    where PostId = #{postid,jdbcType=INTEGER}
+  </select>
+  <select id="selectByClassId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    from post
+    where PostClassId = #{classid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from post
+    where PostId = #{postid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ecare.web.pojo.Post" >
+    insert into post (PostId, PostTitle, PostBody, 
+      PostTime, PostUserId, PostClassId, 
+      PostSort, PostLike)
+    values (#{postid,jdbcType=INTEGER}, #{posttitle,jdbcType=VARCHAR}, #{postbody,jdbcType=VARCHAR}, 
+      #{posttime,jdbcType=TIMESTAMP}, #{postuserid,jdbcType=INTEGER}, #{postclassid,jdbcType=INTEGER}, 
+      #{postsort,jdbcType=BIT}, #{postlike,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ecare.web.pojo.Post" >
+    insert into post
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="postid != null" >
+        PostId,
+      </if>
+      <if test="posttitle != null" >
+        PostTitle,
+      </if>
+      <if test="postbody != null" >
+        PostBody,
+      </if>
+      <if test="posttime != null" >
+        PostTime,
+      </if>
+      <if test="postuserid != null" >
+        PostUserId,
+      </if>
+      <if test="postclassid != null" >
+        PostClassId,
+      </if>
+      <if test="postsort != null" >
+        PostSort,
+      </if>
+      <if test="postlike != null" >
+        PostLike,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="postid != null" >
+        #{postid,jdbcType=INTEGER},
+      </if>
+      <if test="posttitle != null" >
+        #{posttitle,jdbcType=VARCHAR},
+      </if>
+      <if test="postbody != null" >
+        #{postbody,jdbcType=VARCHAR},
+      </if>
+      <if test="posttime != null" >
+        #{posttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="postuserid != null" >
+        #{postuserid,jdbcType=INTEGER},
+      </if>
+      <if test="postclassid != null" >
+        #{postclassid,jdbcType=INTEGER},
+      </if>
+      <if test="postsort != null" >
+        #{postsort,jdbcType=BIT},
+      </if>
+      <if test="postlike != null" >
+        #{postlike,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ecare.web.pojo.Post" >
+    update post
+    <set >
+      <if test="posttitle != null" >
+        PostTitle = #{posttitle,jdbcType=VARCHAR},
+      </if>
+      <if test="postbody != null" >
+        PostBody = #{postbody,jdbcType=VARCHAR},
+      </if>
+      <if test="posttime != null" >
+        PostTime = #{posttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="postuserid != null" >
+        PostUserId = #{postuserid,jdbcType=INTEGER},
+      </if>
+      <if test="postclassid != null" >
+        PostClassId = #{postclassid,jdbcType=INTEGER},
+      </if>
+      <if test="postsort != null" >
+        PostSort = #{postsort,jdbcType=BIT},
+      </if>
+      <if test="postlike != null" >
+        PostLike = #{postlike,jdbcType=INTEGER},
+      </if>
+    </set>
+    where PostId = #{postid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ecare.web.pojo.Post" >
+    update post
+    set PostTitle = #{posttitle,jdbcType=VARCHAR},
+      PostBody = #{postbody,jdbcType=VARCHAR},
+      PostTime = #{posttime,jdbcType=TIMESTAMP},
+      PostUserId = #{postuserid,jdbcType=INTEGER},
+      PostClassId = #{postclassid,jdbcType=INTEGER},
+      PostSort = #{postsort,jdbcType=BIT},
+      PostLike = #{postlike,jdbcType=INTEGER}
+    where PostId = #{postid,jdbcType=INTEGER}
+  </update>
+</mapper>

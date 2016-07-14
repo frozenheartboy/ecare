@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ecare.web.mapper.PhotoMapper" >
+  <resultMap id="BaseResultMap" type="com.ecare.web.pojo.Photo" >
+    <id column="PhoteId" property="photeid" jdbcType="INTEGER" />
+    <result column="PhotePostId" property="photepostid" jdbcType="INTEGER" />
+    <result column="PhotoUrl" property="photourl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PhoteId, PhotePostId, PhotoUrl
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from photo
+    where PhoteId = #{photeid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from photo
+    where PhoteId = #{photeid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ecare.web.pojo.Photo" >
+    insert into photo (PhoteId, PhotePostId, PhotoUrl
+      )
+    values (#{photeid,jdbcType=INTEGER}, #{photepostid,jdbcType=INTEGER}, #{photourl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ecare.web.pojo.Photo" >
+    insert into photo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="photeid != null" >
+        PhoteId,
+      </if>
+      <if test="photepostid != null" >
+        PhotePostId,
+      </if>
+      <if test="photourl != null" >
+        PhotoUrl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="photeid != null" >
+        #{photeid,jdbcType=INTEGER},
+      </if>
+      <if test="photepostid != null" >
+        #{photepostid,jdbcType=INTEGER},
+      </if>
+      <if test="photourl != null" >
+        #{photourl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ecare.web.pojo.Photo" >
+    update photo
+    <set >
+      <if test="photepostid != null" >
+        PhotePostId = #{photepostid,jdbcType=INTEGER},
+      </if>
+      <if test="photourl != null" >
+        PhotoUrl = #{photourl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PhoteId = #{photeid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ecare.web.pojo.Photo" >
+    update photo
+    set PhotePostId = #{photepostid,jdbcType=INTEGER},
+      PhotoUrl = #{photourl,jdbcType=VARCHAR}
+    where PhoteId = #{photeid,jdbcType=INTEGER}
+  </update>
+</mapper>
