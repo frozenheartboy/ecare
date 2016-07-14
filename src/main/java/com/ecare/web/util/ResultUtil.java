@@ -9,12 +9,19 @@ import java.util.logging.StreamHandler;
  */
 public class ResultUtil {
 
-    public static Map<String, Object> getResult(int code, String message, Object data) {
+    private static Map<String, Object> map;
 
-        Map<String, Object> map = new LinkedHashMap<String, Object>();
+    private ResultUtil() {
+    }
+
+    public static synchronized Map<String, Object> getResult(int code, String message, Object data) {
+        if (map == null) {
+            map = new LinkedHashMap<String, Object>();
+        }
         map.put("code", code);
         map.put("message", message);
         map.put("data", data);
         return map;
     }
+
 }
