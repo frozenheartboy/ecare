@@ -24,7 +24,7 @@ public class PostController {
     @ResponseBody
     public  Map<String,Object>  findPostByClassId(@RequestParam("classid") Integer classid){
         List<Post> posts=postService.findPostByClassId(classid);
-        return ResultUtil.getResult(200,"æŸ¥è¯¢æˆåŠŸ",posts);
+        return ResultUtil.getResult(200,"·µ»Ø³É¹¦",posts);
     }
     @RequestMapping(value = "/findReply")
     @ResponseBody
