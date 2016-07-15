@@ -4,9 +4,12 @@
   <resultMap id="BaseResultMap" type="com.ecare.web.pojo.Class" >
     <id column="ClassId" property="classid" jdbcType="INTEGER" />
     <result column="ClassName" property="classname" jdbcType="VARCHAR" />
+    <result column="re1" property="re1" jdbcType="VARCHAR" />
+    <result column="re2" property="re2" jdbcType="VARCHAR" />
+    <result column="re3" property="re3" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ClassId, ClassName
+    ClassId, ClassName, re1, re2, re3
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -19,8 +22,10 @@
     where ClassId = #{classid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.ecare.web.pojo.Class" >
-    insert into class (ClassId, ClassName)
-    values (#{classid,jdbcType=INTEGER}, #{classname,jdbcType=VARCHAR})
+    insert into class (ClassId, ClassName, re1, 
+      re2, re3)
+    values (#{classid,jdbcType=INTEGER}, #{classname,jdbcType=VARCHAR}, #{re1,jdbcType=VARCHAR}, 
+      #{re2,jdbcType=VARCHAR}, #{re3,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ecare.web.pojo.Class" >
     insert into class
@@ -31,6 +36,15 @@
       <if test="classname != null" >
         ClassName,
       </if>
+      <if test="re1 != null" >
+        re1,
+      </if>
+      <if test="re2 != null" >
+        re2,
+      </if>
+      <if test="re3 != null" >
+        re3,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="classid != null" >
@@ -38,6 +52,15 @@
       </if>
       <if test="classname != null" >
         #{classname,jdbcType=VARCHAR},
+      </if>
+      <if test="re1 != null" >
+        #{re1,jdbcType=VARCHAR},
+      </if>
+      <if test="re2 != null" >
+        #{re2,jdbcType=VARCHAR},
+      </if>
+      <if test="re3 != null" >
+        #{re3,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -47,12 +70,24 @@
       <if test="classname != null" >
         ClassName = #{classname,jdbcType=VARCHAR},
       </if>
+      <if test="re1 != null" >
+        re1 = #{re1,jdbcType=VARCHAR},
+      </if>
+      <if test="re2 != null" >
+        re2 = #{re2,jdbcType=VARCHAR},
+      </if>
+      <if test="re3 != null" >
+        re3 = #{re3,jdbcType=VARCHAR},
+      </if>
     </set>
     where ClassId = #{classid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ecare.web.pojo.Class" >
     update class
-    set ClassName = #{classname,jdbcType=VARCHAR}
+    set ClassName = #{classname,jdbcType=VARCHAR},
+      re1 = #{re1,jdbcType=VARCHAR},
+      re2 = #{re2,jdbcType=VARCHAR},
+      re3 = #{re3,jdbcType=VARCHAR}
     where ClassId = #{classid,jdbcType=INTEGER}
   </update>
 </mapper>

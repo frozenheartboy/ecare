@@ -851,126 +851,204 @@ map_id</columns>
         <mandatory>1</mandatory>
         <data-type>varchar(255)|0</data-type>
       </column>
-      <key id="214" parent="26" name="PRIMARY">
+      <column id="214" parent="26" name="re1">
+        <comment>保留字段1</comment>
+        <data-type>varchar(255)|0</data-type>
+      </column>
+      <column id="215" parent="26" name="re2">
+        <comment>保留字段2</comment>
+        <data-type>varchar(255)|0</data-type>
+      </column>
+      <column id="216" parent="26" name="re3">
+        <comment>保留字段3</comment>
+        <data-type>varchar(255)|0</data-type>
+      </column>
+      <key id="217" parent="26" name="PRIMARY">
         <columns>ClassId</columns>
         <primary>1</primary>
       </key>
-      <column id="215" parent="27" name="ReplyId">
+      <column id="218" parent="27" name="ReplyId">
         <comment>回帖ID</comment>
         <mandatory>1</mandatory>
         <data-type>int(11)|0</data-type>
         <sequence-identity>1</sequence-identity>
       </column>
-      <column id="216" parent="27" name="ReplyBody">
+      <column id="219" parent="27" name="ReplyBody">
         <comment>回帖内容</comment>
         <mandatory>1</mandatory>
         <data-type>varchar(255)|0</data-type>
       </column>
-      <column id="217" parent="27" name="ReplyTime">
+      <column id="220" parent="27" name="ReplyTime">
         <comment>回帖时间，默认服务器当前时间</comment>
         <mandatory>1</mandatory>
         <data-type>timestamp|0</data-type>
         <default-expression>CURRENT_TIMESTAMP</default-expression>
       </column>
-      <column id="218" parent="27" name="ReplyPostId">
+      <column id="221" parent="27" name="ReplyPostId">
         <comment>所回复帖子的ID</comment>
         <mandatory>1</mandatory>
         <data-type>int(11)|0</data-type>
       </column>
-      <column id="219" parent="27" name="ReplyUserId">
+      <column id="222" parent="27" name="ReplyUserId">
         <comment>回帖人ID</comment>
         <mandatory>1</mandatory>
         <data-type>int(11)|0</data-type>
       </column>
-      <key id="220" parent="27" name="PRIMARY">
-        <columns>ReplyId</columns>
-        <primary>1</primary>
-      </key>
-      <column id="221" parent="28" name="PhoteId">
-        <comment>图片ID</comment>
-        <mandatory>1</mandatory>
-        <data-type>int(11)|0</data-type>
-        <sequence-identity>1</sequence-identity>
-      </column>
-      <column id="222" parent="28" name="PhotePostId">
-        <comment>图片对应帖子ID</comment>
-        <mandatory>1</mandatory>
-        <data-type>int(11)|0</data-type>
-      </column>
-      <column id="223" parent="28" name="PhotoUrl">
-        <comment>图片的URL</comment>
-        <mandatory>1</mandatory>
-        <data-type>varchar(255)|0</data-type>
-      </column>
-      <key id="224" parent="28" name="PRIMARY">
-        <columns>PhoteId</columns>
-        <primary>1</primary>
-      </key>
-      <column id="225" parent="29" name="FavoriteId">
-        <comment>收藏ID</comment>
-        <mandatory>1</mandatory>
-        <data-type>int(11)|0</data-type>
-        <sequence-identity>1</sequence-identity>
-      </column>
-      <column id="226" parent="29" name="FavoriteUserId">
-        <comment>收藏人ID</comment>
-        <mandatory>1</mandatory>
-        <data-type>int(11)|0</data-type>
-      </column>
-      <column id="227" parent="29" name="FavoritePostId">
-        <comment>收藏帖子ID</comment>
-        <mandatory>1</mandatory>
-        <data-type>varchar(255)|0</data-type>
-      </column>
-      <key id="228" parent="29" name="PRIMARY">
-        <columns>FavoriteId</columns>
-        <primary>1</primary>
-      </key>
-      <column id="229" parent="30" name="PostId">
-        <comment>帖子ID</comment>
-        <mandatory>1</mandatory>
-        <data-type>int(11)|0</data-type>
-        <sequence-identity>1</sequence-identity>
-      </column>
-      <column id="230" parent="30" name="PostTitle">
-        <comment>帖子标题</comment>
-        <mandatory>1</mandatory>
-        <data-type>varchar(255)|0</data-type>
-      </column>
-      <column id="231" parent="30" name="PostBody">
-        <comment>帖子内容</comment>
-        <mandatory>1</mandatory>
-        <data-type>varchar(255)|0</data-type>
-      </column>
-      <column id="232" parent="30" name="PostTime">
-        <comment>发帖时间,默认服务器当前时间</comment>
-        <mandatory>1</mandatory>
-        <data-type>timestamp|0</data-type>
-        <default-expression>CURRENT_TIMESTAMP</default-expression>
-      </column>
-      <column id="233" parent="30" name="PostUserId">
-        <comment>发帖人ID</comment>
-        <mandatory>1</mandatory>
-        <data-type>int(11)|0</data-type>
-      </column>
-      <column id="234" parent="30" name="PostClassId">
-        <comment>发帖板块ID</comment>
-        <mandatory>1</mandatory>
-        <data-type>int(11)|0</data-type>
-      </column>
-      <column id="235" parent="30" name="PostSort">
-        <comment>是够置顶</comment>
-        <mandatory>1</mandatory>
-        <data-type>bit(1)|0</data-type>
-        <default-expression>b&apos;0&apos;</default-expression>
-      </column>
-      <column id="236" parent="30" name="PostLike">
+      <column id="223" parent="27" name="ReplyLike">
         <comment>点赞数量</comment>
         <mandatory>1</mandatory>
         <data-type>int(11)|0</data-type>
         <default-expression>&apos;0&apos;</default-expression>
       </column>
-      <key id="237" parent="30" name="PRIMARY">
+      <column id="224" parent="27" name="re1">
+        <comment>保留字段1</comment>
+        <data-type>varchar(255)|0</data-type>
+      </column>
+      <column id="225" parent="27" name="re2">
+        <comment>保留字段2</comment>
+        <data-type>varchar(255)|0</data-type>
+      </column>
+      <column id="226" parent="27" name="re3">
+        <comment>保留字段3</comment>
+        <data-type>varchar(255)|0</data-type>
+      </column>
+      <key id="227" parent="27" name="PRIMARY">
+        <columns>ReplyId</columns>
+        <primary>1</primary>
+      </key>
+      <column id="228" parent="28" name="PhotoId">
+        <comment>图片ID</comment>
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="229" parent="28" name="PhotoPostId">
+        <comment>图片对应帖子ID</comment>
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="230" parent="28" name="PhotoUrl">
+        <comment>图片的URL</comment>
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)|0</data-type>
+      </column>
+      <column id="231" parent="28" name="re1">
+        <comment>保留字段1</comment>
+        <data-type>varchar(255)|0</data-type>
+      </column>
+      <column id="232" parent="28" name="re2">
+        <comment>保留字段2</comment>
+        <data-type>varchar(255)|0</data-type>
+      </column>
+      <column id="233" parent="28" name="re3">
+        <comment>保留字段3</comment>
+        <data-type>varchar(255)|0</data-type>
+      </column>
+      <key id="234" parent="28" name="PRIMARY">
+        <columns>PhotoId</columns>
+        <primary>1</primary>
+      </key>
+      <column id="235" parent="29" name="FavoriteId">
+        <comment>收藏ID</comment>
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="236" parent="29" name="FavoriteUserId">
+        <comment>收藏人ID</comment>
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="237" parent="29" name="FavoritePostId">
+        <comment>收藏帖子ID</comment>
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)|0</data-type>
+      </column>
+      <column id="238" parent="29" name="re1">
+        <comment>保留字段1</comment>
+        <data-type>varchar(255)|0</data-type>
+      </column>
+      <column id="239" parent="29" name="re2">
+        <comment>保留字段2</comment>
+        <data-type>varchar(255)|0</data-type>
+      </column>
+      <column id="240" parent="29" name="re3">
+        <comment>保留字段3</comment>
+        <data-type>varchar(255)|0</data-type>
+      </column>
+      <key id="241" parent="29" name="PRIMARY">
+        <columns>FavoriteId</columns>
+        <primary>1</primary>
+      </key>
+      <column id="242" parent="30" name="PostId">
+        <comment>帖子ID</comment>
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="243" parent="30" name="PostTitle">
+        <comment>帖子标题</comment>
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)|0</data-type>
+      </column>
+      <column id="244" parent="30" name="PostBody">
+        <comment>帖子内容</comment>
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)|0</data-type>
+      </column>
+      <column id="245" parent="30" name="PostTime">
+        <comment>发帖时间,默认服务器当前时间</comment>
+        <mandatory>1</mandatory>
+        <data-type>timestamp|0</data-type>
+        <default-expression>CURRENT_TIMESTAMP</default-expression>
+      </column>
+      <column id="246" parent="30" name="PostEditTime">
+        <comment>最后编辑时间，默认服务器当前时间</comment>
+        <mandatory>1</mandatory>
+        <data-type>timestamp|0</data-type>
+        <default-expression>&apos;0000-00-00 00:00:00&apos;</default-expression>
+      </column>
+      <column id="247" parent="30" name="PostUserId">
+        <comment>发帖人ID</comment>
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="248" parent="30" name="PostClassId">
+        <comment>发帖板块ID</comment>
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="249" parent="30" name="PostSort">
+        <comment>是够置顶</comment>
+        <mandatory>1</mandatory>
+        <data-type>bit(1)|0</data-type>
+        <default-expression>b&apos;0&apos;</default-expression>
+      </column>
+      <column id="250" parent="30" name="PostLike">
+        <comment>点赞数量</comment>
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="251" parent="30" name="PostViews">
+        <comment>浏览次数</comment>
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="252" parent="30" name="re1">
+        <comment>保留字段1</comment>
+        <data-type>varchar(255)|0</data-type>
+      </column>
+      <column id="253" parent="30" name="re2">
+        <comment>保留字段2</comment>
+        <data-type>varchar(255)|0</data-type>
+      </column>
+      <column id="254" parent="30" name="re3">
+        <comment>保留字段3</comment>
+        <data-type>varchar(255)|0</data-type>
+      </column>
+      <key id="255" parent="30" name="PRIMARY">
         <columns>PostId</columns>
         <primary>1</primary>
       </key>

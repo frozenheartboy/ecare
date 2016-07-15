@@ -5,9 +5,12 @@
     <id column="FavoriteId" property="favoriteid" jdbcType="INTEGER" />
     <result column="FavoriteUserId" property="favoriteuserid" jdbcType="INTEGER" />
     <result column="FavoritePostId" property="favoritepostid" jdbcType="VARCHAR" />
+    <result column="re1" property="re1" jdbcType="VARCHAR" />
+    <result column="re2" property="re2" jdbcType="VARCHAR" />
+    <result column="re3" property="re3" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    FavoriteId, FavoriteUserId, FavoritePostId
+    FavoriteId, FavoriteUserId, FavoritePostId, re1, re2, re3
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -20,10 +23,10 @@
     where FavoriteId = #{favoriteid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.ecare.web.pojo.Favorite" >
-    insert into favorite (FavoriteId, FavoriteUserId, FavoritePostId
-      )
-    values (#{favoriteid,jdbcType=INTEGER}, #{favoriteuserid,jdbcType=INTEGER}, #{favoritepostid,jdbcType=VARCHAR}
-      )
+    insert into favorite (FavoriteId, FavoriteUserId, FavoritePostId, 
+      re1, re2, re3)
+    values (#{favoriteid,jdbcType=INTEGER}, #{favoriteuserid,jdbcType=INTEGER}, #{favoritepostid,jdbcType=VARCHAR}, 
+      #{re1,jdbcType=VARCHAR}, #{re2,jdbcType=VARCHAR}, #{re3,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ecare.web.pojo.Favorite" >
     insert into favorite
@@ -37,6 +40,15 @@
       <if test="favoritepostid != null" >
         FavoritePostId,
       </if>
+      <if test="re1 != null" >
+        re1,
+      </if>
+      <if test="re2 != null" >
+        re2,
+      </if>
+      <if test="re3 != null" >
+        re3,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="favoriteid != null" >
@@ -47,6 +59,15 @@
       </if>
       <if test="favoritepostid != null" >
         #{favoritepostid,jdbcType=VARCHAR},
+      </if>
+      <if test="re1 != null" >
+        #{re1,jdbcType=VARCHAR},
+      </if>
+      <if test="re2 != null" >
+        #{re2,jdbcType=VARCHAR},
+      </if>
+      <if test="re3 != null" >
+        #{re3,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -59,13 +80,25 @@
       <if test="favoritepostid != null" >
         FavoritePostId = #{favoritepostid,jdbcType=VARCHAR},
       </if>
+      <if test="re1 != null" >
+        re1 = #{re1,jdbcType=VARCHAR},
+      </if>
+      <if test="re2 != null" >
+        re2 = #{re2,jdbcType=VARCHAR},
+      </if>
+      <if test="re3 != null" >
+        re3 = #{re3,jdbcType=VARCHAR},
+      </if>
     </set>
     where FavoriteId = #{favoriteid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ecare.web.pojo.Favorite" >
     update favorite
     set FavoriteUserId = #{favoriteuserid,jdbcType=INTEGER},
-      FavoritePostId = #{favoritepostid,jdbcType=VARCHAR}
+      FavoritePostId = #{favoritepostid,jdbcType=VARCHAR},
+      re1 = #{re1,jdbcType=VARCHAR},
+      re2 = #{re2,jdbcType=VARCHAR},
+      re3 = #{re3,jdbcType=VARCHAR}
     where FavoriteId = #{favoriteid,jdbcType=INTEGER}
   </update>
 </mapper>

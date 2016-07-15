@@ -6,13 +6,19 @@
         <result column="PostTitle" property="posttitle" jdbcType="VARCHAR"/>
         <result column="PostBody" property="postbody" jdbcType="VARCHAR"/>
         <result column="PostTime" property="posttime" jdbcType="TIMESTAMP"/>
+        <result column="PostEditTime" property="postedittime" jdbcType="TIMESTAMP"/>
         <result column="PostUserId" property="postuserid" jdbcType="INTEGER"/>
         <result column="PostClassId" property="postclassid" jdbcType="INTEGER"/>
         <result column="PostSort" property="postsort" jdbcType="BIT"/>
         <result column="PostLike" property="postlike" jdbcType="INTEGER"/>
+        <result column="PostViews" property="postviews" jdbcType="INTEGER"/>
+        <result column="re1" property="re1" jdbcType="VARCHAR"/>
+        <result column="re2" property="re2" jdbcType="VARCHAR"/>
+        <result column="re3" property="re3" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-    PostId, PostTitle, PostBody, PostTime, PostUserId, PostClassId, PostSort, PostLike
+    PostId, PostTitle, PostBody, PostTime, PostEditTime, PostUserId, PostClassId, PostSort, 
+    PostLike, PostViews, re1, re2, re3
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -30,16 +36,20 @@
         </if>
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from post
-        where PostId = #{postid,jdbcType=INTEGER}
-    </delete>
+    delete from post
+    where PostId = #{postid,jdbcType=INTEGER}
+  </delete>
     <insert id="insert" parameterType="com.ecare.web.pojo.Post">
     insert into post (PostId, PostTitle, PostBody, 
-      PostTime, PostUserId, PostClassId, 
-      PostSort, PostLike)
+      PostTime, PostEditTime, PostUserId, 
+      PostClassId, PostSort, PostLike, 
+      PostViews, re1, re2, 
+      re3)
     values (#{postid,jdbcType=INTEGER}, #{posttitle,jdbcType=VARCHAR}, #{postbody,jdbcType=VARCHAR}, 
-      #{posttime,jdbcType=TIMESTAMP}, #{postuserid,jdbcType=INTEGER}, #{postclassid,jdbcType=INTEGER}, 
-      #{postsort,jdbcType=BIT}, #{postlike,jdbcType=INTEGER})
+      #{posttime,jdbcType=TIMESTAMP}, #{postedittime,jdbcType=TIMESTAMP}, #{postuserid,jdbcType=INTEGER}, 
+      #{postclassid,jdbcType=INTEGER}, #{postsort,jdbcType=BIT}, #{postlike,jdbcType=INTEGER}, 
+      #{postviews,jdbcType=INTEGER}, #{re1,jdbcType=VARCHAR}, #{re2,jdbcType=VARCHAR}, 
+      #{re3,jdbcType=VARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.ecare.web.pojo.Post">
         insert into post
@@ -56,6 +66,9 @@
             <if test="posttime != null">
                 PostTime,
             </if>
+            <if test="postedittime != null">
+                PostEditTime,
+            </if>
             <if test="postuserid != null">
                 PostUserId,
             </if>
@@ -67,6 +80,18 @@
             </if>
             <if test="postlike != null">
                 PostLike,
+            </if>
+            <if test="postviews != null">
+                PostViews,
+            </if>
+            <if test="re1 != null">
+                re1,
+            </if>
+            <if test="re2 != null">
+                re2,
+            </if>
+            <if test="re3 != null">
+                re3,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -82,6 +107,9 @@
             <if test="posttime != null">
                 #{posttime,jdbcType=TIMESTAMP},
             </if>
+            <if test="postedittime != null">
+                #{postedittime,jdbcType=TIMESTAMP},
+            </if>
             <if test="postuserid != null">
                 #{postuserid,jdbcType=INTEGER},
             </if>
@@ -93,6 +121,18 @@
             </if>
             <if test="postlike != null">
                 #{postlike,jdbcType=INTEGER},
+            </if>
+            <if test="postviews != null">
+                #{postviews,jdbcType=INTEGER},
+            </if>
+            <if test="re1 != null">
+                #{re1,jdbcType=VARCHAR},
+            </if>
+            <if test="re2 != null">
+                #{re2,jdbcType=VARCHAR},
+            </if>
+            <if test="re3 != null">
+                #{re3,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -108,6 +148,9 @@
             <if test="posttime != null">
                 PostTime = #{posttime,jdbcType=TIMESTAMP},
             </if>
+            <if test="postedittime != null">
+                PostEditTime = #{postedittime,jdbcType=TIMESTAMP},
+            </if>
             <if test="postuserid != null">
                 PostUserId = #{postuserid,jdbcType=INTEGER},
             </if>
@@ -120,6 +163,18 @@
             <if test="postlike != null">
                 PostLike = #{postlike,jdbcType=INTEGER},
             </if>
+            <if test="postviews != null">
+                PostViews = #{postviews,jdbcType=INTEGER},
+            </if>
+            <if test="re1 != null">
+                re1 = #{re1,jdbcType=VARCHAR},
+            </if>
+            <if test="re2 != null">
+                re2 = #{re2,jdbcType=VARCHAR},
+            </if>
+            <if test="re3 != null">
+                re3 = #{re3,jdbcType=VARCHAR},
+            </if>
         </set>
         where PostId = #{postid,jdbcType=INTEGER}
     </update>
@@ -128,10 +183,15 @@
     set PostTitle = #{posttitle,jdbcType=VARCHAR},
       PostBody = #{postbody,jdbcType=VARCHAR},
       PostTime = #{posttime,jdbcType=TIMESTAMP},
+      PostEditTime = #{postedittime,jdbcType=TIMESTAMP},
       PostUserId = #{postuserid,jdbcType=INTEGER},
       PostClassId = #{postclassid,jdbcType=INTEGER},
       PostSort = #{postsort,jdbcType=BIT},
-      PostLike = #{postlike,jdbcType=INTEGER}
+      PostLike = #{postlike,jdbcType=INTEGER},
+      PostViews = #{postviews,jdbcType=INTEGER},
+      re1 = #{re1,jdbcType=VARCHAR},
+      re2 = #{re2,jdbcType=VARCHAR},
+      re3 = #{re3,jdbcType=VARCHAR}
     where PostId = #{postid,jdbcType=INTEGER}
   </update>
 </mapper>

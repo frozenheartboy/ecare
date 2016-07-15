@@ -11,6 +11,8 @@ public class Post {
 
     private Date posttime;
 
+    private Date postedittime;
+
     private Integer postuserid;
 
     private Integer postclassid;
@@ -18,6 +20,14 @@ public class Post {
     private Boolean postsort;
 
     private Integer postlike;
+
+    private Integer postviews;
+
+    private String re1;
+
+    private String re2;
+
+    private String re3;
 
     public Integer getPostid() {
         return postid;
@@ -51,6 +61,14 @@ public class Post {
         this.posttime = posttime;
     }
 
+    public Date getPostedittime() {
+        return postedittime;
+    }
+
+    public void setPostedittime(Date postedittime) {
+        this.postedittime = postedittime;
+    }
+
     public Integer getPostuserid() {
         return postuserid;
     }
@@ -81,5 +99,37 @@ public class Post {
 
     public void setPostlike(Integer postlike) {
         this.postlike = postlike;
+    }
+
+    public Integer getPostviews() {
+        return postviews;
+    }
+
+    public void setPostviews(Integer postviews) {
+        this.postviews = postviews;
+    }
+
+    public String getRe1() {
+        return re1;
+    }
+
+    public void setRe1(String re1) {
+        this.re1 = re1 == null ? null : re1.trim();
+    }
+
+    public String getRe2() {
+        return re2;
+    }
+
+    public void setRe2(String re2) {
+        this.re2 = re2 == null ? null : re2.trim();
+    }
+
+    public String getRe3() {
+        return re3;
+    }
+
+    public void setRe3(String re3) {
+        this.re3 = re3 == null ? null : re3.trim();
     }
 }

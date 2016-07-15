@@ -11,5 +11,5 @@ import java.util.List;
  */
 public interface PostService {
     public List<Post>findPostByClassId(Integer classId, PageVo page);
-    public List<Reply>findReplyByPostId(Integer postId,PageVo page);
+    public List<Reply>findReplyByPostId(Integer postId, PageVo page);
 }

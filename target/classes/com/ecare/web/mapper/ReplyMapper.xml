@@ -7,9 +7,13 @@
         <result column="ReplyTime" property="replytime" jdbcType="TIMESTAMP"/>
         <result column="ReplyPostId" property="replypostid" jdbcType="INTEGER"/>
         <result column="ReplyUserId" property="replyuserid" jdbcType="INTEGER"/>
+        <result column="ReplyLike" property="replylike" jdbcType="INTEGER"/>
+        <result column="re1" property="re1" jdbcType="VARCHAR"/>
+        <result column="re2" property="re2" jdbcType="VARCHAR"/>
+        <result column="re3" property="re3" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-    ReplyId, ReplyBody, ReplyTime, ReplyPostId, ReplyUserId
+    ReplyId, ReplyBody, ReplyTime, ReplyPostId, ReplyUserId, ReplyLike, re1, re2, re3
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -17,6 +21,7 @@
         from reply
         where ReplyId = #{replyid,jdbcType=INTEGER}
     </select>
+
     <select id="selectByPostId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         SELECT
         <include refid="Base_Column_List"/>
@@ -33,9 +38,11 @@
   </delete>
     <insert id="insert" parameterType="com.ecare.web.pojo.Reply">
     insert into reply (ReplyId, ReplyBody, ReplyTime, 
-      ReplyPostId, ReplyUserId)
+      ReplyPostId, ReplyUserId, ReplyLike, 
+      re1, re2, re3)
     values (#{replyid,jdbcType=INTEGER}, #{replybody,jdbcType=VARCHAR}, #{replytime,jdbcType=TIMESTAMP}, 
-      #{replypostid,jdbcType=INTEGER}, #{replyuserid,jdbcType=INTEGER})
+      #{replypostid,jdbcType=INTEGER}, #{replyuserid,jdbcType=INTEGER}, #{replylike,jdbcType=INTEGER}, 
+      #{re1,jdbcType=VARCHAR}, #{re2,jdbcType=VARCHAR}, #{re3,jdbcType=VARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.ecare.web.pojo.Reply">
         insert into reply
@@ -55,6 +62,18 @@
             <if test="replyuserid != null">
                 ReplyUserId,
             </if>
+            <if test="replylike != null">
+                ReplyLike,
+            </if>
+            <if test="re1 != null">
+                re1,
+            </if>
+            <if test="re2 != null">
+                re2,
+            </if>
+            <if test="re3 != null">
+                re3,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="replyid != null">
@@ -71,6 +90,18 @@
             </if>
             <if test="replyuserid != null">
                 #{replyuserid,jdbcType=INTEGER},
+            </if>
+            <if test="replylike != null">
+                #{replylike,jdbcType=INTEGER},
+            </if>
+            <if test="re1 != null">
+                #{re1,jdbcType=VARCHAR},
+            </if>
+            <if test="re2 != null">
+                #{re2,jdbcType=VARCHAR},
+            </if>
+            <if test="re3 != null">
+                #{re3,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -89,6 +120,18 @@
             <if test="replyuserid != null">
                 ReplyUserId = #{replyuserid,jdbcType=INTEGER},
             </if>
+            <if test="replylike != null">
+                ReplyLike = #{replylike,jdbcType=INTEGER},
+            </if>
+            <if test="re1 != null">
+                re1 = #{re1,jdbcType=VARCHAR},
+            </if>
+            <if test="re2 != null">
+                re2 = #{re2,jdbcType=VARCHAR},
+            </if>
+            <if test="re3 != null">
+                re3 = #{re3,jdbcType=VARCHAR},
+            </if>
         </set>
         where ReplyId = #{replyid,jdbcType=INTEGER}
     </update>
@@ -97,7 +140,11 @@
     set ReplyBody = #{replybody,jdbcType=VARCHAR},
       ReplyTime = #{replytime,jdbcType=TIMESTAMP},
       ReplyPostId = #{replypostid,jdbcType=INTEGER},
-      ReplyUserId = #{replyuserid,jdbcType=INTEGER}
+      ReplyUserId = #{replyuserid,jdbcType=INTEGER},
+      ReplyLike = #{replylike,jdbcType=INTEGER},
+      re1 = #{re1,jdbcType=VARCHAR},
+      re2 = #{re2,jdbcType=VARCHAR},
+      re3 = #{re3,jdbcType=VARCHAR}
     where ReplyId = #{replyid,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -13,8 +13,7 @@ public interface ReplyMapper {
     int insertSelective(Reply record);
 
     Reply selectByPrimaryKey(Integer replyid);
-
-    List<Reply> selectByPostId(@Param("postId") Integer postId, @Param("pageStart") Integer pageStart,@Param("pageSize")  Integer pageSize);
+    List<Reply> selectByPostId(@Param("postId") Integer postId, @Param("pageStart") Integer pageStart, @Param("pageSize")  Integer pageSize);
 
     int updateByPrimaryKeySelective(Reply record);
 
