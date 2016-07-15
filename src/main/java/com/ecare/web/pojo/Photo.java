@@ -1,6 +1,11 @@
 package com.ecare.web.pojo;
 
-public class Photo {
+import java.io.Serializable;
+
+public class Photo implements Serializable{
+
+    private static final long serialVersionUID = -8370306089502450005L;
+
     private Integer photoId;
 
     private Integer photoPostId;

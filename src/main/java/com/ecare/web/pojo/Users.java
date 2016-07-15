@@ -1,8 +1,12 @@
 package com.ecare.web.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Users {
+public class Users implements Serializable {
+
+    private static final long serialVersionUID = 6420929286290072402L;
+
     private Integer id;
 
     private String phone;

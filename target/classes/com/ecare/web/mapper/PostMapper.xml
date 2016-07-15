@@ -51,7 +51,7 @@
       #{postViews,jdbcType=INTEGER}, #{re1,jdbcType=VARCHAR}, #{re2,jdbcType=VARCHAR}, 
       #{re3,jdbcType=VARCHAR})
   </insert>
-    <insert id="insertSelective" parameterType="com.ecare.web.pojo.Post">
+    <insert id="insertSelective" parameterType="com.ecare.web.pojo.Post" useGeneratedKeys="true" keyProperty="postId">
         insert into post
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="postId != null">
@@ -63,9 +63,9 @@
             <if test="postBody != null">
                 POST_BODY,
             </if>
-            <if test="postCreateTime != null">
+
                 POST_CREATE_TIME,
-            </if>
+
             <if test="postEditTime != null">
                 POST_EDIT_TIME,
             </if>
@@ -104,9 +104,9 @@
             <if test="postBody != null">
                 #{postBody,jdbcType=VARCHAR},
             </if>
-            <if test="postCreateTime != null">
+
                 #{postCreateTime,jdbcType=TIMESTAMP},
-            </if>
+
             <if test="postEditTime != null">
                 #{postEditTime,jdbcType=TIMESTAMP},
             </if>

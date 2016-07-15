@@ -5,8 +5,8 @@ package com.ecare.web.vo;
  */
 public class PageVo {
 
-    private Integer pageStart;
-    private Integer pageSize;
+    private int pageStart;
+    private int pageSize;
 
     public Integer getPageStart() {
         return pageStart;
@@ -16,7 +16,7 @@ public class PageVo {
         this.pageStart = pageStart;
     }
 
-    public Integer getPageSize() {
+    public int getPageSize() {
         return pageSize;
     }
 

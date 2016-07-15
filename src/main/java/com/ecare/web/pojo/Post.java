@@ -1,8 +1,12 @@
 package com.ecare.web.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Post {
+public class Post implements Serializable{
+
+    private static final long serialVersionUID = -839897024211478685L;
+
     private Integer postId;
 
     private String postTitle;

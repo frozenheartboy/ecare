@@ -9,9 +9,25 @@
     <context:component-scan base-package="com.ecare.web.controller"/>
     <!--视图渲染-->
     <!--<bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
-        <!--<property name="prefix" value="/WEB-INF/views/"/>-->
-        <!--<property name="suffix" value=".jsp"/>-->
+    <!--<property name="prefix" value="/WEB-INF/views/"/>-->
+    <!--<property name="suffix" value=".jsp"/>-->
     <!--</bean>-->
     <!--控制器映射器和控制器适配器-->
-    <mvc:annotation-driven></mvc:annotation-driven>
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean
+                    class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper">
+                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                        <property name="dateFormat">
+                            <bean class="java.text.SimpleDateFormat">
+                                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss"/>
+                            </bean>
+                        </property>
+                    </bean>
+                </property>
+            </bean>
+        </mvc:message-converters>
+
+    </mvc:annotation-driven>
 </beans>

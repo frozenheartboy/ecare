@@ -1,6 +1,12 @@
 package com.ecare.web.pojo;
 
-public class Class {
+
+import java.io.Serializable;
+
+public class Class implements Serializable{
+
+    private static final long serialVersionUID = -3058253836143257057L;
+
     private Integer classId;
 
     private String className;

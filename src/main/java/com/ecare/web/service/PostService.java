@@ -10,6 +10,7 @@ import java.util.List;
  * Created by L on 2016/7/13.
  */
 public interface PostService {
-    public List<Post>findPostByClassId(Integer classId, PageVo page);
-    public List<Reply>findReplyByPostId(Integer postId, PageVo page);
+    List<Post> findPostByClassId(int classId, PageVo page);
+    List<Reply> findReplyByPostId(int postId, PageVo page);
+    int addPost(Post post);
 }

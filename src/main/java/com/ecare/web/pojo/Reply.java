@@ -1,8 +1,10 @@
 package com.ecare.web.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Reply {
+public class Reply implements Serializable{
+    private static final long serialVersionUID = 6560095861090641033L;
     private Integer replyId;
 
     private String replyBody;

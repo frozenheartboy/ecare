@@ -10,7 +10,7 @@ public class PageUtil {
 
     private PageUtil() {
     }
-    public static synchronized PageVo getPage(Integer pageStart, Integer pageSize) {
+    public static synchronized PageVo getPage(int pageStart, int pageSize) {
         if (page == null)
             page = new PageVo();
         page.setPageSize(pageSize);

@@ -20,13 +20,15 @@ public class PostServiceImpl implements PostService {
     private PostMapper postMapper;
     @Autowired
     private ReplyMapper replyMapper;
-    public List<Post> findPostByClassId(Integer classId, PageVo page) {
-        List<Post> posts=postMapper.selectByClassId(classId,page.getPageStart(),page.getPageSize());
-        return posts;
+    public List<Post> findPostByClassId(int classId, PageVo page) {
+        return postMapper.selectByClassId(classId,page.getPageStart(),page.getPageSize());
     }
 
-    public List<Reply> findReplyByPostId(Integer postId, PageVo page) {
-        List<Reply> replies=replyMapper.selectByPostId(postId,page.getPageStart(),page.getPageSize());
-        return replies;
+    public List<Reply> findReplyByPostId(int postId, PageVo page) {
+        return replyMapper.selectByPostId(postId,page.getPageStart(),page.getPageSize());
+    }
+
+    public int addPost(Post post) {
+        return postMapper.insertSelective(post);
     }
 }
