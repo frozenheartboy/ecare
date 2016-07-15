@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.ecare.web.pojo.Favorite" >
     <id column="FAVORITE_ID" property="favoriteId" jdbcType="INTEGER" />
     <result column="FAVORITE_USER_ID" property="favoriteUserId" jdbcType="INTEGER" />
-    <result column="FAVORITE_POST_ID" property="favoritePostId" jdbcType="VARCHAR" />
+    <result column="FAVORITE_POST_ID" property="favoritePostId" jdbcType="INTEGER" />
     <result column="RE1" property="re1" jdbcType="VARCHAR" />
     <result column="RE2" property="re2" jdbcType="VARCHAR" />
     <result column="RE3" property="re3" jdbcType="VARCHAR" />
@@ -25,7 +25,7 @@
   <insert id="insert" parameterType="com.ecare.web.pojo.Favorite" >
     insert into favorite (FAVORITE_ID, FAVORITE_USER_ID, FAVORITE_POST_ID, 
       RE1, RE2, RE3)
-    values (#{favoriteId,jdbcType=INTEGER}, #{favoriteUserId,jdbcType=INTEGER}, #{favoritePostId,jdbcType=VARCHAR}, 
+    values (#{favoriteId,jdbcType=INTEGER}, #{favoriteUserId,jdbcType=INTEGER}, #{favoritePostId,jdbcType=INTEGER}, 
       #{re1,jdbcType=VARCHAR}, #{re2,jdbcType=VARCHAR}, #{re3,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ecare.web.pojo.Favorite" >
@@ -58,7 +58,7 @@
         #{favoriteUserId,jdbcType=INTEGER},
       </if>
       <if test="favoritePostId != null" >
-        #{favoritePostId,jdbcType=VARCHAR},
+        #{favoritePostId,jdbcType=INTEGER},
       </if>
       <if test="re1 != null" >
         #{re1,jdbcType=VARCHAR},
@@ -78,7 +78,7 @@
         FAVORITE_USER_ID = #{favoriteUserId,jdbcType=INTEGER},
       </if>
       <if test="favoritePostId != null" >
-        FAVORITE_POST_ID = #{favoritePostId,jdbcType=VARCHAR},
+        FAVORITE_POST_ID = #{favoritePostId,jdbcType=INTEGER},
       </if>
       <if test="re1 != null" >
         RE1 = #{re1,jdbcType=VARCHAR},
@@ -95,7 +95,7 @@
   <update id="updateByPrimaryKey" parameterType="com.ecare.web.pojo.Favorite" >
     update favorite
     set FAVORITE_USER_ID = #{favoriteUserId,jdbcType=INTEGER},
-      FAVORITE_POST_ID = #{favoritePostId,jdbcType=VARCHAR},
+      FAVORITE_POST_ID = #{favoritePostId,jdbcType=INTEGER},
       RE1 = #{re1,jdbcType=VARCHAR},
       RE2 = #{re2,jdbcType=VARCHAR},
       RE3 = #{re3,jdbcType=VARCHAR}

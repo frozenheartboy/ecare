@@ -63,12 +63,12 @@
             <if test="postBody != null">
                 POST_BODY,
             </if>
-
+            <if test="postCreateTime !=null">
                 POST_CREATE_TIME,
-
-            <if test="postEditTime != null">
-                POST_EDIT_TIME,
             </if>
+
+                POST_EDIT_TIME,
+
             <if test="postUserId != null">
                 POST_USER_ID,
             </if>
@@ -104,12 +104,12 @@
             <if test="postBody != null">
                 #{postBody,jdbcType=VARCHAR},
             </if>
-
-                #{postCreateTime,jdbcType=TIMESTAMP},
-
             <if test="postEditTime != null">
-                #{postEditTime,jdbcType=TIMESTAMP},
+                #{postCreateTime,jdbcType=TIMESTAMP},
             </if>
+
+                #{postEditTime,jdbcType=TIMESTAMP},
+
             <if test="postUserId != null">
                 #{postUserId,jdbcType=INTEGER},
             </if>
