@@ -1,11 +1,11 @@
 package com.ecare.web.pojo;
 
 public class Favorite {
-    private Integer favoriteid;
+    private Integer favoriteId;
 
-    private Integer favoriteuserid;
+    private Integer favoriteUserId;
 
-    private String favoritepostid;
+    private String favoritePostId;
 
     private String re1;
 
@@ -13,28 +13,28 @@ public class Favorite {
 
     private String re3;
 
-    public Integer getFavoriteid() {
-        return favoriteid;
+    public Integer getFavoriteId() {
+        return favoriteId;
     }
 
-    public void setFavoriteid(Integer favoriteid) {
-        this.favoriteid = favoriteid;
+    public void setFavoriteId(Integer favoriteId) {
+        this.favoriteId = favoriteId;
     }
 
-    public Integer getFavoriteuserid() {
-        return favoriteuserid;
+    public Integer getFavoriteUserId() {
+        return favoriteUserId;
     }
 
-    public void setFavoriteuserid(Integer favoriteuserid) {
-        this.favoriteuserid = favoriteuserid;
+    public void setFavoriteUserId(Integer favoriteUserId) {
+        this.favoriteUserId = favoriteUserId;
     }
 
-    public String getFavoritepostid() {
-        return favoritepostid;
+    public String getFavoritePostId() {
+        return favoritePostId;
     }
 
-    public void setFavoritepostid(String favoritepostid) {
-        this.favoritepostid = favoritepostid == null ? null : favoritepostid.trim();
+    public void setFavoritePostId(String favoritePostId) {
+        this.favoritePostId = favoritePostId == null ? null : favoritePostId.trim();
     }
 
     public String getRe1() {

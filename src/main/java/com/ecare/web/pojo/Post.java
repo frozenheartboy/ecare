@@ -3,25 +3,25 @@ package com.ecare.web.pojo;
 import java.util.Date;
 
 public class Post {
-    private Integer postid;
+    private Integer postId;
 
-    private String posttitle;
+    private String postTitle;
 
-    private String postbody;
+    private String postBody;
 
-    private Date posttime;
+    private Date postCreateTime;
 
-    private Date postedittime;
+    private Date postEditTime;
 
-    private Integer postuserid;
+    private Integer postUserId;
 
-    private Integer postclassid;
+    private Integer postClassId;
 
-    private Boolean postsort;
+    private Boolean postTop;
 
-    private Integer postlike;
+    private Integer postLikes;
 
-    private Integer postviews;
+    private Integer postViews;
 
     private String re1;
 
@@ -29,84 +29,84 @@ public class Post {
 
     private String re3;
 
-    public Integer getPostid() {
-        return postid;
+    public Integer getPostId() {
+        return postId;
     }
 
-    public void setPostid(Integer postid) {
-        this.postid = postid;
+    public void setPostId(Integer postId) {
+        this.postId = postId;
     }
 
-    public String getPosttitle() {
-        return posttitle;
+    public String getPostTitle() {
+        return postTitle;
     }
 
-    public void setPosttitle(String posttitle) {
-        this.posttitle = posttitle == null ? null : posttitle.trim();
+    public void setPostTitle(String postTitle) {
+        this.postTitle = postTitle == null ? null : postTitle.trim();
     }
 
-    public String getPostbody() {
-        return postbody;
+    public String getPostBody() {
+        return postBody;
     }
 
-    public void setPostbody(String postbody) {
-        this.postbody = postbody == null ? null : postbody.trim();
+    public void setPostBody(String postBody) {
+        this.postBody = postBody == null ? null : postBody.trim();
     }
 
-    public Date getPosttime() {
-        return posttime;
+    public Date getPostCreateTime() {
+        return postCreateTime;
     }
 
-    public void setPosttime(Date posttime) {
-        this.posttime = posttime;
+    public void setPostCreateTime(Date postCreateTime) {
+        this.postCreateTime = postCreateTime;
     }
 
-    public Date getPostedittime() {
-        return postedittime;
+    public Date getPostEditTime() {
+        return postEditTime;
     }
 
-    public void setPostedittime(Date postedittime) {
-        this.postedittime = postedittime;
+    public void setPostEditTime(Date postEditTime) {
+        this.postEditTime = postEditTime;
     }
 
-    public Integer getPostuserid() {
-        return postuserid;
+    public Integer getPostUserId() {
+        return postUserId;
     }
 
-    public void setPostuserid(Integer postuserid) {
-        this.postuserid = postuserid;
+    public void setPostUserId(Integer postUserId) {
+        this.postUserId = postUserId;
     }
 
-    public Integer getPostclassid() {
-        return postclassid;
+    public Integer getPostClassId() {
+        return postClassId;
     }
 
-    public void setPostclassid(Integer postclassid) {
-        this.postclassid = postclassid;
+    public void setPostClassId(Integer postClassId) {
+        this.postClassId = postClassId;
     }
 
-    public Boolean getPostsort() {
-        return postsort;
+    public Boolean getPostTop() {
+        return postTop;
     }
 
-    public void setPostsort(Boolean postsort) {
-        this.postsort = postsort;
+    public void setPostTop(Boolean postTop) {
+        this.postTop = postTop;
     }
 
-    public Integer getPostlike() {
-        return postlike;
+    public Integer getPostLikes() {
+        return postLikes;
     }
 
-    public void setPostlike(Integer postlike) {
-        this.postlike = postlike;
+    public void setPostLikes(Integer postLikes) {
+        this.postLikes = postLikes;
     }
 
-    public Integer getPostviews() {
-        return postviews;
+    public Integer getPostViews() {
+        return postViews;
     }
 
-    public void setPostviews(Integer postviews) {
-        this.postviews = postviews;
+    public void setPostViews(Integer postViews) {
+        this.postViews = postViews;
     }
 
     public String getRe1() {

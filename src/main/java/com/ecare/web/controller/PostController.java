@@ -24,7 +24,7 @@ public class PostController {
 
     @RequestMapping(value = "/findAll")
     @ResponseBody
-    public  Map<String,Object>  findPostByClassId(@RequestParam("classid") Integer classId,@RequestParam("page") Integer pageNumber){
+    public  Map<String,Object>  findPostByClassId(@RequestParam("classId") Integer classId,@RequestParam("page") Integer pageNumber){
         List<Post> posts=postService.findPostByClassId(classId,PageUtil.getPage(pageNumber,5));
         if(posts.size()!=0)
             return ResultUtil.getResult(Constant.SUCCESS,"查询成功",posts);
@@ -33,8 +33,14 @@ public class PostController {
     }
     @RequestMapping(value = "/findReply")
     @ResponseBody
-    public  Map<String,Object>  findReplyByPostId(@RequestParam("postid") Integer postId,@RequestParam("page") Integer pageNumber){
+    public  Map<String,Object>  findReplyByPostId(@RequestParam("postId") Integer postId,@RequestParam("page") Integer pageNumber){
         List<Reply> replies=postService.findReplyByPostId(postId,PageUtil.getPage(pageNumber,5));
         return ResultUtil.getResult(Constant.SUCCESS,"查询成功",replies);
     }
+
+//    @RequestMapping(value ="/addPost",method = RequestMethod.POST)
+//    @ResponseBody
+//    public Map<String ,Object> addPost(@RequestBody() Post post){
+//        return ResultUtil.getResult(Constant.SUCCESS,"查询成功",);
+//    }
 }

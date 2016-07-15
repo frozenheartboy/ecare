@@ -3,13 +3,13 @@ package com.ecare.web.mapper;
 import com.ecare.web.pojo.Photo;
 
 public interface PhotoMapper {
-    int deleteByPrimaryKey(Integer photoid);
+    int deleteByPrimaryKey(Integer photoId);
 
     int insert(Photo record);
 
     int insertSelective(Photo record);
 
-    Photo selectByPrimaryKey(Integer photoid);
+    Photo selectByPrimaryKey(Integer photoId);
 
     int updateByPrimaryKeySelective(Photo record);
 

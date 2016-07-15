@@ -1,9 +1,9 @@
 package com.ecare.web.pojo;
 
 public class Class {
-    private Integer classid;
+    private Integer classId;
 
-    private String classname;
+    private String className;
 
     private String re1;
 
@@ -11,20 +11,20 @@ public class Class {
 
     private String re3;
 
-    public Integer getClassid() {
-        return classid;
+    public Integer getClassId() {
+        return classId;
     }
 
-    public void setClassid(Integer classid) {
-        this.classid = classid;
+    public void setClassId(Integer classId) {
+        this.classId = classId;
     }
 
-    public String getClassname() {
-        return classname;
+    public String getClassName() {
+        return className;
     }
 
-    public void setClassname(String classname) {
-        this.classname = classname == null ? null : classname.trim();
+    public void setClassName(String className) {
+        this.className = className == null ? null : className.trim();
     }
 
     public String getRe1() {

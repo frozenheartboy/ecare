@@ -1,11 +1,11 @@
 package com.ecare.web.pojo;
 
 public class Photo {
-    private Integer photoid;
+    private Integer photoId;
 
-    private Integer photopostid;
+    private Integer photoPostId;
 
-    private String photourl;
+    private String photoUrl;
 
     private String re1;
 
@@ -13,28 +13,28 @@ public class Photo {
 
     private String re3;
 
-    public Integer getPhotoid() {
-        return photoid;
+    public Integer getPhotoId() {
+        return photoId;
     }
 
-    public void setPhotoid(Integer photoid) {
-        this.photoid = photoid;
+    public void setPhotoId(Integer photoId) {
+        this.photoId = photoId;
     }
 
-    public Integer getPhotopostid() {
-        return photopostid;
+    public Integer getPhotoPostId() {
+        return photoPostId;
     }
 
-    public void setPhotopostid(Integer photopostid) {
-        this.photopostid = photopostid;
+    public void setPhotoPostId(Integer photoPostId) {
+        this.photoPostId = photoPostId;
     }
 
-    public String getPhotourl() {
-        return photourl;
+    public String getPhotoUrl() {
+        return photoUrl;
     }
 
-    public void setPhotourl(String photourl) {
-        this.photourl = photourl == null ? null : photourl.trim();
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl == null ? null : photoUrl.trim();
     }
 
     public String getRe1() {

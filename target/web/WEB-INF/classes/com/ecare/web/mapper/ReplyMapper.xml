@@ -2,31 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ecare.web.mapper.ReplyMapper">
     <resultMap id="BaseResultMap" type="com.ecare.web.pojo.Reply">
-        <id column="ReplyId" property="replyid" jdbcType="INTEGER"/>
-        <result column="ReplyBody" property="replybody" jdbcType="VARCHAR"/>
-        <result column="ReplyTime" property="replytime" jdbcType="TIMESTAMP"/>
-        <result column="ReplyPostId" property="replypostid" jdbcType="INTEGER"/>
-        <result column="ReplyUserId" property="replyuserid" jdbcType="INTEGER"/>
-        <result column="ReplyLike" property="replylike" jdbcType="INTEGER"/>
-        <result column="re1" property="re1" jdbcType="VARCHAR"/>
-        <result column="re2" property="re2" jdbcType="VARCHAR"/>
-        <result column="re3" property="re3" jdbcType="VARCHAR"/>
+        <id column="REPLY_ID" property="replyId" jdbcType="INTEGER"/>
+        <result column="REPLY_BODY" property="replyBody" jdbcType="VARCHAR"/>
+        <result column="REPLY_CREATE_TIME" property="replyCreateTime" jdbcType="TIMESTAMP"/>
+        <result column="REPLY_POST_ID" property="replyPostId" jdbcType="INTEGER"/>
+        <result column="REPLY_USER_ID" property="replyUserId" jdbcType="INTEGER"/>
+        <result column="REPLY_LIKES" property="replyLikes" jdbcType="INTEGER"/>
+        <result column="RE1" property="re1" jdbcType="VARCHAR"/>
+        <result column="RE2" property="re2" jdbcType="VARCHAR"/>
+        <result column="RE3" property="re3" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-    ReplyId, ReplyBody, ReplyTime, ReplyPostId, ReplyUserId, ReplyLike, re1, re2, re3
+    REPLY_ID, REPLY_BODY, REPLY_CREATE_TIME, REPLY_POST_ID, REPLY_USER_ID, REPLY_LIKES, 
+    RE1, RE2, RE3
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
         from reply
-        where ReplyId = #{replyid,jdbcType=INTEGER}
+        where REPLY_ID = #{replyId,jdbcType=INTEGER}
     </select>
-
     <select id="selectByPostId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         SELECT
         <include refid="Base_Column_List"/>
         FROM reply
-        where ReplyPostId= #{postId,jdbcType=INTEGER}
+        where REPLY_POST_ID= #{postId,jdbcType=INTEGER}
         <if test="pageStart>-1 and pageSize>-1">
             limit #{pageStart,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
         </if>
@@ -34,65 +34,65 @@
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from reply
-    where ReplyId = #{replyid,jdbcType=INTEGER}
+    where REPLY_ID = #{replyId,jdbcType=INTEGER}
   </delete>
     <insert id="insert" parameterType="com.ecare.web.pojo.Reply">
-    insert into reply (ReplyId, ReplyBody, ReplyTime, 
-      ReplyPostId, ReplyUserId, ReplyLike, 
-      re1, re2, re3)
-    values (#{replyid,jdbcType=INTEGER}, #{replybody,jdbcType=VARCHAR}, #{replytime,jdbcType=TIMESTAMP}, 
-      #{replypostid,jdbcType=INTEGER}, #{replyuserid,jdbcType=INTEGER}, #{replylike,jdbcType=INTEGER}, 
+    insert into reply (REPLY_ID, REPLY_BODY, REPLY_CREATE_TIME, 
+      REPLY_POST_ID, REPLY_USER_ID, REPLY_LIKES, 
+      RE1, RE2, RE3)
+    values (#{replyId,jdbcType=INTEGER}, #{replyBody,jdbcType=VARCHAR}, #{replyCreateTime,jdbcType=TIMESTAMP}, 
+      #{replyPostId,jdbcType=INTEGER}, #{replyUserId,jdbcType=INTEGER}, #{replyLikes,jdbcType=INTEGER}, 
       #{re1,jdbcType=VARCHAR}, #{re2,jdbcType=VARCHAR}, #{re3,jdbcType=VARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.ecare.web.pojo.Reply">
         insert into reply
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="replyid != null">
-                ReplyId,
+            <if test="replyId != null">
+                REPLY_ID,
             </if>
-            <if test="replybody != null">
-                ReplyBody,
+            <if test="replyBody != null">
+                REPLY_BODY,
             </if>
-            <if test="replytime != null">
-                ReplyTime,
+            <if test="replyCreateTime != null">
+                REPLY_CREATE_TIME,
             </if>
-            <if test="replypostid != null">
-                ReplyPostId,
+            <if test="replyPostId != null">
+                REPLY_POST_ID,
             </if>
-            <if test="replyuserid != null">
-                ReplyUserId,
+            <if test="replyUserId != null">
+                REPLY_USER_ID,
             </if>
-            <if test="replylike != null">
-                ReplyLike,
+            <if test="replyLikes != null">
+                REPLY_LIKES,
             </if>
             <if test="re1 != null">
-                re1,
+                RE1,
             </if>
             <if test="re2 != null">
-                re2,
+                RE2,
             </if>
             <if test="re3 != null">
-                re3,
+                RE3,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="replyid != null">
-                #{replyid,jdbcType=INTEGER},
+            <if test="replyId != null">
+                #{replyId,jdbcType=INTEGER},
             </if>
-            <if test="replybody != null">
-                #{replybody,jdbcType=VARCHAR},
+            <if test="replyBody != null">
+                #{replyBody,jdbcType=VARCHAR},
             </if>
-            <if test="replytime != null">
-                #{replytime,jdbcType=TIMESTAMP},
+            <if test="replyCreateTime != null">
+                #{replyCreateTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="replypostid != null">
-                #{replypostid,jdbcType=INTEGER},
+            <if test="replyPostId != null">
+                #{replyPostId,jdbcType=INTEGER},
             </if>
-            <if test="replyuserid != null">
-                #{replyuserid,jdbcType=INTEGER},
+            <if test="replyUserId != null">
+                #{replyUserId,jdbcType=INTEGER},
             </if>
-            <if test="replylike != null">
-                #{replylike,jdbcType=INTEGER},
+            <if test="replyLikes != null">
+                #{replyLikes,jdbcType=INTEGER},
             </if>
             <if test="re1 != null">
                 #{re1,jdbcType=VARCHAR},
@@ -108,43 +108,43 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.ecare.web.pojo.Reply">
         update reply
         <set>
-            <if test="replybody != null">
-                ReplyBody = #{replybody,jdbcType=VARCHAR},
+            <if test="replyBody != null">
+                REPLY_BODY = #{replyBody,jdbcType=VARCHAR},
             </if>
-            <if test="replytime != null">
-                ReplyTime = #{replytime,jdbcType=TIMESTAMP},
+            <if test="replyCreateTime != null">
+                REPLY_CREATE_TIME = #{replyCreateTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="replypostid != null">
-                ReplyPostId = #{replypostid,jdbcType=INTEGER},
+            <if test="replyPostId != null">
+                REPLY_POST_ID = #{replyPostId,jdbcType=INTEGER},
             </if>
-            <if test="replyuserid != null">
-                ReplyUserId = #{replyuserid,jdbcType=INTEGER},
+            <if test="replyUserId != null">
+                REPLY_USER_ID = #{replyUserId,jdbcType=INTEGER},
             </if>
-            <if test="replylike != null">
-                ReplyLike = #{replylike,jdbcType=INTEGER},
+            <if test="replyLikes != null">
+                REPLY_LIKES = #{replyLikes,jdbcType=INTEGER},
             </if>
             <if test="re1 != null">
-                re1 = #{re1,jdbcType=VARCHAR},
+                RE1 = #{re1,jdbcType=VARCHAR},
             </if>
             <if test="re2 != null">
-                re2 = #{re2,jdbcType=VARCHAR},
+                RE2 = #{re2,jdbcType=VARCHAR},
             </if>
             <if test="re3 != null">
-                re3 = #{re3,jdbcType=VARCHAR},
+                RE3 = #{re3,jdbcType=VARCHAR},
             </if>
         </set>
-        where ReplyId = #{replyid,jdbcType=INTEGER}
+        where REPLY_ID = #{replyId,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.ecare.web.pojo.Reply">
     update reply
-    set ReplyBody = #{replybody,jdbcType=VARCHAR},
-      ReplyTime = #{replytime,jdbcType=TIMESTAMP},
-      ReplyPostId = #{replypostid,jdbcType=INTEGER},
-      ReplyUserId = #{replyuserid,jdbcType=INTEGER},
-      ReplyLike = #{replylike,jdbcType=INTEGER},
-      re1 = #{re1,jdbcType=VARCHAR},
-      re2 = #{re2,jdbcType=VARCHAR},
-      re3 = #{re3,jdbcType=VARCHAR}
-    where ReplyId = #{replyid,jdbcType=INTEGER}
+    set REPLY_BODY = #{replyBody,jdbcType=VARCHAR},
+      REPLY_CREATE_TIME = #{replyCreateTime,jdbcType=TIMESTAMP},
+      REPLY_POST_ID = #{replyPostId,jdbcType=INTEGER},
+      REPLY_USER_ID = #{replyUserId,jdbcType=INTEGER},
+      REPLY_LIKES = #{replyLikes,jdbcType=INTEGER},
+      RE1 = #{re1,jdbcType=VARCHAR},
+      RE2 = #{re2,jdbcType=VARCHAR},
+      RE3 = #{re3,jdbcType=VARCHAR}
+    where REPLY_ID = #{replyId,jdbcType=INTEGER}
   </update>
 </mapper>

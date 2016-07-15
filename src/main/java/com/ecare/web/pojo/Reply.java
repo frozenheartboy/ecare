@@ -3,17 +3,17 @@ package com.ecare.web.pojo;
 import java.util.Date;
 
 public class Reply {
-    private Integer replyid;
+    private Integer replyId;
 
-    private String replybody;
+    private String replyBody;
 
-    private Date replytime;
+    private Date replyCreateTime;
 
-    private Integer replypostid;
+    private Integer replyPostId;
 
-    private Integer replyuserid;
+    private Integer replyUserId;
 
-    private Integer replylike;
+    private Integer replyLikes;
 
     private String re1;
 
@@ -21,52 +21,52 @@ public class Reply {
 
     private String re3;
 
-    public Integer getReplyid() {
-        return replyid;
+    public Integer getReplyId() {
+        return replyId;
     }
 
-    public void setReplyid(Integer replyid) {
-        this.replyid = replyid;
+    public void setReplyId(Integer replyId) {
+        this.replyId = replyId;
     }
 
-    public String getReplybody() {
-        return replybody;
+    public String getReplyBody() {
+        return replyBody;
     }
 
-    public void setReplybody(String replybody) {
-        this.replybody = replybody == null ? null : replybody.trim();
+    public void setReplyBody(String replyBody) {
+        this.replyBody = replyBody == null ? null : replyBody.trim();
     }
 
-    public Date getReplytime() {
-        return replytime;
+    public Date getReplyCreateTime() {
+        return replyCreateTime;
     }
 
-    public void setReplytime(Date replytime) {
-        this.replytime = replytime;
+    public void setReplyCreateTime(Date replyCreateTime) {
+        this.replyCreateTime = replyCreateTime;
     }
 
-    public Integer getReplypostid() {
-        return replypostid;
+    public Integer getReplyPostId() {
+        return replyPostId;
     }
 
-    public void setReplypostid(Integer replypostid) {
-        this.replypostid = replypostid;
+    public void setReplyPostId(Integer replyPostId) {
+        this.replyPostId = replyPostId;
     }
 
-    public Integer getReplyuserid() {
-        return replyuserid;
+    public Integer getReplyUserId() {
+        return replyUserId;
     }
 
-    public void setReplyuserid(Integer replyuserid) {
-        this.replyuserid = replyuserid;
+    public void setReplyUserId(Integer replyUserId) {
+        this.replyUserId = replyUserId;
     }
 
-    public Integer getReplylike() {
-        return replylike;
+    public Integer getReplyLikes() {
+        return replyLikes;
     }
 
-    public void setReplylike(Integer replylike) {
-        this.replylike = replylike;
+    public void setReplyLikes(Integer replyLikes) {
+        this.replyLikes = replyLikes;
     }
 
     public String getRe1() {

@@ -2,56 +2,56 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ecare.web.mapper.ClassMapper" >
   <resultMap id="BaseResultMap" type="com.ecare.web.pojo.Class" >
-    <id column="ClassId" property="classid" jdbcType="INTEGER" />
-    <result column="ClassName" property="classname" jdbcType="VARCHAR" />
-    <result column="re1" property="re1" jdbcType="VARCHAR" />
-    <result column="re2" property="re2" jdbcType="VARCHAR" />
-    <result column="re3" property="re3" jdbcType="VARCHAR" />
+    <id column="CLASS_ID" property="classId" jdbcType="INTEGER" />
+    <result column="CLASS_NAME" property="className" jdbcType="VARCHAR" />
+    <result column="RE1" property="re1" jdbcType="VARCHAR" />
+    <result column="RE2" property="re2" jdbcType="VARCHAR" />
+    <result column="RE3" property="re3" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ClassId, ClassName, re1, re2, re3
+    CLASS_ID, CLASS_NAME, RE1, RE2, RE3
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from class
-    where ClassId = #{classid,jdbcType=INTEGER}
+    where CLASS_ID = #{classId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from class
-    where ClassId = #{classid,jdbcType=INTEGER}
+    where CLASS_ID = #{classId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.ecare.web.pojo.Class" >
-    insert into class (ClassId, ClassName, re1, 
-      re2, re3)
-    values (#{classid,jdbcType=INTEGER}, #{classname,jdbcType=VARCHAR}, #{re1,jdbcType=VARCHAR}, 
+    insert into class (CLASS_ID, CLASS_NAME, RE1, 
+      RE2, RE3)
+    values (#{classId,jdbcType=INTEGER}, #{className,jdbcType=VARCHAR}, #{re1,jdbcType=VARCHAR}, 
       #{re2,jdbcType=VARCHAR}, #{re3,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ecare.web.pojo.Class" >
     insert into class
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="classid != null" >
-        ClassId,
+      <if test="classId != null" >
+        CLASS_ID,
       </if>
-      <if test="classname != null" >
-        ClassName,
+      <if test="className != null" >
+        CLASS_NAME,
       </if>
       <if test="re1 != null" >
-        re1,
+        RE1,
       </if>
       <if test="re2 != null" >
-        re2,
+        RE2,
       </if>
       <if test="re3 != null" >
-        re3,
+        RE3,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="classid != null" >
-        #{classid,jdbcType=INTEGER},
+      <if test="classId != null" >
+        #{classId,jdbcType=INTEGER},
       </if>
-      <if test="classname != null" >
-        #{classname,jdbcType=VARCHAR},
+      <if test="className != null" >
+        #{className,jdbcType=VARCHAR},
       </if>
       <if test="re1 != null" >
         #{re1,jdbcType=VARCHAR},
@@ -67,27 +67,27 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.ecare.web.pojo.Class" >
     update class
     <set >
-      <if test="classname != null" >
-        ClassName = #{classname,jdbcType=VARCHAR},
+      <if test="className != null" >
+        CLASS_NAME = #{className,jdbcType=VARCHAR},
       </if>
       <if test="re1 != null" >
-        re1 = #{re1,jdbcType=VARCHAR},
+        RE1 = #{re1,jdbcType=VARCHAR},
       </if>
       <if test="re2 != null" >
-        re2 = #{re2,jdbcType=VARCHAR},
+        RE2 = #{re2,jdbcType=VARCHAR},
       </if>
       <if test="re3 != null" >
-        re3 = #{re3,jdbcType=VARCHAR},
+        RE3 = #{re3,jdbcType=VARCHAR},
       </if>
     </set>
-    where ClassId = #{classid,jdbcType=INTEGER}
+    where CLASS_ID = #{classId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ecare.web.pojo.Class" >
     update class
-    set ClassName = #{classname,jdbcType=VARCHAR},
-      re1 = #{re1,jdbcType=VARCHAR},
-      re2 = #{re2,jdbcType=VARCHAR},
-      re3 = #{re3,jdbcType=VARCHAR}
-    where ClassId = #{classid,jdbcType=INTEGER}
+    set CLASS_NAME = #{className,jdbcType=VARCHAR},
+      RE1 = #{re1,jdbcType=VARCHAR},
+      RE2 = #{re2,jdbcType=VARCHAR},
+      RE3 = #{re3,jdbcType=VARCHAR}
+    where CLASS_ID = #{classId,jdbcType=INTEGER}
   </update>
 </mapper>
