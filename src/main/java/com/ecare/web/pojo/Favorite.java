@@ -1,6 +1,9 @@
 package com.ecare.web.pojo;
 
-public class Favorite {
+import java.io.Serializable;
+
+public class Favorite implements Serializable{
+    private static final long serialVersionUID = 1209017419070805742L;
     private Integer favoriteId;
 
     private Integer favoriteUserId;

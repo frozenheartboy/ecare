@@ -4,12 +4,14 @@
   <resultMap id="BaseResultMap" type="com.ecare.web.pojo.Class" >
     <id column="CLASS_ID" property="classId" jdbcType="INTEGER" />
     <result column="CLASS_NAME" property="className" jdbcType="VARCHAR" />
+    <result column="CLASS_DESC" property="classDesc" jdbcType="VARCHAR" />
+    <result column="CLASS_VIEWS" property="classViews" jdbcType="INTEGER" />
     <result column="RE1" property="re1" jdbcType="VARCHAR" />
     <result column="RE2" property="re2" jdbcType="VARCHAR" />
     <result column="RE3" property="re3" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    CLASS_ID, CLASS_NAME, RE1, RE2, RE3
+    CLASS_ID, CLASS_NAME, CLASS_DESC, CLASS_VIEWS, RE1, RE2, RE3
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -22,10 +24,12 @@
     where CLASS_ID = #{classId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.ecare.web.pojo.Class" >
-    insert into class (CLASS_ID, CLASS_NAME, RE1, 
-      RE2, RE3)
-    values (#{classId,jdbcType=INTEGER}, #{className,jdbcType=VARCHAR}, #{re1,jdbcType=VARCHAR}, 
-      #{re2,jdbcType=VARCHAR}, #{re3,jdbcType=VARCHAR})
+    insert into class (CLASS_ID, CLASS_NAME, CLASS_DESC, 
+      CLASS_VIEWS, RE1, RE2, 
+      RE3)
+    values (#{classId,jdbcType=INTEGER}, #{className,jdbcType=VARCHAR}, #{classDesc,jdbcType=VARCHAR}, 
+      #{classViews,jdbcType=INTEGER}, #{re1,jdbcType=VARCHAR}, #{re2,jdbcType=VARCHAR}, 
+      #{re3,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ecare.web.pojo.Class" >
     insert into class
@@ -35,6 +39,12 @@
       </if>
       <if test="className != null" >
         CLASS_NAME,
+      </if>
+      <if test="classDesc != null" >
+        CLASS_DESC,
+      </if>
+      <if test="classViews != null" >
+        CLASS_VIEWS,
       </if>
       <if test="re1 != null" >
         RE1,
@@ -53,6 +63,12 @@
       <if test="className != null" >
         #{className,jdbcType=VARCHAR},
       </if>
+      <if test="classDesc != null" >
+        #{classDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="classViews != null" >
+        #{classViews,jdbcType=INTEGER},
+      </if>
       <if test="re1 != null" >
         #{re1,jdbcType=VARCHAR},
       </if>
@@ -70,6 +86,12 @@
       <if test="className != null" >
         CLASS_NAME = #{className,jdbcType=VARCHAR},
       </if>
+      <if test="classDesc != null" >
+        CLASS_DESC = #{classDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="classViews != null" >
+        CLASS_VIEWS = #{classViews,jdbcType=INTEGER},
+      </if>
       <if test="re1 != null" >
         RE1 = #{re1,jdbcType=VARCHAR},
       </if>
@@ -85,6 +107,8 @@
   <update id="updateByPrimaryKey" parameterType="com.ecare.web.pojo.Class" >
     update class
     set CLASS_NAME = #{className,jdbcType=VARCHAR},
+      CLASS_DESC = #{classDesc,jdbcType=VARCHAR},
+      CLASS_VIEWS = #{classViews,jdbcType=INTEGER},
       RE1 = #{re1,jdbcType=VARCHAR},
       RE2 = #{re2,jdbcType=VARCHAR},
       RE3 = #{re3,jdbcType=VARCHAR}

@@ -1,25 +1,21 @@
 package com.ecare.web.vo;
 
-import java.util.Date;
+
 import java.util.List;
 
 /**
- * Created by L on 2016/7/17.
+ * Created by L on 2016/7/15.
  */
-public class PostVo {
+public class PostFormVo {
     private Integer postId;
 
     private String postTitle;
 
-    private String postBody;
-
-    private Date postCreateTime;
-
-    private Date postEditTime;
+    private String postDesc;
 
     private Integer postUserId;
 
-    private Integer postClassId;
+    private int postClassId;
 
     private Boolean postTop;
 
@@ -45,28 +41,12 @@ public class PostVo {
         this.postTitle = postTitle;
     }
 
-    public String getPostBody() {
-        return postBody;
+    public String getPostDesc() {
+        return postDesc;
     }
 
-    public void setPostBody(String postBody) {
-        this.postBody = postBody;
-    }
-
-    public Date getPostCreateTime() {
-        return postCreateTime;
-    }
-
-    public void setPostCreateTime(Date postCreateTime) {
-        this.postCreateTime = postCreateTime;
-    }
-
-    public Date getPostEditTime() {
-        return postEditTime;
-    }
-
-    public void setPostEditTime(Date postEditTime) {
-        this.postEditTime = postEditTime;
+    public void setPostDesc(String postDesc) {
+        this.postDesc = postDesc;
     }
 
     public Integer getPostUserId() {
@@ -77,11 +57,11 @@ public class PostVo {
         this.postUserId = postUserId;
     }
 
-    public Integer getPostClassId() {
+    public int getPostClassId() {
         return postClassId;
     }
 
-    public void setPostClassId(Integer postClassId) {
+    public void setPostClassId(int postClassId) {
         this.postClassId = postClassId;
     }
 

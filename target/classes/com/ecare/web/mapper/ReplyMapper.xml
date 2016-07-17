@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ecare.web.mapper.ReplyMapper">
-    <resultMap id="BaseResultMap" type="com.ecare.web.pojo.Reply">
+    <resultMap id="BaseResultMap" type="com.ecare.web.vo.ReplyFormVo">
         <id column="REPLY_ID" property="replyId" jdbcType="INTEGER"/>
         <result column="REPLY_BODY" property="replyBody" jdbcType="VARCHAR"/>
         <result column="REPLY_CREATE_TIME" property="replyCreateTime" jdbcType="TIMESTAMP"/>
         <result column="REPLY_POST_ID" property="replyPostId" jdbcType="INTEGER"/>
         <result column="REPLY_USER_ID" property="replyUserId" jdbcType="INTEGER"/>
         <result column="REPLY_LIKES" property="replyLikes" jdbcType="INTEGER"/>
-        <result column="RE1" property="re1" jdbcType="VARCHAR"/>
-        <result column="RE2" property="re2" jdbcType="VARCHAR"/>
-        <result column="RE3" property="re3" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-    REPLY_ID, REPLY_BODY, REPLY_CREATE_TIME, REPLY_POST_ID, REPLY_USER_ID, REPLY_LIKES, 
-    RE1, RE2, RE3
-  </sql>
+        REPLY_ID, REPLY_BODY, REPLY_CREATE_TIME, REPLY_POST_ID, REPLY_USER_ID, REPLY_LIKES
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -38,13 +34,11 @@
   </delete>
     <insert id="insert" parameterType="com.ecare.web.pojo.Reply">
     insert into reply (REPLY_ID, REPLY_BODY, REPLY_CREATE_TIME, 
-      REPLY_POST_ID, REPLY_USER_ID, REPLY_LIKES, 
-      RE1, RE2, RE3)
+      REPLY_POST_ID, REPLY_USER_ID, REPLY_LIKES)
     values (#{replyId,jdbcType=INTEGER}, #{replyBody,jdbcType=VARCHAR}, #{replyCreateTime,jdbcType=TIMESTAMP}, 
-      #{replyPostId,jdbcType=INTEGER}, #{replyUserId,jdbcType=INTEGER}, #{replyLikes,jdbcType=INTEGER}, 
-      #{re1,jdbcType=VARCHAR}, #{re2,jdbcType=VARCHAR}, #{re3,jdbcType=VARCHAR})
+      #{replyPostId,jdbcType=INTEGER}, #{replyUserId,jdbcType=INTEGER}, #{replyLikes,jdbcType=INTEGER})
   </insert>
-    <insert id="insertSelective" parameterType="com.ecare.web.pojo.Reply">
+    <insert id="insertSelective" parameterType="com.ecare.web.pojo.Reply" useGeneratedKeys="true" keyProperty="replyId">
         insert into reply
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="replyId != null">
@@ -65,15 +59,7 @@
             <if test="replyLikes != null">
                 REPLY_LIKES,
             </if>
-            <if test="re1 != null">
-                RE1,
-            </if>
-            <if test="re2 != null">
-                RE2,
-            </if>
-            <if test="re3 != null">
-                RE3,
-            </if>
+
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="replyId != null">
@@ -94,15 +80,7 @@
             <if test="replyLikes != null">
                 #{replyLikes,jdbcType=INTEGER},
             </if>
-            <if test="re1 != null">
-                #{re1,jdbcType=VARCHAR},
-            </if>
-            <if test="re2 != null">
-                #{re2,jdbcType=VARCHAR},
-            </if>
-            <if test="re3 != null">
-                #{re3,jdbcType=VARCHAR},
-            </if>
+
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.ecare.web.pojo.Reply">
@@ -123,15 +101,7 @@
             <if test="replyLikes != null">
                 REPLY_LIKES = #{replyLikes,jdbcType=INTEGER},
             </if>
-            <if test="re1 != null">
-                RE1 = #{re1,jdbcType=VARCHAR},
-            </if>
-            <if test="re2 != null">
-                RE2 = #{re2,jdbcType=VARCHAR},
-            </if>
-            <if test="re3 != null">
-                RE3 = #{re3,jdbcType=VARCHAR},
-            </if>
+
         </set>
         where REPLY_ID = #{replyId,jdbcType=INTEGER}
     </update>
@@ -142,9 +112,7 @@
       REPLY_POST_ID = #{replyPostId,jdbcType=INTEGER},
       REPLY_USER_ID = #{replyUserId,jdbcType=INTEGER},
       REPLY_LIKES = #{replyLikes,jdbcType=INTEGER},
-      RE1 = #{re1,jdbcType=VARCHAR},
-      RE2 = #{re2,jdbcType=VARCHAR},
-      RE3 = #{re3,jdbcType=VARCHAR}
+
     where REPLY_ID = #{replyId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,6 +1,9 @@
 package com.ecare.web.pojo;
 
-public class Likes {
+import java.io.Serializable;
+
+public class Likes implements Serializable{
+    private static final long serialVersionUID = -8670173501140223354L;
     private Integer likesId;
 
     private Integer likesUserId;

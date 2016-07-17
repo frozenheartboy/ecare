@@ -13,21 +13,9 @@
     <!--<property name="suffix" value=".jsp"/>-->
     <!--</bean>-->
     <!--控制器映射器和控制器适配器-->
-    <mvc:annotation-driven>
-        <mvc:message-converters>
-            <bean
-                    class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-                <property name="objectMapper">
-                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">
-                        <property name="dateFormat">
-                            <bean class="java.text.SimpleDateFormat">
-                                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss"/>
-                            </bean>
-                        </property>
-                    </bean>
-                </property>
-            </bean>
-        </mvc:message-converters>
-
-    </mvc:annotation-driven>
+    <mvc:annotation-driven></mvc:annotation-driven>
+    <!--接受表单from-data格式-->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    </bean>
 </beans>

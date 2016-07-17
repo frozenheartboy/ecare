@@ -1,15 +1,16 @@
 package com.ecare.web.pojo;
 
-
 import java.io.Serializable;
 
 public class Class implements Serializable{
-
-    private static final long serialVersionUID = -3058253836143257057L;
-
+    private static final long serialVersionUID = -2735711399826679433L;
     private Integer classId;
 
     private String className;
+
+    private String classDesc;
+
+    private Integer classViews;
 
     private String re1;
 
@@ -31,6 +32,22 @@ public class Class implements Serializable{
 
     public void setClassName(String className) {
         this.className = className == null ? null : className.trim();
+    }
+
+    public String getClassDesc() {
+        return classDesc;
+    }
+
+    public void setClassDesc(String classDesc) {
+        this.classDesc = classDesc == null ? null : classDesc.trim();
+    }
+
+    public Integer getClassViews() {
+        return classViews;
+    }
+
+    public void setClassViews(Integer classViews) {
+        this.classViews = classViews;
     }
 
     public String getRe1() {

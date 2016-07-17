@@ -6,6 +6,8 @@ import com.ecare.web.pojo.Post;
 import com.ecare.web.pojo.Reply;
 import com.ecare.web.service.PostService;
 import com.ecare.web.vo.PageVo;
+import com.ecare.web.vo.PostFormVo;
+import com.ecare.web.vo.PostVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +22,12 @@ public class PostServiceImpl implements PostService {
     private PostMapper postMapper;
     @Autowired
     private ReplyMapper replyMapper;
-    public List<Post> findPostByClassId(int classId, PageVo page) {
+    public List<PostFormVo> findPostByClassId(int classId, PageVo page) {
         return postMapper.selectByClassId(classId,page.getPageStart(),page.getPageSize());
+    }
+
+    public PostVo findPostbyPostId(int postId) {
+        return postMapper.selectByPrimaryKey(postId);
     }
 
     public List<Reply> findReplyByPostId(int postId, PageVo page) {
@@ -30,5 +36,9 @@ public class PostServiceImpl implements PostService {
 
     public int addPost(Post post) {
         return postMapper.insertSelective(post);
+    }
+
+    public int addReply(Reply reply) {
+        return replyMapper.insertSelective(reply);
     }
 }

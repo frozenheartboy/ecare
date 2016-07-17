@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Post implements Serializable{
-
-    private static final long serialVersionUID = -839897024211478685L;
-
+    private static final long serialVersionUID = 4414487507733446537L;
     private Integer postId;
 
     private String postTitle;
+
+    private String postDesc;
 
     private String postBody;
 
@@ -33,6 +33,7 @@ public class Post implements Serializable{
 
     private String re3;
 
+
     public Integer getPostId() {
         return postId;
     }
@@ -47,6 +48,14 @@ public class Post implements Serializable{
 
     public void setPostTitle(String postTitle) {
         this.postTitle = postTitle == null ? null : postTitle.trim();
+    }
+
+    public String getPostDesc() {
+        return postDesc;
+    }
+
+    public void setPostDesc(String postDesc) {
+        this.postDesc = postDesc == null ? null : postDesc.trim();
     }
 
     public String getPostBody() {
@@ -136,4 +145,6 @@ public class Post implements Serializable{
     public void setRe3(String re3) {
         this.re3 = re3 == null ? null : re3.trim();
     }
+
+
 }
