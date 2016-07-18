@@ -1,6 +1,7 @@
 package com.ecare.web.mapper;
 
 import com.ecare.web.pojo.Likes;
+import org.apache.ibatis.annotations.Param;
 
 public interface LikesMapper {
     int deleteByPrimaryKey(Integer likesId);
@@ -10,6 +11,8 @@ public interface LikesMapper {
     int insertSelective(Likes record);
 
     Likes selectByPrimaryKey(Integer likesId);
+
+    Integer selectByContent(Likes record);
 
     int updateByPrimaryKeySelective(Likes record);
 

@@ -11,6 +11,8 @@ public interface FavoriteMapper {
 
     Favorite selectByPrimaryKey(Integer favoriteId);
 
+    Integer selectByContent(Favorite record);
+
     int updateByPrimaryKeySelective(Favorite record);
 
     int updateByPrimaryKey(Favorite record);

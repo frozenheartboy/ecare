@@ -1,29 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ecare.web.mapper.LikesMapper" >
-  <resultMap id="BaseResultMap" type="com.ecare.web.pojo.Likes" >
-    <id column="LIKES_ID" property="likesId" jdbcType="INTEGER" />
-    <result column="LIKES_USER_ID" property="likesUserId" jdbcType="INTEGER" />
-    <result column="LIKES_TYPE" property="likesType" jdbcType="BIT" />
-    <result column="LIKES_TYPE_ID" property="likesTypeId" jdbcType="INTEGER" />
-    <result column="RE1" property="re1" jdbcType="VARCHAR" />
-    <result column="RE2" property="re2" jdbcType="VARCHAR" />
-    <result column="RE3" property="re3" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.ecare.web.mapper.LikesMapper">
+    <resultMap id="BaseResultMap" type="com.ecare.web.pojo.Likes">
+        <id column="LIKES_ID" property="likesId" jdbcType="INTEGER"/>
+        <result column="LIKES_USER_ID" property="likesUserId" jdbcType="INTEGER"/>
+        <result column="LIKES_TYPE" property="likesType" jdbcType="BIT"/>
+        <result column="LIKES_TYPE_ID" property="likesTypeId" jdbcType="INTEGER"/>
+        <result column="RE1" property="re1" jdbcType="VARCHAR"/>
+        <result column="RE2" property="re2" jdbcType="VARCHAR"/>
+        <result column="RE3" property="re3" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     LIKES_ID, LIKES_USER_ID, LIKES_TYPE, LIKES_TYPE_ID, RE1, RE2, RE3
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from likes
-    where LIKES_ID = #{likesId,jdbcType=INTEGER}
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from likes
+        where LIKES_ID = #{likesId,jdbcType=INTEGER}
+    </select>
+    <select id="selectByContent" resultType="java.lang.Integer">
+    select
+     LIKES_ID
+     from likes
+     where LIKES_USER_ID=#{likesUserId,jdbcType=INTEGER} AND LIKES_TYPE=#{likesType,jdbcType=BIT} AND LIKES_TYPE_ID=#{likesTypeId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from likes
     where LIKES_ID = #{likesId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.ecare.web.pojo.Likes" >
+    <insert id="insert" parameterType="com.ecare.web.pojo.Likes">
     insert into likes (LIKES_ID, LIKES_USER_ID, LIKES_TYPE, 
       LIKES_TYPE_ID, RE1, RE2, 
       RE3)
@@ -31,80 +37,80 @@
       #{likesTypeId,jdbcType=INTEGER}, #{re1,jdbcType=VARCHAR}, #{re2,jdbcType=VARCHAR}, 
       #{re3,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ecare.web.pojo.Likes" >
-    insert into likes
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="likesId != null" >
-        LIKES_ID,
-      </if>
-      <if test="likesUserId != null" >
-        LIKES_USER_ID,
-      </if>
-      <if test="likesType != null" >
-        LIKES_TYPE,
-      </if>
-      <if test="likesTypeId != null" >
-        LIKES_TYPE_ID,
-      </if>
-      <if test="re1 != null" >
-        RE1,
-      </if>
-      <if test="re2 != null" >
-        RE2,
-      </if>
-      <if test="re3 != null" >
-        RE3,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="likesId != null" >
-        #{likesId,jdbcType=INTEGER},
-      </if>
-      <if test="likesUserId != null" >
-        #{likesUserId,jdbcType=INTEGER},
-      </if>
-      <if test="likesType != null" >
-        #{likesType,jdbcType=BIT},
-      </if>
-      <if test="likesTypeId != null" >
-        #{likesTypeId,jdbcType=INTEGER},
-      </if>
-      <if test="re1 != null" >
-        #{re1,jdbcType=VARCHAR},
-      </if>
-      <if test="re2 != null" >
-        #{re2,jdbcType=VARCHAR},
-      </if>
-      <if test="re3 != null" >
-        #{re3,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ecare.web.pojo.Likes" >
-    update likes
-    <set >
-      <if test="likesUserId != null" >
-        LIKES_USER_ID = #{likesUserId,jdbcType=INTEGER},
-      </if>
-      <if test="likesType != null" >
-        LIKES_TYPE = #{likesType,jdbcType=BIT},
-      </if>
-      <if test="likesTypeId != null" >
-        LIKES_TYPE_ID = #{likesTypeId,jdbcType=INTEGER},
-      </if>
-      <if test="re1 != null" >
-        RE1 = #{re1,jdbcType=VARCHAR},
-      </if>
-      <if test="re2 != null" >
-        RE2 = #{re2,jdbcType=VARCHAR},
-      </if>
-      <if test="re3 != null" >
-        RE3 = #{re3,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where LIKES_ID = #{likesId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ecare.web.pojo.Likes" >
+    <insert id="insertSelective" parameterType="com.ecare.web.pojo.Likes">
+        insert into likes
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="likesId != null">
+                LIKES_ID,
+            </if>
+            <if test="likesUserId != null">
+                LIKES_USER_ID,
+            </if>
+            <if test="likesType != null">
+                LIKES_TYPE,
+            </if>
+            <if test="likesTypeId != null">
+                LIKES_TYPE_ID,
+            </if>
+            <if test="re1 != null">
+                RE1,
+            </if>
+            <if test="re2 != null">
+                RE2,
+            </if>
+            <if test="re3 != null">
+                RE3,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="likesId != null">
+                #{likesId,jdbcType=INTEGER},
+            </if>
+            <if test="likesUserId != null">
+                #{likesUserId,jdbcType=INTEGER},
+            </if>
+            <if test="likesType != null">
+                #{likesType,jdbcType=BIT},
+            </if>
+            <if test="likesTypeId != null">
+                #{likesTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="re1 != null">
+                #{re1,jdbcType=VARCHAR},
+            </if>
+            <if test="re2 != null">
+                #{re2,jdbcType=VARCHAR},
+            </if>
+            <if test="re3 != null">
+                #{re3,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ecare.web.pojo.Likes">
+        update likes
+        <set>
+            <if test="likesUserId != null">
+                LIKES_USER_ID = #{likesUserId,jdbcType=INTEGER},
+            </if>
+            <if test="likesType != null">
+                LIKES_TYPE = #{likesType,jdbcType=BIT},
+            </if>
+            <if test="likesTypeId != null">
+                LIKES_TYPE_ID = #{likesTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="re1 != null">
+                RE1 = #{re1,jdbcType=VARCHAR},
+            </if>
+            <if test="re2 != null">
+                RE2 = #{re2,jdbcType=VARCHAR},
+            </if>
+            <if test="re3 != null">
+                RE3 = #{re3,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where LIKES_ID = #{likesId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ecare.web.pojo.Likes">
     update likes
     set LIKES_USER_ID = #{likesUserId,jdbcType=INTEGER},
       LIKES_TYPE = #{likesType,jdbcType=BIT},

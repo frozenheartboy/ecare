@@ -5,13 +5,14 @@
     <id column="CLASS_ID" property="classId" jdbcType="INTEGER" />
     <result column="CLASS_NAME" property="className" jdbcType="VARCHAR" />
     <result column="CLASS_DESC" property="classDesc" jdbcType="VARCHAR" />
+    <result column="CLASS_MEMBERSHIP" property="classMembership" jdbcType="INTEGER" />
     <result column="CLASS_VIEWS" property="classViews" jdbcType="INTEGER" />
     <result column="RE1" property="re1" jdbcType="VARCHAR" />
     <result column="RE2" property="re2" jdbcType="VARCHAR" />
     <result column="RE3" property="re3" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    CLASS_ID, CLASS_NAME, CLASS_DESC, CLASS_VIEWS, RE1, RE2, RE3
+    CLASS_ID, CLASS_NAME, CLASS_DESC, CLASS_MEMBERSHIP, CLASS_VIEWS, RE1, RE2, RE3
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -25,11 +26,11 @@
   </delete>
   <insert id="insert" parameterType="com.ecare.web.pojo.Class" >
     insert into class (CLASS_ID, CLASS_NAME, CLASS_DESC, 
-      CLASS_VIEWS, RE1, RE2, 
-      RE3)
+      CLASS_MEMBERSHIP, CLASS_VIEWS, RE1, 
+      RE2, RE3)
     values (#{classId,jdbcType=INTEGER}, #{className,jdbcType=VARCHAR}, #{classDesc,jdbcType=VARCHAR}, 
-      #{classViews,jdbcType=INTEGER}, #{re1,jdbcType=VARCHAR}, #{re2,jdbcType=VARCHAR}, 
-      #{re3,jdbcType=VARCHAR})
+      #{classMembership,jdbcType=INTEGER}, #{classViews,jdbcType=INTEGER}, #{re1,jdbcType=VARCHAR}, 
+      #{re2,jdbcType=VARCHAR}, #{re3,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ecare.web.pojo.Class" >
     insert into class
@@ -42,6 +43,9 @@
       </if>
       <if test="classDesc != null" >
         CLASS_DESC,
+      </if>
+      <if test="classMembership != null" >
+        CLASS_MEMBERSHIP,
       </if>
       <if test="classViews != null" >
         CLASS_VIEWS,
@@ -66,6 +70,9 @@
       <if test="classDesc != null" >
         #{classDesc,jdbcType=VARCHAR},
       </if>
+      <if test="classMembership != null" >
+        #{classMembership,jdbcType=INTEGER},
+      </if>
       <if test="classViews != null" >
         #{classViews,jdbcType=INTEGER},
       </if>
@@ -89,6 +96,9 @@
       <if test="classDesc != null" >
         CLASS_DESC = #{classDesc,jdbcType=VARCHAR},
       </if>
+      <if test="classMembership != null" >
+        CLASS_MEMBERSHIP = #{classMembership,jdbcType=INTEGER},
+      </if>
       <if test="classViews != null" >
         CLASS_VIEWS = #{classViews,jdbcType=INTEGER},
       </if>
@@ -108,6 +118,7 @@
     update class
     set CLASS_NAME = #{className,jdbcType=VARCHAR},
       CLASS_DESC = #{classDesc,jdbcType=VARCHAR},
+      CLASS_MEMBERSHIP = #{classMembership,jdbcType=INTEGER},
       CLASS_VIEWS = #{classViews,jdbcType=INTEGER},
       RE1 = #{re1,jdbcType=VARCHAR},
       RE2 = #{re2,jdbcType=VARCHAR},

@@ -3,12 +3,14 @@ package com.ecare.web.pojo;
 import java.io.Serializable;
 
 public class Class implements Serializable{
-    private static final long serialVersionUID = -2735711399826679433L;
+    private static final long serialVersionUID = -8900097258838695805L;
     private Integer classId;
 
     private String className;
 
     private String classDesc;
+
+    private Integer classMembership;
 
     private Integer classViews;
 
@@ -40,6 +42,14 @@ public class Class implements Serializable{
 
     public void setClassDesc(String classDesc) {
         this.classDesc = classDesc == null ? null : classDesc.trim();
+    }
+
+    public Integer getClassMembership() {
+        return classMembership;
+    }
+
+    public void setClassMembership(Integer classMembership) {
+        this.classMembership = classMembership;
     }
 
     public Integer getClassViews() {
