@@ -147,6 +147,13 @@
             </if>
         </trim>
     </insert>
+    <update id="updatePostViews" parameterType="java.lang.Integer">
+        update post
+        <set>
+            POST_VIEWS = POST_VIEWS+1,
+        </set>
+        where POST_ID = #{postId,jdbcType=INTEGER}
+    </update>
     <update id="updateByPrimaryKeySelective" parameterType="com.ecare.web.pojo.Post">
         update post
         <set>

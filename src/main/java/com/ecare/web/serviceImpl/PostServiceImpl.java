@@ -28,13 +28,27 @@ public class PostServiceImpl implements PostService {
     private LikesMapper likesMapper;
     @Autowired
     private FavoriteMapper favoriteMapper;
+    @Autowired
+    private PhotoMapper photoMapper;
 
     public List<Class> findAllClass(PageVo page) {
-        return classMapper.selectAll(page.getPageStart(),page.getPageSize());
+        return classMapper.selectAll(page.getPageStart(), page.getPageSize());
+    }
+
+    public Class findClassByClassId(int classId) {
+        return classMapper.selectByPrimaryKey(classId);
+    }
+
+    public int updateClassViews(int classId) {
+        return classMapper.updateClassViews(classId);
     }
 
     public List<PostFormVo> findPostByClassId(int classId, PageVo page) {
-        return postMapper.selectByClassId(classId,page.getPageStart(),page.getPageSize());
+        return postMapper.selectByClassId(classId, page.getPageStart(), page.getPageSize());
+    }
+
+    public int updatePostViews(int postId) {
+        return postMapper.updatePostViews(postId);
     }
 
     public PostVo findPostByPostId(int postId) {
@@ -42,7 +56,7 @@ public class PostServiceImpl implements PostService {
     }
 
     public List<Reply> findReplyByPostId(int postId, PageVo page) {
-        return replyMapper.selectByPostId(postId,page.getPageStart(),page.getPageSize());
+        return replyMapper.selectByPostId(postId, page.getPageStart(), page.getPageSize());
     }
 
     public int addPost(Post post) {
@@ -54,8 +68,8 @@ public class PostServiceImpl implements PostService {
     }
 
     public int addLike(Likes likes) {
-        Integer result=likesMapper.selectByContent(likes);
-        if(result==null)
+        Integer result = likesMapper.selectByContent(likes);
+        if (result == null)
             return likesMapper.insertSelective(likes);
         else
             return 0;
@@ -63,22 +77,33 @@ public class PostServiceImpl implements PostService {
 
     public int addFavorite(Favorite favorite) {
         Integer result = favoriteMapper.selectByContent(favorite);
-        if(result==null)
+        if (result == null)
             return favoriteMapper.insertSelective(favorite);
         else
             return 0;
     }
 
-    public List<PostFormVo> findFavoriteByUserId(int userId,PageVo page) {
-        List<Integer> lists=favoriteMapper.selectByUserId(userId);
-        List<PostFormVo> postFormVoList=new LinkedList<PostFormVo>();
-        for(int i=page.getPageStart();i<lists.size()&&i<page.getPageStart()+page.getPageSize();i++){
-            PostFormVo postFormVo=postMapper.selectFormByPrimaryKey(lists.get(i));
-            if(postFormVo!=null){
+    public List<PostFormVo> findFavoriteByUserId(int userId, PageVo page) {
+        List<Integer> lists = favoriteMapper.selectByUserId(userId);
+        List<PostFormVo> postFormVoList = new LinkedList<PostFormVo>();
+        for (int i = page.getPageStart(); i < lists.size() && i < page.getPageStart() + page.getPageSize(); i++) {
+            PostFormVo postFormVo = postMapper.selectFormByPrimaryKey(lists.get(i));
+            if (postFormVo != null) {
                 postFormVoList.add(postFormVo);
             }
         }
         return postFormVoList;
+    }
+
+    public int addPhotoUrl(int postId, String url) {
+        Photo photo = new Photo();
+        photo.setPhotoPostId(postId);
+        photo.setPhotoUrl(url);
+        return photoMapper.insertSelective(photo);
+    }
+
+    public List<String> findUrlByPostId(int postId) {
+        return photoMapper.selectByPostId(postId);
     }
 
 }

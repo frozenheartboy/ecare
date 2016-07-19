@@ -1,98 +1,104 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ecare.web.mapper.PhotoMapper" >
-  <resultMap id="BaseResultMap" type="com.ecare.web.pojo.Photo" >
-    <id column="PHOTO_ID" property="photoId" jdbcType="INTEGER" />
-    <result column="PHOTO_POST_ID" property="photoPostId" jdbcType="INTEGER" />
-    <result column="PHOTO_URL" property="photoUrl" jdbcType="VARCHAR" />
-    <result column="RE1" property="re1" jdbcType="VARCHAR" />
-    <result column="RE2" property="re2" jdbcType="VARCHAR" />
-    <result column="RE3" property="re3" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.ecare.web.mapper.PhotoMapper">
+    <resultMap id="BaseResultMap" type="com.ecare.web.pojo.Photo">
+        <id column="PHOTO_ID" property="photoId" jdbcType="INTEGER"/>
+        <result column="PHOTO_POST_ID" property="photoPostId" jdbcType="INTEGER"/>
+        <result column="PHOTO_URL" property="photoUrl" jdbcType="VARCHAR"/>
+        <result column="RE1" property="re1" jdbcType="VARCHAR"/>
+        <result column="RE2" property="re2" jdbcType="VARCHAR"/>
+        <result column="RE3" property="re3" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     PHOTO_ID, PHOTO_POST_ID, PHOTO_URL, RE1, RE2, RE3
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from photo
+        where PHOTO_ID = #{photoId,jdbcType=INTEGER}
+    </select>
+    <select id="selectByPostId" resultType="java.lang.String" parameterType="java.lang.Integer">
+    select
+    PHOTO_URL
     from photo
-    where PHOTO_ID = #{photoId,jdbcType=INTEGER}
+    where PHOTO_POST_ID =#{photoPostId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from photo
     where PHOTO_ID = #{photoId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.ecare.web.pojo.Photo" >
+    <insert id="insert" parameterType="com.ecare.web.pojo.Photo">
     insert into photo (PHOTO_ID, PHOTO_POST_ID, PHOTO_URL, 
       RE1, RE2, RE3)
     values (#{photoId,jdbcType=INTEGER}, #{photoPostId,jdbcType=INTEGER}, #{photoUrl,jdbcType=VARCHAR}, 
       #{re1,jdbcType=VARCHAR}, #{re2,jdbcType=VARCHAR}, #{re3,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ecare.web.pojo.Photo" >
-    insert into photo
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="photoId != null" >
-        PHOTO_ID,
-      </if>
-      <if test="photoPostId != null" >
-        PHOTO_POST_ID,
-      </if>
-      <if test="photoUrl != null" >
-        PHOTO_URL,
-      </if>
-      <if test="re1 != null" >
-        RE1,
-      </if>
-      <if test="re2 != null" >
-        RE2,
-      </if>
-      <if test="re3 != null" >
-        RE3,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="photoId != null" >
-        #{photoId,jdbcType=INTEGER},
-      </if>
-      <if test="photoPostId != null" >
-        #{photoPostId,jdbcType=INTEGER},
-      </if>
-      <if test="photoUrl != null" >
-        #{photoUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="re1 != null" >
-        #{re1,jdbcType=VARCHAR},
-      </if>
-      <if test="re2 != null" >
-        #{re2,jdbcType=VARCHAR},
-      </if>
-      <if test="re3 != null" >
-        #{re3,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ecare.web.pojo.Photo" >
-    update photo
-    <set >
-      <if test="photoPostId != null" >
-        PHOTO_POST_ID = #{photoPostId,jdbcType=INTEGER},
-      </if>
-      <if test="photoUrl != null" >
-        PHOTO_URL = #{photoUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="re1 != null" >
-        RE1 = #{re1,jdbcType=VARCHAR},
-      </if>
-      <if test="re2 != null" >
-        RE2 = #{re2,jdbcType=VARCHAR},
-      </if>
-      <if test="re3 != null" >
-        RE3 = #{re3,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where PHOTO_ID = #{photoId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ecare.web.pojo.Photo" >
+    <insert id="insertSelective" parameterType="com.ecare.web.pojo.Photo">
+        insert into photo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="photoId != null">
+                PHOTO_ID,
+            </if>
+            <if test="photoPostId != null">
+                PHOTO_POST_ID,
+            </if>
+            <if test="photoUrl != null">
+                PHOTO_URL,
+            </if>
+            <if test="re1 != null">
+                RE1,
+            </if>
+            <if test="re2 != null">
+                RE2,
+            </if>
+            <if test="re3 != null">
+                RE3,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="photoId != null">
+                #{photoId,jdbcType=INTEGER},
+            </if>
+            <if test="photoPostId != null">
+                #{photoPostId,jdbcType=INTEGER},
+            </if>
+            <if test="photoUrl != null">
+                #{photoUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="re1 != null">
+                #{re1,jdbcType=VARCHAR},
+            </if>
+            <if test="re2 != null">
+                #{re2,jdbcType=VARCHAR},
+            </if>
+            <if test="re3 != null">
+                #{re3,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ecare.web.pojo.Photo">
+        update photo
+        <set>
+            <if test="photoPostId != null">
+                PHOTO_POST_ID = #{photoPostId,jdbcType=INTEGER},
+            </if>
+            <if test="photoUrl != null">
+                PHOTO_URL = #{photoUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="re1 != null">
+                RE1 = #{re1,jdbcType=VARCHAR},
+            </if>
+            <if test="re2 != null">
+                RE2 = #{re2,jdbcType=VARCHAR},
+            </if>
+            <if test="re3 != null">
+                RE3 = #{re3,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where PHOTO_ID = #{photoId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ecare.web.pojo.Photo">
     update photo
     set PHOTO_POST_ID = #{photoPostId,jdbcType=INTEGER},
       PHOTO_URL = #{photoUrl,jdbcType=VARCHAR},

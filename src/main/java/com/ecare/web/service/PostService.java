@@ -13,7 +13,10 @@ import java.util.List;
  */
 public interface PostService {
     List<Class> findAllClass(PageVo page);
+    Class findClassByClassId(int classId);
+    int updateClassViews(int classId);
     List<PostFormVo> findPostByClassId(int classId, PageVo page);
+    int updatePostViews(int postId);
     PostVo findPostByPostId(int postId);
     List<Reply> findReplyByPostId(int postId, PageVo page);
     int addPost(Post post);
@@ -21,4 +24,6 @@ public interface PostService {
     int addLike(Likes likes);
     int addFavorite(Favorite favorite);
     List<PostFormVo> findFavoriteByUserId(int userId,PageVo page);
+    int addPhotoUrl(int postId,String url);
+    List<String> findUrlByPostId(int postId);
 }

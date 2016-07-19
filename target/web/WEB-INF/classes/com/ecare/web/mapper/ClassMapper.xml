@@ -95,6 +95,13 @@
             </if>
         </trim>
     </insert>
+    <update id="updateClassViews" parameterType="java.lang.Integer">
+        update class
+        <set>
+            CLASS_VIEWS =CLASS_VIEWS +1
+        </set>
+        where CLASS_ID=#{classId, jdbcType=INTEGER}
+    </update>
     <update id="updateByPrimaryKeySelective" parameterType="com.ecare.web.pojo.Class">
         update class
         <set>

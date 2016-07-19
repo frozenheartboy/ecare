@@ -20,6 +20,8 @@ public interface PostMapper {
 
     List<PostFormVo> selectByClassId(@Param("classId") Integer classId, @Param("pageStart") Integer pageStart, @Param("pageSize")  Integer pageSize);
 
+    int updatePostViews(Integer postId);
+
     int updateByPrimaryKeySelective(Post record);
 
     int updateByPrimaryKeyWithBLOBs(Post record);
