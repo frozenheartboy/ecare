@@ -10,5 +10,6 @@ public class Constant {
     public static final int POST_PAGE_NUMBER=5;
     public static final int REPLY_PAGE_NUMBER=5;
     public static final int FAVORITE_PAGE_NUMBER=5;
+    public static final String FILE_PATH="File";
 
 }
