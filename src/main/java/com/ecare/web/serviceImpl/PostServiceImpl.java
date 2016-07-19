@@ -1,13 +1,8 @@
 package com.ecare.web.serviceImpl;
 
-import com.ecare.web.mapper.FavoriteMapper;
-import com.ecare.web.mapper.LikesMapper;
-import com.ecare.web.mapper.PostMapper;
-import com.ecare.web.mapper.ReplyMapper;
-import com.ecare.web.pojo.Favorite;
-import com.ecare.web.pojo.Likes;
-import com.ecare.web.pojo.Post;
-import com.ecare.web.pojo.Reply;
+import com.ecare.web.mapper.*;
+import com.ecare.web.pojo.*;
+import com.ecare.web.pojo.Class;
 import com.ecare.web.service.PostService;
 import com.ecare.web.vo.PageVo;
 import com.ecare.web.vo.PostFormVo;
@@ -15,6 +10,7 @@ import com.ecare.web.vo.PostVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -23,6 +19,8 @@ import java.util.List;
 @Service
 public class PostServiceImpl implements PostService {
     @Autowired
+    private ClassMapper classMapper;
+    @Autowired
     private PostMapper postMapper;
     @Autowired
     private ReplyMapper replyMapper;
@@ -30,6 +28,11 @@ public class PostServiceImpl implements PostService {
     private LikesMapper likesMapper;
     @Autowired
     private FavoriteMapper favoriteMapper;
+
+    public List<Class> findAllClass(PageVo page) {
+        return classMapper.selectAll(page.getPageStart(),page.getPageSize());
+    }
+
     public List<PostFormVo> findPostByClassId(int classId, PageVo page) {
         return postMapper.selectByClassId(classId,page.getPageStart(),page.getPageSize());
     }
@@ -64,6 +67,18 @@ public class PostServiceImpl implements PostService {
             return favoriteMapper.insertSelective(favorite);
         else
             return 0;
+    }
+
+    public List<PostFormVo> findFavoriteByUserId(int userId,PageVo page) {
+        List<Integer> lists=favoriteMapper.selectByUserId(userId);
+        List<PostFormVo> postFormVoList=new LinkedList<PostFormVo>();
+        for(int i=page.getPageStart();i<lists.size()&&i<page.getPageStart()+page.getPageSize();i++){
+            PostFormVo postFormVo=postMapper.selectFormByPrimaryKey(lists.get(i));
+            if(postFormVo!=null){
+                postFormVoList.add(postFormVo);
+            }
+        }
+        return postFormVoList;
     }
 
 }

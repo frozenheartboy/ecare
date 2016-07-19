@@ -1,58 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ecare.web.mapper.PostMapper" >
-  <resultMap id="BaseResultMap" type="com.ecare.web.pojo.Post" >
-    <id column="POST_ID" property="postId" jdbcType="INTEGER" />
-    <result column="POST_TITLE" property="postTitle" jdbcType="VARCHAR" />
-    <result column="POST_USER_ID" property="postUserId" jdbcType="INTEGER"/>
-    <result column="POST_CLASS_ID" property="postClassId" jdbcType="INTEGER"/>
-    <result column="POST_TOP" property="postTop" jdbcType="BIT" />
-    <result column="POST_LIKES" property="postLikes" jdbcType="INTEGER" />
-    <result column="POST_VIEWS" property="postViews" jdbcType="INTEGER" />
+<mapper namespace="com.ecare.web.mapper.PostMapper">
+    <resultMap id="BaseResultMap" type="com.ecare.web.pojo.Post">
+        <id column="POST_ID" property="postId" jdbcType="INTEGER"/>
+        <result column="POST_TITLE" property="postTitle" jdbcType="VARCHAR"/>
+        <result column="POST_USER_ID" property="postUserId" jdbcType="INTEGER"/>
+        <result column="POST_CLASS_ID" property="postClassId" jdbcType="INTEGER"/>
+        <result column="POST_TOP" property="postTop" jdbcType="BIT"/>
+        <result column="POST_LIKES" property="postLikes" jdbcType="INTEGER"/>
+        <result column="POST_VIEWS" property="postViews" jdbcType="INTEGER"/>
 
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.ecare.web.vo.PostVo" extends="BaseResultMap" >
-    <result column="POST_CREATE_TIME" property="postCreateTime" jdbcType="TIMESTAMP" />
-    <result column="POST_EDIT_TIME" property="postEditTime" jdbcType="TIMESTAMP" />
-    <result column="POST_BODY" property="postBody" jdbcType="LONGVARCHAR" />
-  </resultMap>
-  <resultMap id="ResultMapWithDESC" type="com.ecare.web.vo.PostFormVo" extends="BaseResultMap" >
-    <result column="POST_DESC" property="postDesc" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.ecare.web.vo.PostVo" extends="BaseResultMap">
+        <result column="POST_CREATE_TIME" property="postCreateTime" jdbcType="TIMESTAMP"/>
+        <result column="POST_EDIT_TIME" property="postEditTime" jdbcType="TIMESTAMP"/>
+        <result column="POST_BODY" property="postBody" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <resultMap id="ResultMapWithDESC" type="com.ecare.web.vo.PostFormVo" extends="BaseResultMap">
+        <result column="POST_DESC" property="postDesc" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     POST_ID, POST_TITLE, POST_USER_ID,POST_CLASS_ID,
     POST_TOP, POST_LIKES, POST_VIEWS
   </sql>
-  <sql id="Desc_Column_List">
+    <sql id="Desc_Column_List">
      POST_DESC
   </sql>
-  <sql id="Blob_Column_List" >
+    <sql id="Blob_Column_List">
      POST_CREATE_TIME, POST_EDIT_TIME, POST_BODY
   </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from post
-    where POST_ID = #{postId,jdbcType=INTEGER}
-  </select>
-  <select id="selectByClassId" resultMap="ResultMapWithDESC">
-    select
-    <include refid="Base_Column_List"/>
-    ,
-    <include refid="Desc_Column_List"/>
-    from post
-    where POST_CLASS_ID = #{classId,jdbcType=INTEGER}
-    <if test="pageStart>-1 and pageSize>-1">
-      limit #{pageStart,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER}
-    </if>
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from post
+        where POST_ID = #{postId,jdbcType=INTEGER}
+    </select>
+    <select id="selectFormByPrimaryKey" resultMap="ResultMapWithDESC" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Desc_Column_List"/>
+        from post
+        where POST_ID =#{postId,jdbcType=INTEGER}
+    </select>
+    <select id="selectByClassId" resultMap="ResultMapWithDESC">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Desc_Column_List"/>
+        from post
+        where POST_CLASS_ID = #{classId,jdbcType=INTEGER}
+        <if test="pageStart>-1 and pageSize>-1">
+            limit #{pageStart,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER}
+        </if>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from post
     where POST_ID = #{postId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.ecare.web.pojo.Post" >
+    <insert id="insert" parameterType="com.ecare.web.pojo.Post">
     insert into post (POST_ID, POST_TITLE, POST_DESC, 
       POST_CREATE_TIME, POST_EDIT_TIME, POST_USER_ID, 
       POST_CLASS_ID, POST_TOP, POST_LIKES, 
@@ -64,120 +72,120 @@
       #{postViews,jdbcType=INTEGER}, #{re1,jdbcType=VARCHAR}, #{re2,jdbcType=VARCHAR}, 
       #{re3,jdbcType=VARCHAR}, #{postBody,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ecare.web.pojo.Post" useGeneratedKeys="true" keyProperty="postId">
-    insert into post
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="postId != null" >
-        POST_ID,
-      </if>
-      <if test="postTitle != null" >
-        POST_TITLE,
-      </if>
-      <if test="postDesc != null" >
-        POST_DESC,
-      </if>
+    <insert id="insertSelective" parameterType="com.ecare.web.pojo.Post" useGeneratedKeys="true" keyProperty="postId">
+        insert into post
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="postId != null">
+                POST_ID,
+            </if>
+            <if test="postTitle != null">
+                POST_TITLE,
+            </if>
+            <if test="postDesc != null">
+                POST_DESC,
+            </if>
 
-      <if test="postCreateTime != null" >
-        POST_CREATE_TIME,
-      </if>
+            <if test="postCreateTime != null">
+                POST_CREATE_TIME,
+            </if>
 
-        POST_EDIT_TIME,
+            POST_EDIT_TIME,
 
-      <if test="postUserId != null" >
-        POST_USER_ID,
-      </if>
-      <if test="postClassId != null" >
-        POST_CLASS_ID,
-      </if>
-      <if test="postTop != null" >
-        POST_TOP,
-      </if>
-      <if test="postLikes != null" >
-        POST_LIKES,
-      </if>
-      <if test="postViews != null" >
-        POST_VIEWS,
-      </if>
-      <if test="postBody != null" >
-        POST_BODY,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="postId != null" >
-        #{postId,jdbcType=INTEGER},
-      </if>
-      <if test="postTitle != null" >
-        #{postTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="postDesc != null" >
-        #{postDesc,jdbcType=VARCHAR},
-      </if>
-      <if test="postCreateTime != null" >
-        #{postCreateTime,jdbcType=TIMESTAMP},
-      </if>
+            <if test="postUserId != null">
+                POST_USER_ID,
+            </if>
+            <if test="postClassId != null">
+                POST_CLASS_ID,
+            </if>
+            <if test="postTop != null">
+                POST_TOP,
+            </if>
+            <if test="postLikes != null">
+                POST_LIKES,
+            </if>
+            <if test="postViews != null">
+                POST_VIEWS,
+            </if>
+            <if test="postBody != null">
+                POST_BODY,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="postId != null">
+                #{postId,jdbcType=INTEGER},
+            </if>
+            <if test="postTitle != null">
+                #{postTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="postDesc != null">
+                #{postDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="postCreateTime != null">
+                #{postCreateTime,jdbcType=TIMESTAMP},
+            </if>
 
-        #{postEditTime,jdbcType=TIMESTAMP},
+            #{postEditTime,jdbcType=TIMESTAMP},
 
-      <if test="postUserId != null" >
-        #{postUserId,jdbcType=INTEGER},
-      </if>
-      <if test="postClassId != null" >
-        #{postClassId,jdbcType=INTEGER},
-      </if>
-      <if test="postTop != null" >
-        #{postTop,jdbcType=BIT},
-      </if>
-      <if test="postLikes != null" >
-        #{postLikes,jdbcType=INTEGER},
-      </if>
-      <if test="postViews != null" >
-        #{postViews,jdbcType=INTEGER},
-      </if>
+            <if test="postUserId != null">
+                #{postUserId,jdbcType=INTEGER},
+            </if>
+            <if test="postClassId != null">
+                #{postClassId,jdbcType=INTEGER},
+            </if>
+            <if test="postTop != null">
+                #{postTop,jdbcType=BIT},
+            </if>
+            <if test="postLikes != null">
+                #{postLikes,jdbcType=INTEGER},
+            </if>
+            <if test="postViews != null">
+                #{postViews,jdbcType=INTEGER},
+            </if>
 
-      <if test="postBody != null" >
-        #{postBody,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ecare.web.pojo.Post" >
-    update post
-    <set >
-      <if test="postTitle != null" >
-        POST_TITLE = #{postTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="postDesc != null" >
-        POST_DESC = #{postDesc,jdbcType=VARCHAR},
-      </if>
-      <if test="postCreateTime != null" >
-        POST_CREATE_TIME = #{postCreateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="postEditTime != null" >
-        POST_EDIT_TIME = #{postEditTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="postUserId != null" >
-        POST_USER_ID = #{postUserId,jdbcType=INTEGER},
-      </if>
-      <if test="postClassId != null" >
-        POST_CLASS_ID = #{postClassId,jdbcType=INTEGER},
-      </if>
-      <if test="postTop != null" >
-        POST_TOP = #{postTop,jdbcType=BIT},
-      </if>
-      <if test="postLikes != null" >
-        POST_LIKES = #{postLikes,jdbcType=INTEGER},
-      </if>
-      <if test="postViews != null" >
-        POST_VIEWS = #{postViews,jdbcType=INTEGER},
-      </if>
+            <if test="postBody != null">
+                #{postBody,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ecare.web.pojo.Post">
+        update post
+        <set>
+            <if test="postTitle != null">
+                POST_TITLE = #{postTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="postDesc != null">
+                POST_DESC = #{postDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="postCreateTime != null">
+                POST_CREATE_TIME = #{postCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="postEditTime != null">
+                POST_EDIT_TIME = #{postEditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="postUserId != null">
+                POST_USER_ID = #{postUserId,jdbcType=INTEGER},
+            </if>
+            <if test="postClassId != null">
+                POST_CLASS_ID = #{postClassId,jdbcType=INTEGER},
+            </if>
+            <if test="postTop != null">
+                POST_TOP = #{postTop,jdbcType=BIT},
+            </if>
+            <if test="postLikes != null">
+                POST_LIKES = #{postLikes,jdbcType=INTEGER},
+            </if>
+            <if test="postViews != null">
+                POST_VIEWS = #{postViews,jdbcType=INTEGER},
+            </if>
 
 
-      <if test="postBody != null" >
-        POST_BODY = #{postBody,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where POST_ID = #{postId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ecare.web.pojo.Post" >
+            <if test="postBody != null">
+                POST_BODY = #{postBody,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where POST_ID = #{postId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ecare.web.pojo.Post">
     update post
     set POST_TITLE = #{postTitle,jdbcType=VARCHAR},
       POST_DESC = #{postDesc,jdbcType=VARCHAR},
@@ -191,7 +199,7 @@
       POST_BODY = #{postBody,jdbcType=LONGVARCHAR}
     where POST_ID = #{postId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ecare.web.pojo.Post" >
+    <update id="updateByPrimaryKey" parameterType="com.ecare.web.pojo.Post">
     update post
     set POST_TITLE = #{postTitle,jdbcType=VARCHAR},
       POST_DESC = #{postDesc,jdbcType=VARCHAR},

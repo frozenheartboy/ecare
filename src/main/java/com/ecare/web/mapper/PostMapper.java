@@ -14,7 +14,9 @@ public interface PostMapper {
 
     int insertSelective(Post record);
 
-    PostVo selectByPrimaryKey(Integer postId);
+    PostVo selectByPrimaryKey( Integer postId);
+
+    PostFormVo selectFormByPrimaryKey(Integer postId);
 
     List<PostFormVo> selectByClassId(@Param("classId") Integer classId, @Param("pageStart") Integer pageStart, @Param("pageSize")  Integer pageSize);
 

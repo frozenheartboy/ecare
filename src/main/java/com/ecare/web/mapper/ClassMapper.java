@@ -1,6 +1,9 @@
 package com.ecare.web.mapper;
 
 import com.ecare.web.pojo.Class;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface ClassMapper {
     int deleteByPrimaryKey(Integer classId);
@@ -10,6 +13,8 @@ public interface ClassMapper {
     int insertSelective(Class record);
 
     Class selectByPrimaryKey(Integer classId);
+
+    List<Class> selectAll(@Param("pageStart") Integer pageStart,@Param("pageSize") Integer pageSize);
 
     int updateByPrimaryKeySelective(Class record);
 

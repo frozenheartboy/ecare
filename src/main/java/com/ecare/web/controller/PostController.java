@@ -1,9 +1,7 @@
 package com.ecare.web.controller;
 
-import com.ecare.web.pojo.Favorite;
-import com.ecare.web.pojo.Likes;
-import com.ecare.web.pojo.Post;
-import com.ecare.web.pojo.Reply;
+import com.ecare.web.pojo.*;
+import com.ecare.web.pojo.Class;
 import com.ecare.web.service.PostService;
 import com.ecare.web.util.PageUtil;
 import com.ecare.web.util.ResultUtil;
@@ -26,6 +24,16 @@ import java.util.Map;
 public class PostController {
     @Autowired
     private PostService postService;
+    @RequestMapping(value = "/findClass")
+    @ResponseBody
+    public Map<String,Object> findAllClass(@RequestParam(value = "page") int pageNumber){
+        if(pageNumber>-1){
+            List<Class> classList=postService.findAllClass(PageUtil.getPage(pageNumber,Constant.CLASS_PAGE_NUMBER));
+            if(classList!=null)
+                return ResultUtil.getResult(Constant.SUCCESS,"查询成功",classList);
+        }
+        return ResultUtil.getResult(Constant.FAILURE,"查询失败",null);
+    }
 
     @RequestMapping(value = "/findPost")
     @ResponseBody
@@ -41,7 +49,7 @@ public class PostController {
 
     @RequestMapping(value = "/getPost")
     @ResponseBody
-    public Map<String, Object> findPostByPostId(@RequestParam(value = "PostId") int postId) {
+    public Map<String, Object> findPostByPostId(@RequestParam(value = "postId") int postId) {
         PostVo postVo = postService.findPostByPostId(postId);
         if (postVo != null)
             return ResultUtil.getResult(Constant.SUCCESS, "查找成功", postVo);
@@ -49,7 +57,7 @@ public class PostController {
 
     }
 
-    @RequestMapping(value = "/findReplies")
+    @RequestMapping(value = "/findReply")
     @ResponseBody
     public Map<String, Object> findReplyByPostId(@RequestParam("postId") int postId, @RequestParam("page") int pageNumber) {
         if (pageNumber > -1) {
@@ -118,5 +126,15 @@ public class PostController {
         if(result!=0)
             return ResultUtil.getResult(Constant.SUCCESS,"收藏成功",null);
         return ResultUtil.getResult(Constant.FAILURE,"已经收藏",null);
+    }
+    @RequestMapping(value = "/findFavorite")
+    @ResponseBody
+    public Map<String,Object> findFavorite(@RequestParam("user_id") int user_id,@RequestParam("page") int pageNumber){
+        if (pageNumber > -1) {
+            List<PostFormVo> list=postService.findFavoriteByUserId(user_id, PageUtil.getPage(pageNumber, Constant.FAVORITE_PAGE_NUMBER));
+            if(list.size()!=0)
+                return ResultUtil.getResult(Constant.SUCCESS,"查询成功",list);
+        }
+        return ResultUtil.getResult(Constant.FAILURE,"查询失败",null);
     }
 }

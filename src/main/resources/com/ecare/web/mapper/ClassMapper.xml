@@ -1,30 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ecare.web.mapper.ClassMapper" >
-  <resultMap id="BaseResultMap" type="com.ecare.web.pojo.Class" >
-    <id column="CLASS_ID" property="classId" jdbcType="INTEGER" />
-    <result column="CLASS_NAME" property="className" jdbcType="VARCHAR" />
-    <result column="CLASS_DESC" property="classDesc" jdbcType="VARCHAR" />
-    <result column="CLASS_MEMBERSHIP" property="classMembership" jdbcType="INTEGER" />
-    <result column="CLASS_VIEWS" property="classViews" jdbcType="INTEGER" />
-    <result column="RE1" property="re1" jdbcType="VARCHAR" />
-    <result column="RE2" property="re2" jdbcType="VARCHAR" />
-    <result column="RE3" property="re3" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.ecare.web.mapper.ClassMapper">
+    <resultMap id="BaseResultMap" type="com.ecare.web.pojo.Class">
+        <id column="CLASS_ID" property="classId" jdbcType="INTEGER"/>
+        <result column="CLASS_NAME" property="className" jdbcType="VARCHAR"/>
+        <result column="CLASS_DESC" property="classDesc" jdbcType="VARCHAR"/>
+        <result column="CLASS_MEMBERSHIP" property="classMembership" jdbcType="INTEGER"/>
+        <result column="CLASS_VIEWS" property="classViews" jdbcType="INTEGER"/>
+        <result column="RE1" property="re1" jdbcType="VARCHAR"/>
+        <result column="RE2" property="re2" jdbcType="VARCHAR"/>
+        <result column="RE3" property="re3" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     CLASS_ID, CLASS_NAME, CLASS_DESC, CLASS_MEMBERSHIP, CLASS_VIEWS, RE1, RE2, RE3
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from class
-    where CLASS_ID = #{classId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from class
+        where CLASS_ID = #{classId,jdbcType=INTEGER}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from class
+        <if test="pageStart>-1 and pageSize>-1">
+            limit #{pageStart,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER}
+        </if>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from class
     where CLASS_ID = #{classId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.ecare.web.pojo.Class" >
+    <insert id="insert" parameterType="com.ecare.web.pojo.Class">
     insert into class (CLASS_ID, CLASS_NAME, CLASS_DESC, 
       CLASS_MEMBERSHIP, CLASS_VIEWS, RE1, 
       RE2, RE3)
@@ -32,89 +40,89 @@
       #{classMembership,jdbcType=INTEGER}, #{classViews,jdbcType=INTEGER}, #{re1,jdbcType=VARCHAR}, 
       #{re2,jdbcType=VARCHAR}, #{re3,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ecare.web.pojo.Class" >
-    insert into class
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="classId != null" >
-        CLASS_ID,
-      </if>
-      <if test="className != null" >
-        CLASS_NAME,
-      </if>
-      <if test="classDesc != null" >
-        CLASS_DESC,
-      </if>
-      <if test="classMembership != null" >
-        CLASS_MEMBERSHIP,
-      </if>
-      <if test="classViews != null" >
-        CLASS_VIEWS,
-      </if>
-      <if test="re1 != null" >
-        RE1,
-      </if>
-      <if test="re2 != null" >
-        RE2,
-      </if>
-      <if test="re3 != null" >
-        RE3,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="classId != null" >
-        #{classId,jdbcType=INTEGER},
-      </if>
-      <if test="className != null" >
-        #{className,jdbcType=VARCHAR},
-      </if>
-      <if test="classDesc != null" >
-        #{classDesc,jdbcType=VARCHAR},
-      </if>
-      <if test="classMembership != null" >
-        #{classMembership,jdbcType=INTEGER},
-      </if>
-      <if test="classViews != null" >
-        #{classViews,jdbcType=INTEGER},
-      </if>
-      <if test="re1 != null" >
-        #{re1,jdbcType=VARCHAR},
-      </if>
-      <if test="re2 != null" >
-        #{re2,jdbcType=VARCHAR},
-      </if>
-      <if test="re3 != null" >
-        #{re3,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ecare.web.pojo.Class" >
-    update class
-    <set >
-      <if test="className != null" >
-        CLASS_NAME = #{className,jdbcType=VARCHAR},
-      </if>
-      <if test="classDesc != null" >
-        CLASS_DESC = #{classDesc,jdbcType=VARCHAR},
-      </if>
-      <if test="classMembership != null" >
-        CLASS_MEMBERSHIP = #{classMembership,jdbcType=INTEGER},
-      </if>
-      <if test="classViews != null" >
-        CLASS_VIEWS = #{classViews,jdbcType=INTEGER},
-      </if>
-      <if test="re1 != null" >
-        RE1 = #{re1,jdbcType=VARCHAR},
-      </if>
-      <if test="re2 != null" >
-        RE2 = #{re2,jdbcType=VARCHAR},
-      </if>
-      <if test="re3 != null" >
-        RE3 = #{re3,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where CLASS_ID = #{classId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ecare.web.pojo.Class" >
+    <insert id="insertSelective" parameterType="com.ecare.web.pojo.Class">
+        insert into class
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="classId != null">
+                CLASS_ID,
+            </if>
+            <if test="className != null">
+                CLASS_NAME,
+            </if>
+            <if test="classDesc != null">
+                CLASS_DESC,
+            </if>
+            <if test="classMembership != null">
+                CLASS_MEMBERSHIP,
+            </if>
+            <if test="classViews != null">
+                CLASS_VIEWS,
+            </if>
+            <if test="re1 != null">
+                RE1,
+            </if>
+            <if test="re2 != null">
+                RE2,
+            </if>
+            <if test="re3 != null">
+                RE3,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="classId != null">
+                #{classId,jdbcType=INTEGER},
+            </if>
+            <if test="className != null">
+                #{className,jdbcType=VARCHAR},
+            </if>
+            <if test="classDesc != null">
+                #{classDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="classMembership != null">
+                #{classMembership,jdbcType=INTEGER},
+            </if>
+            <if test="classViews != null">
+                #{classViews,jdbcType=INTEGER},
+            </if>
+            <if test="re1 != null">
+                #{re1,jdbcType=VARCHAR},
+            </if>
+            <if test="re2 != null">
+                #{re2,jdbcType=VARCHAR},
+            </if>
+            <if test="re3 != null">
+                #{re3,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ecare.web.pojo.Class">
+        update class
+        <set>
+            <if test="className != null">
+                CLASS_NAME = #{className,jdbcType=VARCHAR},
+            </if>
+            <if test="classDesc != null">
+                CLASS_DESC = #{classDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="classMembership != null">
+                CLASS_MEMBERSHIP = #{classMembership,jdbcType=INTEGER},
+            </if>
+            <if test="classViews != null">
+                CLASS_VIEWS = #{classViews,jdbcType=INTEGER},
+            </if>
+            <if test="re1 != null">
+                RE1 = #{re1,jdbcType=VARCHAR},
+            </if>
+            <if test="re2 != null">
+                RE2 = #{re2,jdbcType=VARCHAR},
+            </if>
+            <if test="re3 != null">
+                RE3 = #{re3,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where CLASS_ID = #{classId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ecare.web.pojo.Class">
     update class
     set CLASS_NAME = #{className,jdbcType=VARCHAR},
       CLASS_DESC = #{classDesc,jdbcType=VARCHAR},

@@ -18,6 +18,12 @@
     from favorite
     where FAVORITE_ID = #{favoriteId,jdbcType=INTEGER}
   </select>
+  <select id="selectByUserId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+    select
+    FAVORITE_POST_ID
+    from favorite
+    where  FAVORITE_USER_ID = #{userId,jdbcType=INTEGER}
+  </select>
   <select id="selectByContent" resultType="java.lang.Integer" parameterType="com.ecare.web.pojo.Favorite">
     select
     FAVORITE_ID
