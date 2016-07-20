@@ -1,14 +1,19 @@
 package com.ecare.web.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Class implements Serializable{
-    private static final long serialVersionUID = -8900097258838695805L;
+    private static final long serialVersionUID = 7339226119888783290L;
     private Integer classId;
 
     private String className;
 
     private String classDesc;
+
+    private Integer classCreaterId;
+
+    private Date classCreateTime;
 
     private Integer classMembership;
 
@@ -42,6 +47,22 @@ public class Class implements Serializable{
 
     public void setClassDesc(String classDesc) {
         this.classDesc = classDesc == null ? null : classDesc.trim();
+    }
+
+    public Integer getClassCreaterId() {
+        return classCreaterId;
+    }
+
+    public void setClassCreaterId(Integer classCreaterId) {
+        this.classCreaterId = classCreaterId;
+    }
+
+    public Date getClassCreateTime() {
+        return classCreateTime;
+    }
+
+    public void setClassCreateTime(Date classCreateTime) {
+        this.classCreateTime = classCreateTime;
     }
 
     public Integer getClassMembership() {

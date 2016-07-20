@@ -5,6 +5,8 @@
         <id column="CLASS_ID" property="classId" jdbcType="INTEGER"/>
         <result column="CLASS_NAME" property="className" jdbcType="VARCHAR"/>
         <result column="CLASS_DESC" property="classDesc" jdbcType="VARCHAR"/>
+        <result column="CLASS_CREATER_ID" property="classCreaterId" jdbcType="INTEGER"/>
+        <result column="CLASS_CREATE_TIME" property="classCreateTime" jdbcType="TIMESTAMP"/>
         <result column="CLASS_MEMBERSHIP" property="classMembership" jdbcType="INTEGER"/>
         <result column="CLASS_VIEWS" property="classViews" jdbcType="INTEGER"/>
         <result column="RE1" property="re1" jdbcType="VARCHAR"/>
@@ -12,7 +14,8 @@
         <result column="RE3" property="re3" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-    CLASS_ID, CLASS_NAME, CLASS_DESC, CLASS_MEMBERSHIP, CLASS_VIEWS, RE1, RE2, RE3
+    CLASS_ID, CLASS_NAME, CLASS_DESC, CLASS_CREATER_ID, CLASS_CREATE_TIME, CLASS_MEMBERSHIP, 
+    CLASS_VIEWS, RE1, RE2, RE3
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -34,11 +37,13 @@
   </delete>
     <insert id="insert" parameterType="com.ecare.web.pojo.Class">
     insert into class (CLASS_ID, CLASS_NAME, CLASS_DESC, 
-      CLASS_MEMBERSHIP, CLASS_VIEWS, RE1, 
-      RE2, RE3)
+      CLASS_CREATER_ID, CLASS_CREATE_TIME, CLASS_MEMBERSHIP, 
+      CLASS_VIEWS, RE1, RE2, 
+      RE3)
     values (#{classId,jdbcType=INTEGER}, #{className,jdbcType=VARCHAR}, #{classDesc,jdbcType=VARCHAR}, 
-      #{classMembership,jdbcType=INTEGER}, #{classViews,jdbcType=INTEGER}, #{re1,jdbcType=VARCHAR}, 
-      #{re2,jdbcType=VARCHAR}, #{re3,jdbcType=VARCHAR})
+      #{classCreaterId,jdbcType=INTEGER}, #{classCreateTime,jdbcType=TIMESTAMP}, #{classMembership,jdbcType=INTEGER}, 
+      #{classViews,jdbcType=INTEGER}, #{re1,jdbcType=VARCHAR}, #{re2,jdbcType=VARCHAR}, 
+      #{re3,jdbcType=VARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.ecare.web.pojo.Class">
         insert into class
@@ -51,6 +56,12 @@
             </if>
             <if test="classDesc != null">
                 CLASS_DESC,
+            </if>
+            <if test="classCreaterId != null">
+                CLASS_CREATER_ID,
+            </if>
+            <if test="classCreateTime != null">
+                CLASS_CREATE_TIME,
             </if>
             <if test="classMembership != null">
                 CLASS_MEMBERSHIP,
@@ -77,6 +88,12 @@
             </if>
             <if test="classDesc != null">
                 #{classDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="classCreaterId != null">
+                #{classCreaterId,jdbcType=INTEGER},
+            </if>
+            <if test="classCreateTime != null">
+                #{classCreateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="classMembership != null">
                 #{classMembership,jdbcType=INTEGER},
@@ -111,6 +128,12 @@
             <if test="classDesc != null">
                 CLASS_DESC = #{classDesc,jdbcType=VARCHAR},
             </if>
+            <if test="classCreaterId != null">
+                CLASS_CREATER_ID = #{classCreaterId,jdbcType=INTEGER},
+            </if>
+            <if test="classCreateTime != null">
+                CLASS_CREATE_TIME = #{classCreateTime,jdbcType=TIMESTAMP},
+            </if>
             <if test="classMembership != null">
                 CLASS_MEMBERSHIP = #{classMembership,jdbcType=INTEGER},
             </if>
@@ -133,6 +156,8 @@
     update class
     set CLASS_NAME = #{className,jdbcType=VARCHAR},
       CLASS_DESC = #{classDesc,jdbcType=VARCHAR},
+      CLASS_CREATER_ID = #{classCreaterId,jdbcType=INTEGER},
+      CLASS_CREATE_TIME = #{classCreateTime,jdbcType=TIMESTAMP},
       CLASS_MEMBERSHIP = #{classMembership,jdbcType=INTEGER},
       CLASS_VIEWS = #{classViews,jdbcType=INTEGER},
       RE1 = #{re1,jdbcType=VARCHAR},

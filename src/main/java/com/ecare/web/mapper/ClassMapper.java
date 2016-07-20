@@ -14,7 +14,7 @@ public interface ClassMapper {
 
     Class selectByPrimaryKey(Integer classId);
 
-    List<Class> selectAll(@Param("pageStart") Integer pageStart,@Param("pageSize") Integer pageSize);
+    List<Class> selectAll(@Param("pageStart") Integer pageStart, @Param("pageSize") Integer pageSize);
 
     int updateClassViews(Integer classId);
 
