@@ -14,6 +14,7 @@ import java.util.List;
 public interface PostService {
     List<Class> findAllClass(PageVo page);
     Class findClassByClassId(int classId);
+    int addClass(Class classVo);
     int updateClassViews(int classId);
     List<PostFormVo> findPostByClassId(int classId, PageVo page);
     int updatePostViews(int postId);

@@ -2,6 +2,7 @@ package com.ecare.web.controller;
 
 import com.ecare.web.pojo.*;
 import com.ecare.web.pojo.Class;
+import com.ecare.web.redis.RedisDao;
 import com.ecare.web.service.PostService;
 import com.ecare.web.util.PageUtil;
 import com.ecare.web.util.ResultUtil;
@@ -24,9 +25,10 @@ public class PostController {
     @Autowired
     private PostService postService;
 
+
     @RequestMapping(value = "/findClass")
     @ResponseBody
-    public Map<String, Object> findAllClass(@RequestParam(value = "page") int pageNumber) {
+    public Map<String, Object> findAllClass(@RequestParam(value = "page") int pageNumber,@RequestParam("user_id") int user_id) {
         if (pageNumber > -1) {
             List<Class> classList = postService.findAllClass(PageUtil.getPage(pageNumber, Constant.CLASS_PAGE_NUMBER));
             if (classList != null)
@@ -45,6 +47,16 @@ public class PostController {
             return ResultUtil.getResult(Constant.SUCCESS, "查询成功", classVo);
         }
         return ResultUtil.getResult(Constant.FAILURE, "查询失败", null);
+    }
+    @RequestMapping(value = "/addClass")
+    @ResponseBody
+    public Map<String,Object> addClass(@ModelAttribute Class classVo,@RequestParam("user_id") int user_id){
+        classVo.setClassCreaterId(user_id);
+        int result = postService.addClass(classVo);
+        if (result != 0) {
+            return ResultUtil.getResult(Constant.SUCCESS, "添加成功", null);
+        } else
+            return ResultUtil.getResult(Constant.FAILURE, "添加失败", null);
     }
 
     @RequestMapping(value = "/findPost")
@@ -110,7 +122,7 @@ public class PostController {
         reply.setReplyUserId(userId);
         int result = postService.addReply(reply);
         if (result != 0) {
-            return ResultUtil.getResult(Constant.SUCCESS, "添加成功", reply.getReplyId());
+            return ResultUtil.getResult(Constant.SUCCESS, "添加成功", null);
         } else
             return ResultUtil.getResult(Constant.FAILURE, "添加失败", null);
     }

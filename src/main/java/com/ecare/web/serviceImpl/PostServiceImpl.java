@@ -39,6 +39,10 @@ public class PostServiceImpl implements PostService {
         return classMapper.selectByPrimaryKey(classId);
     }
 
+    public int addClass(Class classVo) {
+        return classMapper.insertSelective(classVo);
+    }
+
     public int updateClassViews(int classId) {
         return classMapper.updateClassViews(classId);
     }

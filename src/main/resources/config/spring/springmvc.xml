@@ -3,7 +3,12 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!--自动扫描控制器-->
     <context:component-scan base-package="com.ecare.web.controller"/>
@@ -20,5 +25,15 @@
         <!-- 指定所上传文件的最大值单位Byte。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->
         <property name="maxUploadSize" value="10000000"/>
     </bean>
+    <mvc:interceptors>
+         <!-- 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 -->
+          <bean class="com.ecare.web.interceptor.TokenInterceptor"/>
+          <!--<mvc:interceptor>-->
+              <!--<mvc:mapping path="/test/number.do"/>-->
+              <!--&lt;!&ndash; 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 &ndash;&gt;-->
+              <!--<bean class="com.host.app.web.interceptor.LoginInterceptor"/>-->
+          <!--</mvc:interceptor>-->
+      </mvc:interceptors>
+
 
 </beans>

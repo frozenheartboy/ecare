@@ -38,7 +38,7 @@
     values (#{replyId,jdbcType=INTEGER}, #{replyBody,jdbcType=VARCHAR}, #{replyCreateTime,jdbcType=TIMESTAMP}, 
       #{replyPostId,jdbcType=INTEGER}, #{replyUserId,jdbcType=INTEGER}, #{replyLikes,jdbcType=INTEGER})
   </insert>
-    <insert id="insertSelective" parameterType="com.ecare.web.pojo.Reply" useGeneratedKeys="true" keyProperty="replyId">
+    <insert id="insertSelective" parameterType="com.ecare.web.pojo.Reply">
         insert into reply
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="replyId != null">
