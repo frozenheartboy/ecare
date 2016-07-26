@@ -8,9 +8,9 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface PostMapper {
-    int deleteByPrimaryKey(Integer postId);
+//    int deleteByPrimaryKey(Integer postId);
 
-    int insert(Post record);
+//    int insert(Post record);
 
     int insertSelective(Post record);
 
@@ -20,11 +20,20 @@ public interface PostMapper {
 
     List<PostFormVo> selectByClassId(@Param("classId") Integer classId, @Param("pageStart") Integer pageStart, @Param("pageSize")  Integer pageSize);
 
+    List<PostFormVo> selectHomeTop(Integer homeTopNumber);
+    List<PostFormVo> selectClassTop(@Param("classId") Integer classId,@Param("classTopNumber") Integer ClassTopNumber);
+
+    int updatePostLikes(Integer postId);
     int updatePostViews(Integer postId);
+    int updatePostActiveNumber(Integer postId);
 
-    int updateByPrimaryKeySelective(Post record);
+    int initPostActiveNumber(Integer postId);
+    int initAllPostActiveNumber();
 
-    int updateByPrimaryKeyWithBLOBs(Post record);
 
-    int updateByPrimaryKey(Post record);
+//    int updateByPrimaryKeySelective(Post record);
+//
+//    int updateByPrimaryKeyWithBLOBs(Post record);
+//
+//    int updateByPrimaryKey(Post record);
 }

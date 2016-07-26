@@ -1,6 +1,7 @@
 package com.ecare.web.mapper;
 
 import com.ecare.web.pojo.Class;
+import com.ecare.web.vo.PageVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -13,6 +14,12 @@ public interface ClassMapper {
     int insertSelective(Class record);
 
     Class selectByPrimaryKey(Integer classId);
+
+    int selectByClassName(String className);
+
+    List<Integer> selectAllClassId();
+
+    List<Class> selectLikeClassKey(@Param("classKey") String classKey, @Param("pageStart") Integer pageStart, @Param("pageSize") Integer pageSize);
 
     List<Class> selectAll(@Param("pageStart") Integer pageStart, @Param("pageSize") Integer pageSize);
 

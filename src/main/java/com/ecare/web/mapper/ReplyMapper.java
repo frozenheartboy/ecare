@@ -16,6 +16,8 @@ public interface ReplyMapper {
 
     List<Reply> selectByPostId(@Param("postId") Integer postId, @Param("pageStart") Integer pageStart, @Param("pageSize") Integer pageSize);
 
+    int updateReplyLikes(Integer replyId);
+
     int updateByPrimaryKeySelective(Reply record);
 
     int updateByPrimaryKey(Reply record);

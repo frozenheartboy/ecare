@@ -17,6 +17,8 @@ public class Post implements Serializable{
 
     private Date postEditTime;
 
+    private Date postLastTime;
+
     private Integer postUserId;
 
     private Integer postClassId;
@@ -26,6 +28,8 @@ public class Post implements Serializable{
     private Integer postLikes;
 
     private Integer postViews;
+
+    private Integer postActiveNumber;
 
     private String re1;
 
@@ -82,6 +86,14 @@ public class Post implements Serializable{
         this.postEditTime = postEditTime;
     }
 
+    public Date getPostLastTime() {
+        return postLastTime;
+    }
+
+    public void setPostLastTime(Date postLastTime) {
+        this.postLastTime = postLastTime;
+    }
+
     public Integer getPostUserId() {
         return postUserId;
     }
@@ -120,6 +132,14 @@ public class Post implements Serializable{
 
     public void setPostViews(Integer postViews) {
         this.postViews = postViews;
+    }
+
+    public Integer getPostActiveNumber() {
+        return postActiveNumber;
+    }
+
+    public void setPostActiveNumber(Integer postActiveNumber) {
+        this.postActiveNumber = postActiveNumber;
     }
 
     public String getRe1() {

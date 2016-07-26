@@ -25,15 +25,15 @@
         <!-- 指定所上传文件的最大值单位Byte。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->
         <property name="maxUploadSize" value="10000000"/>
     </bean>
-    <mvc:interceptors>
-         <!-- 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 -->
-          <bean class="com.ecare.web.interceptor.TokenInterceptor"/>
-          <!--<mvc:interceptor>-->
-              <!--<mvc:mapping path="/test/number.do"/>-->
-              <!--&lt;!&ndash; 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 &ndash;&gt;-->
-              <!--<bean class="com.host.app.web.interceptor.LoginInterceptor"/>-->
-          <!--</mvc:interceptor>-->
-      </mvc:interceptors>
+    <!--<mvc:interceptors>-->
+         <!--&lt;!&ndash; 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 &ndash;&gt;-->
+          <!--<bean class="com.ecare.web.interceptor.TokenInterceptor"/>-->
+          <!--&lt;!&ndash;<mvc:interceptor>&ndash;&gt;-->
+              <!--&lt;!&ndash;<mvc:mapping path="/test/number.do"/>&ndash;&gt;-->
+              <!--&lt;!&ndash;&lt;!&ndash; 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 &ndash;&gt;&ndash;&gt;-->
+              <!--&lt;!&ndash;<bean class="com.host.app.web.interceptor.LoginInterceptor"/>&ndash;&gt;-->
+          <!--&lt;!&ndash;</mvc:interceptor>&ndash;&gt;-->
+      <!--</mvc:interceptors>-->
 
-
+    <mvc:resources mapping="/File/**" location="/File/"/>
 </beans>

@@ -17,8 +17,6 @@ public class PostFormVo {
 
     private int postClassId;
 
-    private Boolean postTop;
-
     private Integer postLikes;
 
     private Integer postViews;
@@ -63,14 +61,6 @@ public class PostFormVo {
 
     public void setPostClassId(int postClassId) {
         this.postClassId = postClassId;
-    }
-
-    public Boolean getPostTop() {
-        return postTop;
-    }
-
-    public void setPostTop(Boolean postTop) {
-        this.postTop = postTop;
     }
 
     public Integer getPostLikes() {

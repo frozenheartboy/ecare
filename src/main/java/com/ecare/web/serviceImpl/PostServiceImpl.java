@@ -4,6 +4,7 @@ import com.ecare.web.mapper.*;
 import com.ecare.web.pojo.*;
 import com.ecare.web.pojo.Class;
 import com.ecare.web.service.PostService;
+import com.ecare.web.vo.Constant.Constant;
 import com.ecare.web.vo.PageVo;
 import com.ecare.web.vo.PostFormVo;
 import com.ecare.web.vo.PostVo;
@@ -39,6 +40,14 @@ public class PostServiceImpl implements PostService {
         return classMapper.selectByPrimaryKey(classId);
     }
 
+    public int findClassByClassName(String className) {
+        return classMapper.selectByClassName(className);
+    }
+
+    public List<Class> findClassLikeClassKey(String classKey,PageVo page) {
+        return classMapper.selectLikeClassKey(classKey,page.getPageStart(),page.getPageSize());
+    }
+
     public int addClass(Class classVo) {
         return classMapper.insertSelective(classVo);
     }
@@ -51,6 +60,17 @@ public class PostServiceImpl implements PostService {
         return postMapper.selectByClassId(classId, page.getPageStart(), page.getPageSize());
     }
 
+    public List<PostFormVo> findHomeTop() {
+        return postMapper.selectHomeTop(Constant.HOME_TOP_NUMBER);
+    }
+
+    public List<PostFormVo> findClassTop(int classId) {
+        return postMapper.selectClassTop(classId,Constant.CLASS_TOP_NUMBER);
+    }
+
+    public int updatePostLikes(int postId) {
+        return postMapper.updatePostLikes(postId);
+    }
     public int updatePostViews(int postId) {
         return postMapper.updatePostViews(postId);
     }
@@ -63,18 +83,24 @@ public class PostServiceImpl implements PostService {
         return replyMapper.selectByPostId(postId, page.getPageStart(), page.getPageSize());
     }
 
+    public int updateReplyLikes(int replyId) {
+        return replyMapper.updateReplyLikes(replyId);
+    }
+
     public int addPost(Post post) {
         return postMapper.insertSelective(post);
     }
 
     public int addReply(Reply reply) {
+        postMapper.updatePostActiveNumber(reply.getReplyPostId());
         return replyMapper.insertSelective(reply);
     }
 
     public int addLike(Likes likes) {
         Integer result = likesMapper.selectByContent(likes);
-        if (result == null)
+        if (result == null) {
             return likesMapper.insertSelective(likes);
+        }
         else
             return 0;
     }

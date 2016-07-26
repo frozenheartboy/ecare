@@ -1,5 +1,6 @@
 package com.ecare.web.controller;
 
+import com.ecare.web.mapper.ClassMapper;
 import com.ecare.web.pojo.*;
 import com.ecare.web.pojo.Class;
 import com.ecare.web.redis.RedisDao;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -25,14 +27,16 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-
     @RequestMapping(value = "/findClass")
     @ResponseBody
-    public Map<String, Object> findAllClass(@RequestParam(value = "page") int pageNumber,@RequestParam("user_id") int user_id) {
+    public Map<String, Object> findAllClass(@RequestParam(value = "page") int pageNumber) {
         if (pageNumber > -1) {
-            List<Class> classList = postService.findAllClass(PageUtil.getPage(pageNumber, Constant.CLASS_PAGE_NUMBER));
-            if (classList != null)
+            List<Class> classList = postService.findAllClass(PageUtil.getPage(pageNumber, Constant.CLASS_PAGE_NUMBER, Constant.HOME_CLASS_PAGE_NUMBER));
+            if (classList.size()!=0)
                 return ResultUtil.getResult(Constant.SUCCESS, "查询成功", classList);
+            else
+                return ResultUtil.getResult(Constant.SUCCESS, "查询为空", classList);
+
         }
         return ResultUtil.getResult(Constant.FAILURE, "查询失败", null);
     }
@@ -48,15 +52,34 @@ public class PostController {
         }
         return ResultUtil.getResult(Constant.FAILURE, "查询失败", null);
     }
+
     @RequestMapping(value = "/addClass")
     @ResponseBody
-    public Map<String,Object> addClass(@ModelAttribute Class classVo,@RequestParam("user_id") int user_id){
+    public Map<String, Object> addClass(@ModelAttribute Class classVo, @RequestParam("user_id") int user_id) {
+
+        if (postService.findClassByClassName(classVo.getClassName()) != 0) {
+            return ResultUtil.getResult(Constant.FAILURE, "话题已存在", null);
+        }
         classVo.setClassCreaterId(user_id);
         int result = postService.addClass(classVo);
         if (result != 0) {
             return ResultUtil.getResult(Constant.SUCCESS, "添加成功", null);
-        } else
-            return ResultUtil.getResult(Constant.FAILURE, "添加失败", null);
+        }
+        return ResultUtil.getResult(Constant.FAILURE, "添加失败", null);
+    }
+
+    @RequestMapping(value = "/findClassLikeKey")
+    @ResponseBody
+    public Map<String, Object> findClassLikeClassKey(@RequestParam("classKey")String classKey,@RequestParam(value = "page") int pageNumber) {
+        if (pageNumber > -1) {
+            List<Class> classList = postService.findClassLikeClassKey("%"+classKey+"%",PageUtil.getPage(pageNumber, Constant.CLASS_PAGE_LIKE_NUMBER, 0));
+            if (classList.size()!=0)
+                return ResultUtil.getResult(Constant.SUCCESS, "查询成功", classList);
+            else
+                return ResultUtil.getResult(Constant.SUCCESS, "查询为空", classList);
+
+        }
+        return ResultUtil.getResult(Constant.FAILURE, "查询失败", null);
     }
 
     @RequestMapping(value = "/findPost")
@@ -64,13 +87,14 @@ public class PostController {
     public Map<String, Object> findPostByClassId(@RequestParam(value = "classId") int classId, @RequestParam(value = "page") int pageNumber) {
 
         if (pageNumber > -1) {
-            List<PostFormVo> postFormVos = postService.findPostByClassId(classId, PageUtil.getPage(pageNumber, Constant.POST_PAGE_NUMBER));
+            List<PostFormVo> postFormVos = postService.findPostByClassId(classId, PageUtil.getPage(pageNumber, Constant.POST_PAGE_NUMBER, 0));
             if (postFormVos.size() != 0) {
                 for (int i = 0; i < postFormVos.size(); i++) {
                     postFormVos.get(i).setPhotoUrl(postService.findUrlByPostId(postFormVos.get(i).getPostId()));
                 }
                 return ResultUtil.getResult(Constant.SUCCESS, "查询成功", postFormVos);
-            }
+            } else
+                return ResultUtil.getResult(Constant.SUCCESS, "查询为空", postFormVos);
         }
         return ResultUtil.getResult(Constant.FAILURE, "查询失败", null);
     }
@@ -93,21 +117,32 @@ public class PostController {
     @ResponseBody
     public Map<String, Object> findReplyByPostId(@RequestParam("postId") int postId, @RequestParam("page") int pageNumber) {
         if (pageNumber > -1) {
-            List<Reply> replies = postService.findReplyByPostId(postId, PageUtil.getPage(pageNumber, Constant.REPLY_PAGE_NUMBER));
+            List<Reply> replies = postService.findReplyByPostId(postId, PageUtil.getPage(pageNumber, Constant.REPLY_PAGE_NUMBER, 0));
             if (replies.size() != 0)
                 return ResultUtil.getResult(Constant.SUCCESS, "查询成功", replies);
+            else
+                return ResultUtil.getResult(Constant.SUCCESS, "查询为空", replies);
         }
         return ResultUtil.getResult(Constant.FAILURE, "查询失败", null);
     }
 
     @RequestMapping(value = "/addPost", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> addPost(@ModelAttribute Post post, @RequestParam("user_id") int userId, @RequestParam("url") String[] url) {
+    public Map<String, Object> addPost(@ModelAttribute Post post, @RequestParam("user_id") int userId, @RequestParam("url") String url) {
+        post.setPostDesc(post.getPostBody().substring(0,(Constant.POST_DESCRIPTION_LENGTH<post.getPostBody().length())?Constant.POST_DESCRIPTION_LENGTH : post.getPostBody().length()));//截取文章一部分作为描述
+        List<String> urlList = new LinkedList<String>();
+        //url以json数组格式传输，需要解析出来
+        String[] temp = url.split("\"");
+        for (int i = 0; i < temp.length; i++) {
+            if (i % 2 != 0) {
+                urlList.add(temp[i]);
+            }
+        }
         post.setPostUserId(userId);
         int result = postService.addPost(post);
         if (result != 0) {
-            for (int i = 0; i < url.length; i++) {
-                int photoResult = postService.addPhotoUrl(post.getPostId(), url[i]);
+            for (int i = 0; i < urlList.size(); i++) {
+                int photoResult = postService.addPhotoUrl(post.getPostId(), urlList.get(i));
                 if (photoResult == 0)
                     return ResultUtil.getResult(Constant.FAILURE, "图片添加失败", null);
             }
@@ -135,8 +170,10 @@ public class PostController {
         likes.setLikesType(false);
         likes.setLikesTypeId(postId);
         int result = postService.addLike(likes);
-        if (result != 0)
+        if (result != 0) {
+            postService.updatePostLikes(postId);
             return ResultUtil.getResult(Constant.SUCCESS, "帖子点赞成功", null);
+        }
         return ResultUtil.getResult(Constant.FAILURE, "已经点赞", null);
     }
 
@@ -148,9 +185,29 @@ public class PostController {
         likes.setLikesType(true);
         likes.setLikesTypeId(replyId);
         int result = postService.addLike(likes);
-        if (result != 0)
+        if (result != 0) {
+            postService.updateReplyLikes(replyId);
             return ResultUtil.getResult(Constant.SUCCESS, "回帖点赞成功", null);
+        }
         return ResultUtil.getResult(Constant.FAILURE, "已经点赞", null);
+    }
+    @RequestMapping(value = "/findHomeTop")
+    @ResponseBody
+    public Map<String,Object> findHomeTop(){
+       List<PostFormVo> postFormVos=postService.findHomeTop();
+        if(postFormVos.size()!=0){
+            return ResultUtil.getResult(Constant.SUCCESS,"查询成功",postFormVos);
+        }
+        return ResultUtil.getResult(Constant.FAILURE, "查询失败", null);
+    }
+    @RequestMapping(value = "/findClassTop")
+    @ResponseBody
+    public Map<String,Object> findClassTop(@RequestParam("classId") int classId){
+        List<PostFormVo> postFormVos=postService.findClassTop(classId);
+        if(postFormVos.size()!=0){
+            return ResultUtil.getResult(Constant.SUCCESS,"查询成功",postFormVos);
+        }
+        return ResultUtil.getResult(Constant.FAILURE, "查询失败", null);
     }
 
     @RequestMapping(value = "/addFavorite")
@@ -169,9 +226,11 @@ public class PostController {
     @ResponseBody
     public Map<String, Object> findFavorite(@RequestParam("user_id") int user_id, @RequestParam("page") int pageNumber) {
         if (pageNumber > -1) {
-            List<PostFormVo> list = postService.findFavoriteByUserId(user_id, PageUtil.getPage(pageNumber, Constant.FAVORITE_PAGE_NUMBER));
+            List<PostFormVo> list = postService.findFavoriteByUserId(user_id, PageUtil.getPage(pageNumber, Constant.FAVORITE_PAGE_NUMBER, 0));
             if (list.size() != 0)
                 return ResultUtil.getResult(Constant.SUCCESS, "查询成功", list);
+            else
+                return ResultUtil.getResult(Constant.SUCCESS, "查询为空", list);
         }
         return ResultUtil.getResult(Constant.FAILURE, "查询失败", null);
     }

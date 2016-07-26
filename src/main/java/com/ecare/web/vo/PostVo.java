@@ -17,11 +17,12 @@ public class PostVo {
 
     private Date postEditTime;
 
+    private Date postLastTime;
+
     private Integer postUserId;
 
     private Integer postClassId;
 
-    private Boolean postTop;
 
     private Integer postLikes;
 
@@ -69,6 +70,14 @@ public class PostVo {
         this.postEditTime = postEditTime;
     }
 
+    public Date getPostLastTime() {
+        return postLastTime;
+    }
+
+    public void setPostLastTime(Date postLastTime) {
+        this.postLastTime = postLastTime;
+    }
+
     public Integer getPostUserId() {
         return postUserId;
     }
@@ -85,13 +94,6 @@ public class PostVo {
         this.postClassId = postClassId;
     }
 
-    public Boolean getPostTop() {
-        return postTop;
-    }
-
-    public void setPostTop(Boolean postTop) {
-        this.postTop = postTop;
-    }
 
     public Integer getPostLikes() {
         return postLikes;

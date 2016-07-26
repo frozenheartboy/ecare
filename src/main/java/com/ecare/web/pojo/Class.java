@@ -15,6 +15,8 @@ public class Class implements Serializable{
 
     private Date classCreateTime;
 
+    private Date classEditTime;
+
     private Integer classMembership;
 
     private Integer classViews;
@@ -63,6 +65,14 @@ public class Class implements Serializable{
 
     public void setClassCreateTime(Date classCreateTime) {
         this.classCreateTime = classCreateTime;
+    }
+
+    public Date getClassEditTime() {
+        return classEditTime;
+    }
+
+    public void setClassEditTime(Date classEditTime) {
+        this.classEditTime = classEditTime;
     }
 
     public Integer getClassMembership() {

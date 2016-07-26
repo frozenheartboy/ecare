@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Reply implements Serializable{
-    private static final long serialVersionUID = 6560095861090641033L;
+    private static final long serialVersionUID = 1017104612643094796L;
     private Integer replyId;
 
     private String replyBody;
@@ -14,6 +14,8 @@ public class Reply implements Serializable{
     private Integer replyPostId;
 
     private Integer replyUserId;
+
+    private Integer replyToUserId;
 
     private Integer replyLikes;
 
@@ -61,6 +63,14 @@ public class Reply implements Serializable{
 
     public void setReplyUserId(Integer replyUserId) {
         this.replyUserId = replyUserId;
+    }
+
+    public Integer getReplyToUserId() {
+        return replyToUserId;
+    }
+
+    public void setReplyToUserId(Integer replyToUserId) {
+        this.replyToUserId = replyToUserId;
     }
 
     public Integer getReplyLikes() {
