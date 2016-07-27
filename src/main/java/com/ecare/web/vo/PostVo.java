@@ -1,12 +1,14 @@
 package com.ecare.web.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by L on 2016/7/17.
  */
-public class PostVo {
+public class PostVo implements Serializable{
+    private static final long serialVersionUID = 5783068969730871211L;
     private Integer postId;
 
     private String postTitle;

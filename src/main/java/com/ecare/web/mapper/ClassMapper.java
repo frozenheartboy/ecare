@@ -15,7 +15,7 @@ public interface ClassMapper {
 
     Class selectByPrimaryKey(Integer classId);
 
-    int selectByClassName(String className);
+    Integer selectByClassName(String className);
 
     List<Integer> selectAllClassId();
 
@@ -23,6 +23,7 @@ public interface ClassMapper {
 
     List<Class> selectAll(@Param("pageStart") Integer pageStart, @Param("pageSize") Integer pageSize);
 
+    int updateNameDesc(Class record);
     int updateClassViews(Integer classId);
 
     int updateByPrimaryKeySelective(Class record);

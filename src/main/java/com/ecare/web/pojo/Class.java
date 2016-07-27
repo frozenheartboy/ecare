@@ -11,6 +11,8 @@ public class Class implements Serializable{
 
     private String classDesc;
 
+    private Integer classType;
+
     private Integer classCreaterId;
 
     private Date classCreateTime;
@@ -49,6 +51,14 @@ public class Class implements Serializable{
 
     public void setClassDesc(String classDesc) {
         this.classDesc = classDesc == null ? null : classDesc.trim();
+    }
+
+    public Integer getClassType() {
+        return classType;
+    }
+
+    public void setClassType(Integer classType) {
+        this.classType = classType;
     }
 
     public Integer getClassCreaterId() {

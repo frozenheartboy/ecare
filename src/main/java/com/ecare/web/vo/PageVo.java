@@ -1,10 +1,13 @@
 package com.ecare.web.vo;
 
+import java.io.Serializable;
+
 /**
  * Created by L on 2016/7/14.
  */
-public class PageVo {
+public class PageVo implements Serializable{
 
+    private static final long serialVersionUID = -8212495011954051624L;
     private int pageStart;
     private int pageSize;
 

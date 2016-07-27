@@ -1,11 +1,13 @@
 package com.ecare.web.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by L on 2016/7/17.
  */
-public class ReplyFormVo {
+public class ReplyFormVo implements Serializable {
+    private static final long serialVersionUID = -1629378884301270660L;
     private Integer replyId;
 
     private String replyBody;

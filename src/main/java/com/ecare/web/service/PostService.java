@@ -14,13 +14,14 @@ import java.util.List;
 public interface PostService {
     List<Class> findAllClass(PageVo page);
     Class findClassByClassId(int classId);
-    int findClassByClassName(String className);
+    Integer findClassByClassName(String className);
     List<Class> findClassLikeClassKey(String className,PageVo page);
     int addClass(Class classVo);
     int updateClassViews(int classId);
     List<PostFormVo> findPostByClassId(int classId, PageVo page);
     List<PostFormVo> findHomeTop();
     List<PostFormVo> findClassTop(int classId);
+    int updateClassNameDesc(Class classVo);
     int updatePostLikes(int postId);
     int updatePostViews(int postId);
     PostVo findPostByPostId(int postId);

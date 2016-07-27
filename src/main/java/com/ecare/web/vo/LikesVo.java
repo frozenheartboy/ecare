@@ -1,9 +1,12 @@
 package com.ecare.web.vo;
 
+import java.io.Serializable;
+
 /**
  * Created by L on 2016/7/18.
  */
-public class LikesVo {
+public class LikesVo implements Serializable{
+    private static final long serialVersionUID = 6322065870364143731L;
     private Integer likesId;
 
     private Integer likesUserId;

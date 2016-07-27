@@ -26,7 +26,6 @@ public interface PostMapper {
     int updatePostLikes(Integer postId);
     int updatePostViews(Integer postId);
     int updatePostActiveNumber(Integer postId);
-
     int initPostActiveNumber(Integer postId);
     int initAllPostActiveNumber();
 

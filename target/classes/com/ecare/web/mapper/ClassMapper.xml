@@ -5,6 +5,7 @@
         <id column="CLASS_ID" property="classId" jdbcType="INTEGER"/>
         <result column="CLASS_NAME" property="className" jdbcType="VARCHAR"/>
         <result column="CLASS_DESC" property="classDesc" jdbcType="VARCHAR"/>
+        <result column="CLASS_TYPE" property="classType" jdbcType="INTEGER"/>
         <result column="CLASS_CREATER_ID" property="classCreaterId" jdbcType="INTEGER"/>
         <result column="CLASS_CREATE_TIME" property="classCreateTime" jdbcType="TIMESTAMP"/>
         <result column="CLASS_EDIT_TIME" property="classEditTime" jdbcType="TIMESTAMP"/>
@@ -15,7 +16,7 @@
         <result column="RE3" property="re3" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-    CLASS_ID, CLASS_NAME, CLASS_DESC, CLASS_CREATER_ID, CLASS_CREATE_TIME,CLASS_EDIT_TIME, CLASS_MEMBERSHIP,
+    CLASS_ID, CLASS_NAME, CLASS_DESC,CLASS_TYPE,CLASS_CREATER_ID, CLASS_CREATE_TIME,CLASS_EDIT_TIME, CLASS_MEMBERSHIP,
     CLASS_VIEWS, RE1, RE2, RE3
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
@@ -26,7 +27,7 @@
     </select>
     <select id="selectByClassName" resultType="java.lang.Integer" parameterType="java.lang.String">
         SELECT
-        COUNT(CLASS_ID)
+        CLASS_ID
         FROM class
         WHERE CLASS_NAME=#{className,jdbcType=VARCHAR}
     </select>
@@ -34,7 +35,7 @@
         SELECT
         <include refid="Base_Column_List"/>
         FROM class
-        WHERE CLASS_NAME LIKE #{classKey,jdbcType=VARCHAR}
+        WHERE CLASS_NAME LIKE #{classKey,jdbcType=VARCHAR} AND CLASS_TYPE!=0
         <if test="pageStart>-1 and pageSize>-1">
             limit #{pageStart,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER}
         </if>
@@ -58,11 +59,11 @@
     where CLASS_ID = #{classId,jdbcType=INTEGER}
   </delete>
     <insert id="insert" parameterType="com.ecare.web.pojo.Class">
-    insert into class (CLASS_ID, CLASS_NAME, CLASS_DESC, 
+    insert into class (CLASS_ID, CLASS_NAME, CLASS_DESC,CLASS_TYPE
       CLASS_CREATER_ID, CLASS_CREATE_TIME, CLASS_EDIT_TIME,CLASS_MEMBERSHIP,
       CLASS_VIEWS, RE1, RE2, 
       RE3)
-    values (#{classId,jdbcType=INTEGER}, #{className,jdbcType=VARCHAR}, #{classDesc,jdbcType=VARCHAR}, 
+    values (#{classId,jdbcType=INTEGER}, #{className,jdbcType=VARCHAR}, #{classDesc,jdbcType=VARCHAR}, #{classType,jdbcType=INTEGER},
       #{classCreaterId,jdbcType=INTEGER}, #{classCreateTime,jdbcType=TIMESTAMP}, #{classEditTime,jdbcType=TIMESTAMP}, #{classMembership,jdbcType=INTEGER},
       #{classViews,jdbcType=INTEGER}, #{re1,jdbcType=VARCHAR}, #{re2,jdbcType=VARCHAR}, 
       #{re3,jdbcType=VARCHAR})
@@ -78,6 +79,9 @@
             </if>
             <if test="classDesc != null">
                 CLASS_DESC,
+            </if>
+            <if test="classType != null">
+                CLASS_TYPE,
             </if>
             <if test="classCreaterId != null">
                 CLASS_CREATER_ID,
@@ -114,6 +118,9 @@
             <if test="classDesc != null">
                 #{classDesc,jdbcType=VARCHAR},
             </if>
+            <if test="classType != null">
+                #{classType,jdbcType=INTEGER},
+            </if>
             <if test="classCreaterId != null">
                 #{classCreaterId,jdbcType=INTEGER},
             </if>
@@ -146,6 +153,16 @@
             CLASS_VIEWS =CLASS_VIEWS +1
         </set>
         where CLASS_ID=#{classId, jdbcType=INTEGER}
+    </update>
+    <update id="updateNameDesc" parameterType="com.ecare.web.pojo.Class">
+        UPDATE class
+        <set>
+            <if test="className!=null">
+                CLASS_NAME = #{className,jdbcType=VARCHAR},
+            </if>
+                CLASS_DESC = #{classDesc,jdbcType=VARCHAR},
+        </set>
+        where CLASS_ID = #{classId,jdbcType=INTEGER}
     </update>
     <!--<update id="updateByPrimaryKeySelective" parameterType="com.ecare.web.pojo.Class">-->
         <!--update class-->

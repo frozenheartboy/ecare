@@ -27,5 +27,8 @@
     <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
         <property name="connectionFactory" ref="connectionFactory"/>
     </bean>
+    <bean id="redisCacheTransfer" class="com.ecare.web.redis.RedisCacheTransfer">
+        <property name="jedisConnectionFactory" ref="connectionFactory"/>
+    </bean>
 
 </beans>

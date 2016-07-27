@@ -40,7 +40,7 @@ public class PostServiceImpl implements PostService {
         return classMapper.selectByPrimaryKey(classId);
     }
 
-    public int findClassByClassName(String className) {
+    public Integer findClassByClassName(String className) {
         return classMapper.selectByClassName(className);
     }
 
@@ -66,6 +66,10 @@ public class PostServiceImpl implements PostService {
 
     public List<PostFormVo> findClassTop(int classId) {
         return postMapper.selectClassTop(classId,Constant.CLASS_TOP_NUMBER);
+    }
+
+    public int updateClassNameDesc(Class classVo) {
+        return classMapper.updateNameDesc(classVo);
     }
 
     public int updatePostLikes(int postId) {
