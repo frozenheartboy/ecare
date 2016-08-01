@@ -14,6 +14,8 @@ public class ReplyFormVo implements Serializable {
 
     private Date replyCreateTime;
 
+    private String TimeStatus;
+
     private Integer replyPostId;
 
     private Integer replyUserId;
@@ -21,6 +23,11 @@ public class ReplyFormVo implements Serializable {
     private Integer replyToUserId;
 
     private Integer replyLikes;
+
+    private String userName;
+
+    private String headUrl;
+
 
     private boolean isLiked;
 
@@ -46,6 +53,14 @@ public class ReplyFormVo implements Serializable {
 
     public void setReplyCreateTime(Date replyCreateTime) {
         this.replyCreateTime = replyCreateTime;
+    }
+
+    public String getTimeStatus() {
+        return TimeStatus;
+    }
+
+    public void setTimeStatus(String timeStatus) {
+        TimeStatus = timeStatus;
     }
 
     public Integer getReplyPostId() {
@@ -78,6 +93,22 @@ public class ReplyFormVo implements Serializable {
 
     public void setReplyLikes(Integer replyLikes) {
         this.replyLikes = replyLikes;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getHeadUrl() {
+        return headUrl;
+    }
+
+    public void setHeadUrl(String headUrl) {
+        this.headUrl = headUrl;
     }
 
     public boolean isLiked() {

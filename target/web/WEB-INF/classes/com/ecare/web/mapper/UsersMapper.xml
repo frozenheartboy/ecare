@@ -42,6 +42,12 @@
     from users
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectSimpleByPrimaryKey" resultType="com.ecare.web.vo.UserSimpleVo" parameterType="java.lang.Integer" >
+    select
+    nickname,head_url
+    from users
+    where id = #{id,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from users
     where id = #{id,jdbcType=INTEGER}

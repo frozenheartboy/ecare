@@ -2,6 +2,7 @@ package com.ecare.web.mapper;
 
 import com.ecare.web.pojo.OpUserMedicineRecords;
 
+import java.util.Date;
 import java.util.List;
 
 public interface OpUserMedicineRecordsMapper {
@@ -13,7 +14,7 @@ public interface OpUserMedicineRecordsMapper {
 
     OpUserMedicineRecords selectByPrimaryKey(Integer id);
 
-    List<OpUserMedicineRecords> selectRemind();
+    List<OpUserMedicineRecords> selectRemind(String date);
 
     int updateByPrimaryKeySelective(OpUserMedicineRecords record);
 

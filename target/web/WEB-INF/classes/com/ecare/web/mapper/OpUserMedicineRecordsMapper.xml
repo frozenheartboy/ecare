@@ -27,12 +27,12 @@
     from op_user_medicine_records
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap">-->
-    <!--select-->
-    <!--<include refid="Base_Column_List"/>-->
-    <!--from op_user_medicine_records-->
-    <!--where-->
-  <!--</select>-->
+  <select id="selectRemind" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    from op_user_medicine_records
+    where is_out_time=0 AND is_open_clock=1 AND remind_time=#{date,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from op_user_medicine_records
     where id = #{id,jdbcType=INTEGER}

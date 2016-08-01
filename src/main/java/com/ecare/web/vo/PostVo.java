@@ -20,12 +20,12 @@ public class PostVo implements Serializable{
     private Date postEditTime;
 
     private Date postLastTime;
+
     private String TimeStatus;
 
     private Integer postUserId;
 
     private Integer postClassId;
-
 
     private Integer postLikes;
 
@@ -34,7 +34,12 @@ public class PostVo implements Serializable{
     private List<String> photoUrl;
 
     private boolean isLiked;
+
     private boolean isFavorite;
+
+    private String userName;
+
+    private String headUrl;
 
     public Integer getPostId() {
         return postId;
@@ -147,5 +152,21 @@ public class PostVo implements Serializable{
 
     public void setFavorite(boolean favorite) {
         isFavorite = favorite;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getHeadUrl() {
+        return headUrl;
+    }
+
+    public void setHeadUrl(String headUrl) {
+        this.headUrl = headUrl;
     }
 }

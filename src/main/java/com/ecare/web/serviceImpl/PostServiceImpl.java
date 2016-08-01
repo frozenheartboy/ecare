@@ -4,11 +4,8 @@ import com.ecare.web.mapper.*;
 import com.ecare.web.pojo.*;
 import com.ecare.web.pojo.Class;
 import com.ecare.web.service.PostService;
+import com.ecare.web.vo.*;
 import com.ecare.web.vo.Constant.Constant;
-import com.ecare.web.vo.PageVo;
-import com.ecare.web.vo.PostFormVo;
-import com.ecare.web.vo.PostVo;
-import com.ecare.web.vo.ReplyFormVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +29,8 @@ public class PostServiceImpl implements PostService {
     private FavoriteMapper favoriteMapper;
     @Autowired
     private PhotoMapper photoMapper;
+    @Autowired
+    private UsersMapper usersMapper;
 
     public List<Class> findAllClass(PageVo page) {
         return classMapper.selectAll(page.getPageStart(), page.getPageSize());
@@ -147,6 +146,11 @@ public class PostServiceImpl implements PostService {
 
     public List<String> findUrlByPostId(int postId) {
         return photoMapper.selectByPostId(postId);
+    }
+
+    public UserSimpleVo findUsersByUserId(int userId) {
+        return usersMapper.selectSimpleByPrimaryKey(userId);
+
     }
 
 }

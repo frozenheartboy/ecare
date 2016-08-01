@@ -2,10 +2,7 @@ package com.ecare.web.service;
 
 import com.ecare.web.pojo.*;
 import com.ecare.web.pojo.Class;
-import com.ecare.web.vo.PageVo;
-import com.ecare.web.vo.PostFormVo;
-import com.ecare.web.vo.PostVo;
-import com.ecare.web.vo.ReplyFormVo;
+import com.ecare.web.vo.*;
 
 import java.util.List;
 
@@ -37,4 +34,5 @@ public interface PostService {
     List<PostFormVo> findFavoriteByUserId(int userId,PageVo page);
     int addPhotoUrl(int postId,String url);
     List<String> findUrlByPostId(int postId);
+    UserSimpleVo findUsersByUserId(int userId);
 }
