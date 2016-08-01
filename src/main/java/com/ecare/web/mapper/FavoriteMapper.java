@@ -1,6 +1,7 @@
 package com.ecare.web.mapper;
 
 import com.ecare.web.pojo.Favorite;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface FavoriteMapper {
 
     Favorite selectByPrimaryKey(Integer favoriteId);
 
-    List<Integer> selectByUserId(Integer userID);
+    List<Integer> selectByUserId(Integer userId);
 
     Integer selectByContent(Favorite record);
 

@@ -18,7 +18,11 @@ public class ReplyFormVo implements Serializable {
 
     private Integer replyUserId;
 
+    private Integer replyToUserId;
+
     private Integer replyLikes;
+
+    private boolean isLiked;
 
     public Integer getReplyId() {
         return replyId;
@@ -60,11 +64,27 @@ public class ReplyFormVo implements Serializable {
         this.replyUserId = replyUserId;
     }
 
+    public Integer getReplyToUserId() {
+        return replyToUserId;
+    }
+
+    public void setReplyToUserId(Integer replyToUserId) {
+        this.replyToUserId = replyToUserId;
+    }
+
     public Integer getReplyLikes() {
         return replyLikes;
     }
 
     public void setReplyLikes(Integer replyLikes) {
         this.replyLikes = replyLikes;
+    }
+
+    public boolean isLiked() {
+        return isLiked;
+    }
+
+    public void setLiked(boolean liked) {
+        isLiked = liked;
     }
 }

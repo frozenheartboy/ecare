@@ -10,13 +10,13 @@ import com.ecare.web.util.ResultUtil;
 import com.ecare.web.vo.Constant.Constant;
 import com.ecare.web.vo.PostFormVo;
 import com.ecare.web.vo.PostVo;
+import com.ecare.web.vo.ReplyFormVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by L on 2016/7/13.
@@ -118,15 +118,43 @@ public class PostController {
         return ResultUtil.getResult(Constant.FAILURE, "查询失败", null);
     }
 
-    @RequestMapping(value = "/getPost")
+    @CrossOrigin(maxAge = 3600)
+    @RequestMapping(value = "/getPost",method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> findPostByPostId(@RequestParam(value = "postId") int postId) {
+    public Map<String, Object> findPostByPostId(@RequestParam("postId") int postId,@RequestParam("user_id") int userId) {
         if(postId>0) {
             postService.updatePostViews(postId);
             PostVo postVo = postService.findPostByPostId(postId);
             if (postVo != null) {
                 postVo.setPhotoUrl(postService.findUrlByPostId(postVo.getPostId()));
-
+                Date date=postVo.getPostCreateTime();
+                Date now=new Date();
+                long l=now.getTime()-date.getTime();
+                long hour=l/(60*60*1000);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                if(hour<24){
+                    postVo.setTimeStatus(hour+"小时前");
+                }
+                else {
+                    postVo.setTimeStatus(sdf.format(date));
+                }
+                Likes likes = new Likes();
+                likes.setLikesUserId(userId);
+                likes.setLikesType(false);
+                likes.setLikesTypeId(postVo.getPostId());
+                Integer likeResult=postService.findlikesByContent(likes);
+                if(likeResult!=null)
+                    postVo.setLiked(true);
+                else
+                    postVo.setLiked(false);
+                Favorite favorite = new Favorite();
+                favorite.setFavoriteUserId(userId);
+                favorite.setFavoritePostId(postId);
+                Integer favResult=postService.findFavoriteByContent(favorite);
+                if(favResult!=null)
+                    postVo.setFavorite(true);
+                else
+                    postVo.setFavorite(false);
                 return ResultUtil.getResult(Constant.SUCCESS, "查找成功", postVo);
             }
             return ResultUtil.getResult(Constant.SUCCESS, "查找为空", postVo);
@@ -134,14 +162,26 @@ public class PostController {
         return ResultUtil.getResult(Constant.FAILURE, "查询失败", null);
 
     }
-
+    @CrossOrigin(maxAge = 3600)
     @RequestMapping(value = "/findReply")
     @ResponseBody
-    public Map<String, Object> findReplyByPostId(@RequestParam("postId") int postId, @RequestParam("page") int pageNumber) {
+    public Map<String, Object> findReplyByPostId(@RequestParam("postId") int postId, @RequestParam("page") int pageNumber,@RequestParam("user_id") int userId){
         if (pageNumber > -1) {
-            List<Reply> replies = postService.findReplyByPostId(postId, PageUtil.getPage(pageNumber, Constant.REPLY_PAGE_NUMBER, 0));
-            if (replies.size() != 0)
+            List<ReplyFormVo> replies = postService.findReplyByPostId(postId, PageUtil.getPage(pageNumber, Constant.REPLY_PAGE_NUMBER, 0));
+            if (replies.size() != 0) {
+                for(ReplyFormVo replyFormVo:replies){
+                    Likes likes = new Likes();
+                    likes.setLikesUserId(userId);
+                    likes.setLikesType(true);
+                    likes.setLikesTypeId(replyFormVo.getReplyId());
+                    Integer result=postService.findlikesByContent(likes);
+                    if(result!=null)
+                        replyFormVo.setLiked(true);
+                    else
+                        replyFormVo.setLiked(false);
+                }
                 return ResultUtil.getResult(Constant.SUCCESS, "查询成功", replies);
+            }
             else
                 return ResultUtil.getResult(Constant.SUCCESS, "查询为空", replies);
         }
@@ -172,10 +212,10 @@ public class PostController {
         } else
             return ResultUtil.getResult(Constant.FAILURE, "内容添加失败", null);
     }
-
+    @CrossOrigin(maxAge = 3600)
     @RequestMapping(value = "/addReply", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> addReply(@ModelAttribute Reply reply, @RequestParam("user_id") int userId) {
+    public Map<String, Object> addReply(@RequestBody Reply reply, @RequestParam("user_id") int userId) {
         reply.setReplyUserId(userId);
         int result = postService.addReply(reply);
         if (result != 0) {
@@ -244,9 +284,9 @@ public class PostController {
 
     @RequestMapping(value = "/addFavorite")
     @ResponseBody
-    public Map<String, Object> addFavorite(@RequestParam("user_id") int user_id, @RequestParam("postId") int postId) {
+    public Map<String, Object> addFavorite(@RequestParam("user_id") int userId, @RequestParam("postId") int postId) {
         Favorite favorite = new Favorite();
-        favorite.setFavoriteUserId(user_id);
+        favorite.setFavoriteUserId(userId);
         favorite.setFavoritePostId(postId);
         int result = postService.addFavorite(favorite);
         if (result != 0)
@@ -256,9 +296,9 @@ public class PostController {
 
     @RequestMapping(value = "/findFavorite")
     @ResponseBody
-    public Map<String, Object> findFavorite(@RequestParam("user_id") int user_id, @RequestParam("page") int pageNumber) {
+    public Map<String, Object> findFavorite(@RequestParam("user_id") int userId, @RequestParam("page") int pageNumber) {
         if (pageNumber > -1) {
-            List<PostFormVo> list = postService.findFavoriteByUserId(user_id, PageUtil.getPage(pageNumber, Constant.FAVORITE_PAGE_NUMBER, 0));
+            List<PostFormVo> list = postService.findFavoriteByUserId(userId, PageUtil.getPage(pageNumber, Constant.FAVORITE_PAGE_NUMBER, 0));
             if (list.size() != 0)
                 return ResultUtil.getResult(Constant.SUCCESS, "查询成功", list);
             else

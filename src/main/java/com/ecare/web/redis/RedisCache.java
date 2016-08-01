@@ -2,8 +2,9 @@ package com.ecare.web.redis;
 
 
 import org.apache.ibatis.cache.Cache;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.data.redis.connection.jedis.JedisConnection;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
@@ -18,7 +19,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 public class RedisCache implements Cache
 {
-    private static final Logger logger = LoggerFactory.getLogger(RedisCache.class);
+    private static final Logger logger = LogManager.getLogger(RedisCache.class);
 
     private static JedisConnectionFactory jedisConnectionFactory;
 
@@ -33,7 +34,7 @@ public class RedisCache implements Cache
         if (id == null) {
             throw new IllegalArgumentException("Cache instances require an ID");
         }
-        logger.debug("MybatisRedisCache:id=" + id);
+        logger.info("MybatisRedisCache:id=" + id);
         this.id = id;
     }
 

@@ -8,6 +8,7 @@ import com.ecare.web.vo.Constant.Constant;
 import com.ecare.web.vo.PageVo;
 import com.ecare.web.vo.PostFormVo;
 import com.ecare.web.vo.PostVo;
+import com.ecare.web.vo.ReplyFormVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -83,8 +84,16 @@ public class PostServiceImpl implements PostService {
         return postMapper.selectByPrimaryKey(postId);
     }
 
-    public List<Reply> findReplyByPostId(int postId, PageVo page) {
+    public List<ReplyFormVo> findReplyByPostId(int postId, PageVo page) {
         return replyMapper.selectByPostId(postId, page.getPageStart(), page.getPageSize());
+    }
+
+    public Integer findlikesByContent(Likes likes) {
+        return likesMapper.selectByContent(likes);
+    }
+
+    public Integer findFavoriteByContent(Favorite favorite) {
+        return favoriteMapper.selectByContent(favorite);
     }
 
     public int updateReplyLikes(int replyId) {

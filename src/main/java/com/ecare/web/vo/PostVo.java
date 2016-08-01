@@ -20,6 +20,7 @@ public class PostVo implements Serializable{
     private Date postEditTime;
 
     private Date postLastTime;
+    private String TimeStatus;
 
     private Integer postUserId;
 
@@ -31,6 +32,9 @@ public class PostVo implements Serializable{
     private Integer postViews;
 
     private List<String> photoUrl;
+
+    private boolean isLiked;
+    private boolean isFavorite;
 
     public Integer getPostId() {
         return postId;
@@ -80,6 +84,14 @@ public class PostVo implements Serializable{
         this.postLastTime = postLastTime;
     }
 
+    public String getTimeStatus() {
+        return TimeStatus;
+    }
+
+    public void setTimeStatus(String timeStatus) {
+        TimeStatus = timeStatus;
+    }
+
     public Integer getPostUserId() {
         return postUserId;
     }
@@ -119,5 +131,21 @@ public class PostVo implements Serializable{
 
     public void setPhotoUrl(List<String> photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    public boolean isLiked() {
+        return isLiked;
+    }
+
+    public void setLiked(boolean liked) {
+        isLiked = liked;
+    }
+
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
     }
 }

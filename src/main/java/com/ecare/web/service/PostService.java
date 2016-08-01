@@ -5,6 +5,7 @@ import com.ecare.web.pojo.Class;
 import com.ecare.web.vo.PageVo;
 import com.ecare.web.vo.PostFormVo;
 import com.ecare.web.vo.PostVo;
+import com.ecare.web.vo.ReplyFormVo;
 
 import java.util.List;
 
@@ -25,7 +26,9 @@ public interface PostService {
     int updatePostLikes(int postId);
     int updatePostViews(int postId);
     PostVo findPostByPostId(int postId);
-    List<Reply> findReplyByPostId(int postId, PageVo page);
+    List<ReplyFormVo> findReplyByPostId(int postId, PageVo page);
+    Integer findlikesByContent(Likes likes);
+    Integer findFavoriteByContent(Favorite favorite);
     int updateReplyLikes(int replyId);
     int addPost(Post post);
     int addReply(Reply reply);
