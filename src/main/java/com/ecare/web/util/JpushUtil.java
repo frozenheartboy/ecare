@@ -78,7 +78,12 @@ public class JpushUtil {
         }
 
     }
-
+    /**
+     * 推送消息接口
+     *
+     * @param alias   别名
+     * @param content 推送内容
+     */
     public static synchronized void sendPushMessage(String alias, String content) {
         jpushClient = new JPushClient(Constant.JPUSH_MASTER_SECRET, Constant.JPUSH_APP_KEY);
         PushPayload payload = null;

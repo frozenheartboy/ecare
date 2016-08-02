@@ -248,8 +248,8 @@ public class PostController {
         } else
             return ResultUtil.getResult(Constant.FAILURE, "添加失败", null);
     }
-
-    @RequestMapping(value = "/addPostLike")
+    @CrossOrigin(maxAge = 3600)
+    @RequestMapping(value = "/addPostLike", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> addLike(@RequestParam("user_id") Integer userId, @RequestParam("postId") Integer postId) {
         Likes likes = new Likes();
@@ -263,8 +263,8 @@ public class PostController {
         }
         return ResultUtil.getResult(Constant.FAILURE, "已经点赞", null);
     }
-
-    @RequestMapping(value = "/addReplyLike")
+    @CrossOrigin(maxAge = 3600)
+    @RequestMapping(value = "/addReplyLike", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> addReplyLike(@RequestParam("user_id") Integer userId, @RequestParam("replyId") Integer replyId) {
         Likes likes = new Likes();
@@ -306,8 +306,8 @@ public class PostController {
         }
         return ResultUtil.getResult(Constant.FAILURE,"查询失败",null);
     }
-
-    @RequestMapping(value = "/addFavorite")
+    @CrossOrigin(maxAge = 3600)
+    @RequestMapping(value = "/addFavorite", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> addFavorite(@RequestParam("user_id") Integer userId, @RequestParam("postId") Integer postId) {
         Favorite favorite = new Favorite();

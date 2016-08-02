@@ -14,9 +14,13 @@ public interface OpUserMedicineRecordsMapper {
 
     OpUserMedicineRecords selectByPrimaryKey(Integer id);
 
+    List<OpUserMedicineRecords> selectInTime();
+
     List<OpUserMedicineRecords> selectRemind(String date);
 
     int updateByPrimaryKeySelective(OpUserMedicineRecords record);
 
     int updateByPrimaryKey(OpUserMedicineRecords record);
+
+    int updateOutTimeByPrimaryKey(Integer id);
 }

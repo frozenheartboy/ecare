@@ -2,6 +2,8 @@ package com.ecare.web.mapper;
 
 import com.ecare.web.pojo.TfUserMedicineRecords;
 
+import java.util.List;
+
 public interface TfUserMedicineRecordsMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -11,7 +13,13 @@ public interface TfUserMedicineRecordsMapper {
 
     TfUserMedicineRecords selectByPrimaryKey(Integer id);
 
+    List<TfUserMedicineRecords> selectInTime();
+
+    List<TfUserMedicineRecords> selectRemind(String date);
+
     int updateByPrimaryKeySelective(TfUserMedicineRecords record);
 
     int updateByPrimaryKey(TfUserMedicineRecords record);
+
+    int updateOutTimeByPrimaryKey(Integer id);
 }
