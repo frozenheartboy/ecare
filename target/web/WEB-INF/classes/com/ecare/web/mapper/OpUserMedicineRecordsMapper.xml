@@ -27,6 +27,12 @@
     from op_user_medicine_records
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectInTime" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from op_user_medicine_records
+    where is_out_time=0
+  </select>
   <select id="selectRemind" resultMap="BaseResultMap" parameterType="java.lang.String">
     select
     <include refid="Base_Column_List"/>
@@ -200,6 +206,11 @@
       is_out_time = #{isOutTime,jdbcType=BIT},
       is_open_clock = #{isOpenClock,jdbcType=TINYINT},
       cat = #{cat,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateOutTimeByPrimaryKey" parameterType="java.lang.Integer">
+    update op_user_medicine_records
+    set is_out_time =1;
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

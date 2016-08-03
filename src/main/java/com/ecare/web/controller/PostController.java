@@ -120,26 +120,30 @@ public class PostController {
     }
 
     @CrossOrigin(maxAge = 3600)
-    @RequestMapping(value = "/getPost",method = RequestMethod.GET)
+    @RequestMapping(value = "/getPost", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> findPostByPostId(@RequestParam("postId") Integer postId,@RequestParam("user_id") Integer userId) {
-        if(postId>0) {
+    public Map<String, Object> findPostByPostId(@RequestParam("postId") Integer postId, @RequestParam("user_id") Integer userId) {
+        if (postId > 0) {
             postService.updatePostViews(postId);
             PostVo postVo = postService.findPostByPostId(postId);
             if (postVo != null) {
                 postVo.setPhotoUrl(postService.findUrlByPostId(postVo.getPostId()));
-                Date date=postVo.getPostCreateTime();
-                Date now=new Date();
-                long l=now.getTime()-date.getTime();
-                long hour=l/(60*60*1000);
+                Date date = postVo.getPostCreateTime();
+                Date now = new Date();
+                long l = now.getTime() - date.getTime();
+                long hour = l / (60 * 60 * 1000);
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                if(hour<24){
-                    postVo.setTimeStatus(hour+"小时前");
-                }
+                if(hour==0)
+                    postVo.setTimeStatus("刚刚");
                 else {
-                    postVo.setTimeStatus(sdf.format(date));
+                    if (hour < 24) {
+                        postVo.setTimeStatus(hour + "小时前");
+                    } else {
+                        postVo.setTimeStatus(sdf.format(date));
+                    }
                 }
-                if(userId!=null) {
+
+                if (userId != null) {
                     Likes likes = new Likes();
                     likes.setLikesUserId(userId);
                     likes.setLikesType(false);
@@ -153,13 +157,13 @@ public class PostController {
                 Favorite favorite = new Favorite();
                 favorite.setFavoriteUserId(userId);
                 favorite.setFavoritePostId(postId);
-                Integer favResult=postService.findFavoriteByContent(favorite);
-                if(favResult!=null)
+                Integer favResult = postService.findFavoriteByContent(favorite);
+                if (favResult != null)
                     postVo.setFavorite(true);
                 else
                     postVo.setFavorite(false);
-                UserSimpleVo userSimpleVo= postService.findUsersByUserId(postVo.getPostUserId());
-                if(userSimpleVo!=null){
+                UserSimpleVo userSimpleVo = postService.findUsersByUserId(postVo.getPostUserId());
+                if (userSimpleVo != null) {
                     postVo.setUserName(userSimpleVo.getNickname());
                     postVo.setHeadUrl(userSimpleVo.getHeadUrl());
                 }
@@ -170,44 +174,56 @@ public class PostController {
         return ResultUtil.getResult(Constant.FAILURE, "查询失败", null);
 
     }
+
     @CrossOrigin(maxAge = 3600)
     @RequestMapping(value = "/findReply")
     @ResponseBody
-    public Map<String, Object> findReplyByPostId(@RequestParam("postId") Integer postId, @RequestParam("page") Integer pageNumber,@RequestParam("user_id") Integer userId){
+    public Map<String, Object> findReplyByPostId(@RequestParam("postId") Integer postId, @RequestParam("page") Integer pageNumber, @RequestParam("user_id") Integer userId) {
         if (pageNumber > -1) {
             List<ReplyFormVo> replies = postService.findReplyByPostId(postId, PageUtil.getPage(pageNumber, Constant.REPLY_PAGE_NUMBER, 0));
             if (replies.size() != 0) {
-                for(ReplyFormVo replyFormVo:replies){
-                    Date date=replyFormVo.getReplyCreateTime();
-                    Date now=new Date();
-                    long l=now.getTime()-date.getTime();
-                    long hour=l/(60*60*1000);
+                for (ReplyFormVo replyFormVo : replies) {
+                    Date date = replyFormVo.getReplyCreateTime();
+                    Date now = new Date();
+                    long l = now.getTime() - date.getTime();
+                    long hour = l / (60 * 60 * 1000);
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    if(hour<24){
-                        replyFormVo.setTimeStatus(hour+"小时前");
+                    if (hour == 0) {
+                        replyFormVo.setTimeStatus("刚刚");
+                    } else {
+                        if (hour < 24) {
+                            replyFormVo.setTimeStatus(hour + "小时前");
+                        } else {
+                            replyFormVo.setTimeStatus(sdf.format(date));
+                        }
                     }
-                    else {
-                        replyFormVo.setTimeStatus(sdf.format(date));
-                    }
-
                     Likes likes = new Likes();
                     likes.setLikesUserId(userId);
                     likes.setLikesType(true);
                     likes.setLikesTypeId(replyFormVo.getReplyId());
-                    Integer result=postService.findlikesByContent(likes);
-                    if(result!=null)
+                    Integer result = postService.findlikesByContent(likes);
+                    if (result != null)
                         replyFormVo.setLiked(true);
                     else
                         replyFormVo.setLiked(false);
-                    UserSimpleVo userSimpleVo= postService.findUsersByUserId(replyFormVo.getReplyUserId());
-                    if(userSimpleVo!=null){
+
+                    UserSimpleVo userSimpleVo = postService.findUsersByUserId(replyFormVo.getReplyUserId());
+                    if (userSimpleVo != null) {
                         replyFormVo.setUserName(userSimpleVo.getNickname());
                         replyFormVo.setHeadUrl(userSimpleVo.getHeadUrl());
                     }
+
+                    Integer toUserId=replyFormVo.getReplyToUserId();
+                    if(toUserId!=null) {
+                        UserSimpleVo toUserSimpleVo = postService.findUsersByUserId(toUserId);
+                        if (toUserSimpleVo != null) {
+                            replyFormVo.setReplyToUserName(toUserSimpleVo.getNickname());
+                        }
+                    }
+
                 }
                 return ResultUtil.getResult(Constant.SUCCESS, "查询成功", replies);
-            }
-            else
+            } else
                 return ResultUtil.getResult(Constant.SUCCESS, "查询为空", replies);
         }
         return ResultUtil.getResult(Constant.FAILURE, "查询失败", null);
@@ -237,6 +253,7 @@ public class PostController {
         } else
             return ResultUtil.getResult(Constant.FAILURE, "内容添加失败", null);
     }
+
     @CrossOrigin(maxAge = 3600)
     @RequestMapping(value = "/addReply", method = RequestMethod.POST)
     @ResponseBody
@@ -248,6 +265,7 @@ public class PostController {
         } else
             return ResultUtil.getResult(Constant.FAILURE, "添加失败", null);
     }
+
     @CrossOrigin(maxAge = 3600)
     @RequestMapping(value = "/addPostLike", method = RequestMethod.POST)
     @ResponseBody
@@ -263,6 +281,7 @@ public class PostController {
         }
         return ResultUtil.getResult(Constant.FAILURE, "已经点赞", null);
     }
+
     @CrossOrigin(maxAge = 3600)
     @RequestMapping(value = "/addReplyLike", method = RequestMethod.POST)
     @ResponseBody
@@ -289,23 +308,24 @@ public class PostController {
                 return ResultUtil.getResult(Constant.SUCCESS, "查询成功", postFormVos);
             }
             return ResultUtil.getResult(Constant.SUCCESS, "查询为空", postFormVos);
-        }catch (Exception e){
-            return ResultUtil.getResult(Constant.FAILURE,"查询失败",null);
+        } catch (Exception e) {
+            return ResultUtil.getResult(Constant.FAILURE, "查询失败", null);
         }
     }
 
     @RequestMapping(value = "/findClassTop")
     @ResponseBody
     public Map<String, Object> findClassTop(@RequestParam("classId") Integer classId) {
-        if(classId>0) {
+        if (classId > 0) {
             List<PostFormVo> postFormVos = postService.findClassTop(classId);
             if (postFormVos.size() != 0) {
                 return ResultUtil.getResult(Constant.SUCCESS, "查询成功", postFormVos);
             }
             return ResultUtil.getResult(Constant.SUCCESS, "查询为空", postFormVos);
         }
-        return ResultUtil.getResult(Constant.FAILURE,"查询失败",null);
+        return ResultUtil.getResult(Constant.FAILURE, "查询失败", null);
     }
+
     @CrossOrigin(maxAge = 3600)
     @RequestMapping(value = "/addFavorite", method = RequestMethod.POST)
     @ResponseBody

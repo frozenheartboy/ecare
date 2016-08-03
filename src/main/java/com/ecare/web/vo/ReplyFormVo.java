@@ -22,6 +22,8 @@ public class ReplyFormVo implements Serializable {
 
     private Integer replyToUserId;
 
+    private String replyToUserName;
+
     private Integer replyLikes;
 
     private String userName;
@@ -85,6 +87,14 @@ public class ReplyFormVo implements Serializable {
 
     public void setReplyToUserId(Integer replyToUserId) {
         this.replyToUserId = replyToUserId;
+    }
+
+    public String getReplyToUserName() {
+        return replyToUserName;
+    }
+
+    public void setReplyToUserName(String replyToUserName) {
+        this.replyToUserName = replyToUserName;
     }
 
     public Integer getReplyLikes() {
