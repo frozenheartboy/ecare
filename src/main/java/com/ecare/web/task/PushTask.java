@@ -74,21 +74,23 @@ public class PushTask {
         //查询到该提醒的给对应用于和家人提醒
         List<OpUserMedicineRecords> opUserMedicineRecordsList = opUserMedicineRecordsMapper.selectRemind(time);
         for (OpUserMedicineRecords opUserMedicineRecords : opUserMedicineRecordsList) {
-            //            给家人发送吃药消息
             List<Integer> myDirectRelationIds = familyService.myDirectRelationIds(opUserMedicineRecords.getUserId());
             List<Integer> myRelationIds = familyService.myRelationIds(opUserMedicineRecords.getUserId());
             myRelationIds.removeAll(myDirectRelationIds);
             myRelationIds.addAll(myDirectRelationIds);
+            /**
+             * myRelationIds 为 我关联的所有非傀儡用户id 获取我的用户名 给这些人发送消息
+             */
+            String name = usersMapper.selectByPrimaryKey(opUserMedicineRecords.getUserId()).getName();
             for (int i = 0; i < myRelationIds.size(); i++) {
                 String get = myRelationIds.get(i).toString();
                 JpushUtil.sendPushMessage(get,
-                        "111111 " + opUserMedicineRecords.getRecordName() + " "
-                        + opUserMedicineRecords.getTakingWays() + " "
-                        + opUserMedicineRecords.getTakingFrequency());
+                        name + "到了服药时间，记得提醒他不要忘记哦");
 
             }
-
-//            给自己发送吃药通知
+            /**
+             * 给自己发送吃药通知/**
+             */
             JpushUtil.sendPushNotice(opUserMedicineRecords.getUserId().toString(), null, "hello", "ALERT", opUserMedicineRecords.getRecordName());
 
         }
