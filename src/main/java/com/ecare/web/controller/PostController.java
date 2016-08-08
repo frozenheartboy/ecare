@@ -25,6 +25,7 @@ import java.util.*;
 @Controller
 @RequestMapping("/Post")
 public class PostController {
+
     @Autowired
     private PostService postService;
 
@@ -351,4 +352,6 @@ public class PostController {
         }
         return ResultUtil.getResult(Constant.FAILURE, "查询失败", null);
     }
+
+
 }
