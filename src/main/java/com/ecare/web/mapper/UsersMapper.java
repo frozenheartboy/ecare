@@ -17,4 +17,5 @@ public interface UsersMapper {
     int updateByPrimaryKeySelective(Users record);
 
     int updateByPrimaryKey(Users record);
+    int selectIsOpenLockByPrimaryKey(Integer id);
 }
