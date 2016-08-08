@@ -5,7 +5,7 @@
     <artifactId>ecare</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>web Maven Webapp</name>
+    <name>ecareApi</name>
     <url>http://maven.apache.org</url>
     <build>
         <finalName>web</finalName>

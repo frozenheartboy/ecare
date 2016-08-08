@@ -1,216 +1,216 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ecare.web.mapper.TfUserMedicineRecordsMapper" >
-  <resultMap id="BaseResultMap" type="com.ecare.web.pojo.TfUserMedicineRecords" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="user_id" property="userId" jdbcType="INTEGER" />
-    <result column="codeId" property="codeid" jdbcType="VARCHAR" />
-    <result column="record_name" property="recordName" jdbcType="VARCHAR" />
-    <result column="record_value" property="recordValue" jdbcType="VARCHAR" />
-    <result column="record_time" property="recordTime" jdbcType="TIMESTAMP" />
-    <result column="treatment_period" property="treatmentPeriod" jdbcType="INTEGER" />
-    <result column="remind_time" property="remindTime" jdbcType="VARCHAR" />
-    <result column="taking_frequency" property="takingFrequency" jdbcType="VARCHAR" />
-    <result column="taking_ways" property="takingWays" jdbcType="VARCHAR" />
-    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
-    <result column="is_out_time" property="isOutTime" jdbcType="BIT" />
-    <result column="is_open_clock" property="isOpenClock" jdbcType="BIT" />
-    <result column="cat" property="cat" jdbcType="TINYINT" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, user_id, codeId, record_name, record_value, record_time, treatment_period, remind_time, 
-    taking_frequency, taking_ways, start_time, is_out_time, is_open_clock, cat
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from tf_user_medicine_records
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <select id="selectInTime" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"/>
-    from tf_user_medicine_records
-    where is_out_time=0
-  </select>
-  <select id="selectRemind" resultMap="BaseResultMap" parameterType="java.lang.String">
-    select
-    <include refid="Base_Column_List"/>
-    from tf_user_medicine_records
-    where is_out_time=0 AND is_open_clock=1 AND remind_time=#{date,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from tf_user_medicine_records
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.ecare.web.pojo.TfUserMedicineRecords" >
-    insert into tf_user_medicine_records (id, user_id, codeId, 
-      record_name, record_value, record_time, 
-      treatment_period, remind_time, taking_frequency, 
-      taking_ways, start_time, is_out_time, 
-      is_open_clock, cat)
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{codeid,jdbcType=VARCHAR}, 
-      #{recordName,jdbcType=VARCHAR}, #{recordValue,jdbcType=VARCHAR}, #{recordTime,jdbcType=TIMESTAMP}, 
-      #{treatmentPeriod,jdbcType=INTEGER}, #{remindTime,jdbcType=VARCHAR}, #{takingFrequency,jdbcType=VARCHAR}, 
-      #{takingWays,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{isOutTime,jdbcType=BIT}, 
-      #{isOpenClock,jdbcType=BIT}, #{cat,jdbcType=TINYINT})
-  </insert>
-  <insert id="insertSelective" parameterType="com.ecare.web.pojo.TfUserMedicineRecords" >
-    insert into tf_user_medicine_records
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="userId != null" >
-        user_id,
-      </if>
-      <if test="codeid != null" >
-        codeId,
-      </if>
-      <if test="recordName != null" >
-        record_name,
-      </if>
-      <if test="recordValue != null" >
-        record_value,
-      </if>
-      <if test="recordTime != null" >
-        record_time,
-      </if>
-      <if test="treatmentPeriod != null" >
-        treatment_period,
-      </if>
-      <if test="remindTime != null" >
-        remind_time,
-      </if>
-      <if test="takingFrequency != null" >
-        taking_frequency,
-      </if>
-      <if test="takingWays != null" >
-        taking_ways,
-      </if>
-      <if test="startTime != null" >
-        start_time,
-      </if>
-      <if test="isOutTime != null" >
-        is_out_time,
-      </if>
-      <if test="isOpenClock != null" >
-        is_open_clock,
-      </if>
-      <if test="cat != null" >
-        cat,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="codeid != null" >
-        #{codeid,jdbcType=VARCHAR},
-      </if>
-      <if test="recordName != null" >
-        #{recordName,jdbcType=VARCHAR},
-      </if>
-      <if test="recordValue != null" >
-        #{recordValue,jdbcType=VARCHAR},
-      </if>
-      <if test="recordTime != null" >
-        #{recordTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="treatmentPeriod != null" >
-        #{treatmentPeriod,jdbcType=INTEGER},
-      </if>
-      <if test="remindTime != null" >
-        #{remindTime,jdbcType=VARCHAR},
-      </if>
-      <if test="takingFrequency != null" >
-        #{takingFrequency,jdbcType=VARCHAR},
-      </if>
-      <if test="takingWays != null" >
-        #{takingWays,jdbcType=VARCHAR},
-      </if>
-      <if test="startTime != null" >
-        #{startTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isOutTime != null" >
-        #{isOutTime,jdbcType=BIT},
-      </if>
-      <if test="isOpenClock != null" >
-        #{isOpenClock,jdbcType=BIT},
-      </if>
-      <if test="cat != null" >
-        #{cat,jdbcType=TINYINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ecare.web.pojo.TfUserMedicineRecords" >
-    update tf_user_medicine_records
-    <set >
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="codeid != null" >
+    <resultMap id="BaseResultMap" type="com.ecare.web.pojo.TfUserMedicineRecords" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="codeId" property="codeid" jdbcType="VARCHAR" />
+        <result column="record_name" property="recordName" jdbcType="VARCHAR" />
+        <result column="record_value" property="recordValue" jdbcType="VARCHAR" />
+        <result column="record_time" property="recordTime" jdbcType="TIMESTAMP" />
+        <result column="treatment_period" property="treatmentPeriod" jdbcType="INTEGER" />
+        <result column="remind_time" property="remindTime" jdbcType="VARCHAR" />
+        <result column="taking_frequency" property="takingFrequency" jdbcType="VARCHAR" />
+        <result column="taking_ways" property="takingWays" jdbcType="VARCHAR" />
+        <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+        <result column="is_out_time" property="isOutTime" jdbcType="BIT" />
+        <result column="is_open_clock" property="isOpenClock" jdbcType="BIT" />
+        <result column="cat" property="cat" jdbcType="TINYINT" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, user_id, codeId, record_name, record_value, record_time, treatment_period, remind_time, 
+        taking_frequency, taking_ways, start_time, is_out_time, is_open_clock, cat
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from tf_user_medicine_records
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectInTime" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tf_user_medicine_records
+        where is_out_time=0
+    </select>
+    <select id="selectRemind" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        tf_user_medicine_records.*
+        from tf_user_medicine_records,users
+        where is_out_time=0 AND tf_user_medicine_records.is_open_clock=1 AND tf_user_medicine_records.user_id=users.id AND users.is_open_clock=1 AND remind_time=#{date,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from tf_user_medicine_records
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.ecare.web.pojo.TfUserMedicineRecords" >
+        insert into tf_user_medicine_records (id, user_id, codeId, 
+        record_name, record_value, record_time, 
+        treatment_period, remind_time, taking_frequency, 
+        taking_ways, start_time, is_out_time, 
+        is_open_clock, cat)
+        values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{codeid,jdbcType=VARCHAR}, 
+        #{recordName,jdbcType=VARCHAR}, #{recordValue,jdbcType=VARCHAR}, #{recordTime,jdbcType=TIMESTAMP}, 
+        #{treatmentPeriod,jdbcType=INTEGER}, #{remindTime,jdbcType=VARCHAR}, #{takingFrequency,jdbcType=VARCHAR}, 
+        #{takingWays,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{isOutTime,jdbcType=BIT}, 
+        #{isOpenClock,jdbcType=BIT}, #{cat,jdbcType=TINYINT})
+    </insert>
+    <insert id="insertSelective" parameterType="com.ecare.web.pojo.TfUserMedicineRecords" >
+        insert into tf_user_medicine_records
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="userId != null" >
+                user_id,
+            </if>
+            <if test="codeid != null" >
+                codeId,
+            </if>
+            <if test="recordName != null" >
+                record_name,
+            </if>
+            <if test="recordValue != null" >
+                record_value,
+            </if>
+            <if test="recordTime != null" >
+                record_time,
+            </if>
+            <if test="treatmentPeriod != null" >
+                treatment_period,
+            </if>
+            <if test="remindTime != null" >
+                remind_time,
+            </if>
+            <if test="takingFrequency != null" >
+                taking_frequency,
+            </if>
+            <if test="takingWays != null" >
+                taking_ways,
+            </if>
+            <if test="startTime != null" >
+                start_time,
+            </if>
+            <if test="isOutTime != null" >
+                is_out_time,
+            </if>
+            <if test="isOpenClock != null" >
+                is_open_clock,
+            </if>
+            <if test="cat != null" >
+                cat,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null" >
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="codeid != null" >
+                #{codeid,jdbcType=VARCHAR},
+            </if>
+            <if test="recordName != null" >
+                #{recordName,jdbcType=VARCHAR},
+            </if>
+            <if test="recordValue != null" >
+                #{recordValue,jdbcType=VARCHAR},
+            </if>
+            <if test="recordTime != null" >
+                #{recordTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="treatmentPeriod != null" >
+                #{treatmentPeriod,jdbcType=INTEGER},
+            </if>
+            <if test="remindTime != null" >
+                #{remindTime,jdbcType=VARCHAR},
+            </if>
+            <if test="takingFrequency != null" >
+                #{takingFrequency,jdbcType=VARCHAR},
+            </if>
+            <if test="takingWays != null" >
+                #{takingWays,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null" >
+                #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isOutTime != null" >
+                #{isOutTime,jdbcType=BIT},
+            </if>
+            <if test="isOpenClock != null" >
+                #{isOpenClock,jdbcType=BIT},
+            </if>
+            <if test="cat != null" >
+                #{cat,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ecare.web.pojo.TfUserMedicineRecords" >
+        update tf_user_medicine_records
+        <set >
+            <if test="userId != null" >
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="codeid != null" >
+                codeId = #{codeid,jdbcType=VARCHAR},
+            </if>
+            <if test="recordName != null" >
+                record_name = #{recordName,jdbcType=VARCHAR},
+            </if>
+            <if test="recordValue != null" >
+                record_value = #{recordValue,jdbcType=VARCHAR},
+            </if>
+            <if test="recordTime != null" >
+                record_time = #{recordTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="treatmentPeriod != null" >
+                treatment_period = #{treatmentPeriod,jdbcType=INTEGER},
+            </if>
+            <if test="remindTime != null" >
+                remind_time = #{remindTime,jdbcType=VARCHAR},
+            </if>
+            <if test="takingFrequency != null" >
+                taking_frequency = #{takingFrequency,jdbcType=VARCHAR},
+            </if>
+            <if test="takingWays != null" >
+                taking_ways = #{takingWays,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null" >
+                start_time = #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isOutTime != null" >
+                is_out_time = #{isOutTime,jdbcType=BIT},
+            </if>
+            <if test="isOpenClock != null" >
+                is_open_clock = #{isOpenClock,jdbcType=BIT},
+            </if>
+            <if test="cat != null" >
+                cat = #{cat,jdbcType=TINYINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ecare.web.pojo.TfUserMedicineRecords" >
+        update tf_user_medicine_records
+        set user_id = #{userId,jdbcType=INTEGER},
         codeId = #{codeid,jdbcType=VARCHAR},
-      </if>
-      <if test="recordName != null" >
         record_name = #{recordName,jdbcType=VARCHAR},
-      </if>
-      <if test="recordValue != null" >
         record_value = #{recordValue,jdbcType=VARCHAR},
-      </if>
-      <if test="recordTime != null" >
         record_time = #{recordTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="treatmentPeriod != null" >
         treatment_period = #{treatmentPeriod,jdbcType=INTEGER},
-      </if>
-      <if test="remindTime != null" >
         remind_time = #{remindTime,jdbcType=VARCHAR},
-      </if>
-      <if test="takingFrequency != null" >
         taking_frequency = #{takingFrequency,jdbcType=VARCHAR},
-      </if>
-      <if test="takingWays != null" >
         taking_ways = #{takingWays,jdbcType=VARCHAR},
-      </if>
-      <if test="startTime != null" >
         start_time = #{startTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isOutTime != null" >
         is_out_time = #{isOutTime,jdbcType=BIT},
-      </if>
-      <if test="isOpenClock != null" >
         is_open_clock = #{isOpenClock,jdbcType=BIT},
-      </if>
-      <if test="cat != null" >
-        cat = #{cat,jdbcType=TINYINT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ecare.web.pojo.TfUserMedicineRecords" >
-    update tf_user_medicine_records
-    set user_id = #{userId,jdbcType=INTEGER},
-      codeId = #{codeid,jdbcType=VARCHAR},
-      record_name = #{recordName,jdbcType=VARCHAR},
-      record_value = #{recordValue,jdbcType=VARCHAR},
-      record_time = #{recordTime,jdbcType=TIMESTAMP},
-      treatment_period = #{treatmentPeriod,jdbcType=INTEGER},
-      remind_time = #{remindTime,jdbcType=VARCHAR},
-      taking_frequency = #{takingFrequency,jdbcType=VARCHAR},
-      taking_ways = #{takingWays,jdbcType=VARCHAR},
-      start_time = #{startTime,jdbcType=TIMESTAMP},
-      is_out_time = #{isOutTime,jdbcType=BIT},
-      is_open_clock = #{isOpenClock,jdbcType=BIT},
-      cat = #{cat,jdbcType=TINYINT}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateOutTimeByPrimaryKey" parameterType="java.lang.Integer">
-    update tf_user_medicine_records
-    set is_out_time =1;
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        cat = #{cat,jdbcType=TINYINT}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateOutTimeByPrimaryKey" parameterType="java.lang.Integer">
+        update tf_user_medicine_records
+        set is_out_time =1;
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

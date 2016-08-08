@@ -34,10 +34,10 @@
     where is_out_time=0
   </select>
   <select id="selectRemind" resultMap="BaseResultMap" parameterType="java.lang.String">
-    select
-    <include refid="Base_Column_List"/>
-    from op_user_medicine_records
-    where is_out_time=0 AND is_open_clock=1 AND remind_time=#{date,jdbcType=VARCHAR}
+ select
+    op_user_medicine_records.*
+    from op_user_medicine_records,users
+    where is_out_time=0 AND op_user_medicine_records.is_open_clock=1 AND op_user_medicine_records.user_id=users.id AND users.is_open_clock=1 AND remind_time=#{date,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from op_user_medicine_records

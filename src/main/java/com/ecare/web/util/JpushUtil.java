@@ -19,6 +19,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static cn.jpush.api.push.model.notification.PlatformNotification.ALERT;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by L on 2016/8/1.
