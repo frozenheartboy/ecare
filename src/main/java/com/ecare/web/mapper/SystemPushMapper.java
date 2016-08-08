@@ -1,5 +1,7 @@
 package com.ecare.web.mapper;
 
+import com.ecare.web.pojo.SystemPush;
+
 /**
  * @author lpf
  * @datetime 2016-8-8 21:51:13
@@ -7,5 +9,5 @@ package com.ecare.web.mapper;
  */
 public interface SystemPushMapper {
 
-    int insert(SystemPush systemPush);
+    int insertPush(SystemPush systemPush);
 }

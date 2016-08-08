@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ecare.web.mapper.SystemPushMapper">
-    <insert id="insert" parameterType="com.ecare.web.pojo.SystemPush">
+    <insert id="insertPush" parameterType="com.ecare.web.pojo.SystemPush">
         insert into system_push(user_id,info,cat,add_time) VALUES(#(user_id,jdbcType=INTEGER),#(info),#(cat),#(add_time));
     </insert>
 </mapper>

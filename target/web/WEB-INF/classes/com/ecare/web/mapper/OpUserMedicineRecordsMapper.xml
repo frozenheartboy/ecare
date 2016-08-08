@@ -28,15 +28,6 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectInTime" resultMap="BaseResultMap">
-<<<<<<< HEAD
-    select
-    <include refid="Base_Column_List"/>
-    from op_user_medicine_records
-    where is_out_time=0
-  </select>
-  <select id="selectRemind" resultMap="BaseResultMap" parameterType="java.lang.String">
-=======
->>>>>>> 8bff640c8cca3076d7610aa2f7a9c9d2196bc869
     select
     <include refid="Base_Column_List"/>
     from op_user_medicine_records

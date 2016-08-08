@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
+<Context path="/web"/>
+=======
 <Context path="/ecareApi"/>
+>>>>>>> 8bff640c8cca3076d7610aa2f7a9c9d2196bc869
