@@ -31,7 +31,7 @@
     select
     <include refid="Base_Column_List"/>
     from op_user_medicine_records
-    where is_out_time=0
+    where is_out_time=0 and is_open_clock=1
   </select>
   <select id="selectRemind" resultMap="BaseResultMap" parameterType="java.lang.String">
  select
@@ -210,7 +210,7 @@
   </update>
   <update id="updateOutTimeByPrimaryKey" parameterType="java.lang.Integer">
     update op_user_medicine_records
-    set is_out_time =1;
+    set is_out_time =1
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
