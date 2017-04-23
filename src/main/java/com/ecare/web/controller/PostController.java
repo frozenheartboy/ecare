@@ -108,11 +108,12 @@ public class PostController {
     @RequestMapping(value = "/findPost")
     @ResponseBody
     public Map<String, Object> findPostByClassId(@RequestParam(value = "classId") Integer classId, @RequestParam(value = "page") Integer pageNumber) {
-
+        Class classVo=postService.findClassByClassId(classId);
         if (pageNumber > -1) {
             List<PostFormVo> postFormVos = postService.findPostByClassId(classId, PageUtil.getPage(pageNumber, Constant.POST_PAGE_NUMBER, 0));
             if (postFormVos.size() != 0) {
                 for (int i = 0; i < postFormVos.size(); i++) {
+                    postFormVos.get(i).setPostClassType(classVo.getClassType());
                     postFormVos.get(i).setPhotoUrl(postService.findUrlByPostId(postFormVos.get(i).getPostId()));
                 }
                 return ResultUtil.getResult(Constant.SUCCESS, "查询成功", postFormVos);
@@ -132,6 +133,7 @@ public class PostController {
             PostVo postVo = postService.findPostByPostId(postId);
             if (postVo != null) {
                 postVo.setPhotoUrl(postService.findUrlByPostId(postVo.getPostId()));
+                postVo.setPostClassType(postService.findClassByClassId(postVo.getPostClassId()).getClassType());
                 Date date = postVo.getPostCreateTime();
                 Date now = new Date();
                 long l = now.getTime() - date.getTime();
@@ -314,6 +316,9 @@ public class PostController {
     public Map<String, Object> findHomeTop() {
         try {
             List<PostFormVo> postFormVos = postService.findHomeTop();
+            for(PostFormVo postFormVo:postFormVos){
+                postFormVo.setPostClassType(postService.findClassByClassId(postFormVo.getPostClassId()).getClassType());
+            }
 
             if (postFormVos.size() != 0) {
                 return ResultUtil.getResult(Constant.SUCCESS, "查询成功", postFormVos);
@@ -329,6 +334,9 @@ public class PostController {
     public Map<String, Object> findClassTop(@RequestParam("classId") Integer classId) {
         if (classId > 0) {
             List<PostFormVo> postFormVos = postService.findClassTop(classId);
+            for(PostFormVo postFormVo:postFormVos){
+                postFormVo.setPostClassType(postService.findClassByClassId(classId).getClassType());
+            }
             if (postFormVos.size() != 0) {
                 return ResultUtil.getResult(Constant.SUCCESS, "查询成功", postFormVos);
             }

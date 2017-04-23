@@ -1,9 +1,11 @@
 package com.ecare.web.task;
 
 import com.ecare.web.mapper.OpUserMedicineRecordsMapper;
+import com.ecare.web.mapper.SystemPushMapper;
 import com.ecare.web.mapper.TfUserMedicineRecordsMapper;
 import com.ecare.web.mapper.UsersMapper;
 import com.ecare.web.pojo.OpUserMedicineRecords;
+import com.ecare.web.pojo.SystemPush;
 import com.ecare.web.pojo.TfUserMedicineRecords;
 import com.ecare.web.service.FamilyService;
 import com.ecare.web.util.JpushUtil;
@@ -26,6 +28,8 @@ public class PushTask {
     OpUserMedicineRecordsMapper opUserMedicineRecordsMapper;
     @Autowired
     TfUserMedicineRecordsMapper tfUserMedicineRecordsMapper;
+    @Autowired
+    SystemPushMapper systemPushMapper;
     @Autowired
     UsersMapper usersMapper;
     @Autowired
@@ -140,22 +144,50 @@ public class PushTask {
             for (int i = 0; i < myRelationIds.size(); i++) {
                 String get = myRelationIds.get(i).toString();
                 JpushUtil.sendPushMessage(get,
-                        name + "到了服药时间，记得提醒他不要忘记哦");
+                        "该吃药了 " + opUserMedicineRecords.getRecordName() + " "
+                                + opUserMedicineRecords.getTakingWays() + " "
+                                + opUserMedicineRecords.getTakingFrequency());
 
             }
             /**
              * 给自己发送吃药通知/**
              */
-            JpushUtil.sendPushNotice(opUserMedicineRecords.getUserId().toString(), null, "hello", "ALERT", opUserMedicineRecords.getRecordName());
+            JpushUtil.sendPushMessage(opUserMedicineRecords.getUserId().toString(),
+                    "该吃药了 " + opUserMedicineRecords.getRecordName() + " "
+                            + opUserMedicineRecords.getTakingWays() + " "
+                            + opUserMedicineRecords.getTakingFrequency());
+            JpushUtil.sendPushNotice(opUserMedicineRecords.getUserId().toString(), null, "该吃药了", "ALERT", "该吃药了 " + opUserMedicineRecords.getRecordName() + " "
+                    + opUserMedicineRecords.getTakingWays() + " "
+                    + opUserMedicineRecords.getTakingFrequency());
 
         }
         List<TfUserMedicineRecords> tfUserMedicineRecordsList = tfUserMedicineRecordsMapper.selectRemind(time);
         for (TfUserMedicineRecords tfUserMedicineRecords : tfUserMedicineRecordsList) {
+            List<Integer> myDirectRelationIds = familyService.myDirectRelationIds(tfUserMedicineRecords.getUserId());
+            List<Integer> myRelationIds = familyService.myRelationIds(tfUserMedicineRecords.getUserId());
+            myRelationIds.removeAll(myDirectRelationIds);
+            myRelationIds.addAll(myDirectRelationIds);
+            /**
+             * myRelationIds 为 我关联的所有非傀儡用户id 获取我的用户名 给这些人发送消息
+             */
+            String name = usersMapper.selectByPrimaryKey(tfUserMedicineRecords.getUserId()).getName();
+            for (int i = 0; i < myRelationIds.size(); i++) {
+                String get = myRelationIds.get(i).toString();
+                JpushUtil.sendPushMessage(get,
+                        "该吃药了 " + tfUserMedicineRecords.getRecordName() + " "
+                                + tfUserMedicineRecords.getTakingWays() + " "
+                                + tfUserMedicineRecords.getTakingFrequency());
+
+            }
+
+
             JpushUtil.sendPushMessage(tfUserMedicineRecords.getUserId().toString(),
                     "该吃药了 " + tfUserMedicineRecords.getRecordName() + " "
                     + tfUserMedicineRecords.getTakingWays() + " "
                     + tfUserMedicineRecords.getTakingFrequency());
-            JpushUtil.sendPushNotice(tfUserMedicineRecords.getUserId().toString(), null, "hello", "ALERT", tfUserMedicineRecords.getRecordName());
+            JpushUtil.sendPushNotice(tfUserMedicineRecords.getUserId().toString(), null, "该吃药了", "ALERT", "该吃药了 " + tfUserMedicineRecords.getRecordName() + " "
+                    + tfUserMedicineRecords.getTakingWays() + " "
+                    + tfUserMedicineRecords.getTakingFrequency());
 
         }
 

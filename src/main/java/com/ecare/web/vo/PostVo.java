@@ -27,6 +27,8 @@ public class PostVo implements Serializable{
 
     private Integer postClassId;
 
+    private Integer postClassType;
+
     private Integer postLikes;
 
     private Integer postViews;
@@ -113,6 +115,13 @@ public class PostVo implements Serializable{
         this.postClassId = postClassId;
     }
 
+    public Integer getPostClassType() {
+        return postClassType;
+    }
+
+    public void setPostClassType(Integer postClassType) {
+        this.postClassType = postClassType;
+    }
 
     public Integer getPostLikes() {
         return postLikes;

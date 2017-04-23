@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by L on 2016/7/15.
  */
-public class PostFormVo implements Serializable{
+public class PostFormVo implements Serializable {
     private static final long serialVersionUID = 7031735888725773192L;
     private Integer postId;
 
@@ -17,7 +17,9 @@ public class PostFormVo implements Serializable{
 
     private Integer postUserId;
 
-    private int postClassId;
+    private Integer postClassId;
+
+    private Integer postClassType;
 
     private Integer postLikes;
 
@@ -57,12 +59,20 @@ public class PostFormVo implements Serializable{
         this.postUserId = postUserId;
     }
 
-    public int getPostClassId() {
+    public Integer getPostClassId() {
         return postClassId;
     }
 
-    public void setPostClassId(int postClassId) {
+    public void setPostClassId(Integer postClassId) {
         this.postClassId = postClassId;
+    }
+
+    public Integer getPostClassType() {
+        return postClassType;
+    }
+
+    public void setPostClassType(Integer postClassType) {
+        this.postClassType = postClassType;
     }
 
     public Integer getPostLikes() {

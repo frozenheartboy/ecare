@@ -1,24 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ecare.web.pojo;
 
 import java.util.Date;
 
-/**
- * @author lpf
- * @datetime 2016-8-8 21:44:41
- * @email lipengfei19927@163.com
- */
 public class SystemPush {
-
     private Integer id;
-    private Integer user_id;
+
+    private Integer userId;
+
     private String info;
+
     private Integer cat;
-    private Date addtime;
+
+    private Date addTime;
 
     public Integer getId() {
         return id;
@@ -28,12 +21,12 @@ public class SystemPush {
         this.id = id;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getInfo() {
@@ -41,7 +34,7 @@ public class SystemPush {
     }
 
     public void setInfo(String info) {
-        this.info = info;
+        this.info = info == null ? null : info.trim();
     }
 
     public Integer getCat() {
@@ -52,18 +45,11 @@ public class SystemPush {
         this.cat = cat;
     }
 
-    public Date getAddtime() {
-        return addtime;
+    public Date getAddTime() {
+        return addTime;
     }
 
-    public void setAddtime(Date addtime) {
-        this.addtime = addtime;
+    public void setAddTime(Date addTime) {
+        this.addTime = addTime;
     }
-
-    @Override
-    public String toString() {
-        return "SystemPush{" + "id=" + id + ", user_id=" + user_id + ", info=" + info + ", cat=" + cat + ", addtime=" + addtime + '}';
-    }
-   
-    
 }

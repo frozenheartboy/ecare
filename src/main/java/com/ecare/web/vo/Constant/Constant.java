@@ -16,8 +16,8 @@ public class Constant {
     public static final int POST_DESCRIPTION_LENGTH=20;  //文章描述的长度
     public static final int HOME_TOP_NUMBER=10;           //首页置顶帖个数
     public static final int CLASS_TOP_NUMBER=3;          //话题置顶帖个数
-    public static final String JPUSH_APP_KEY="541fc97bea87ae3c5a245927"; //JPUSH账号
-    public static final String JPUSH_MASTER_SECRET="526c6deea29922607b3b38b8"; //JPUSH密码
+    public static final String JPUSH_APP_KEY="96d8639d89dad03f92d00fd4"; //JPUSH账号
+    public static final String JPUSH_MASTER_SECRET="3ebbfe9be5f2022835c31d54"; //JPUSH密码
 
 
 }

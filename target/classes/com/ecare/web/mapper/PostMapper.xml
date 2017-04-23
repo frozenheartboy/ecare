@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ecare.web.mapper.PostMapper">
-    <cache type="com.ecare.web.redis.RedisCache"/>
+    <!--<cache type="com.ecare.web.redis.RedisCache"/>-->
     <resultMap id="BaseResultMap" type="com.ecare.web.pojo.Post">
         <id column="POST_ID" property="postId" jdbcType="INTEGER"/>
         <result column="POST_TITLE" property="postTitle" jdbcType="VARCHAR"/>
