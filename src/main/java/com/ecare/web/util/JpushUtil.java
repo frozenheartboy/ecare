@@ -149,6 +149,7 @@ public class JpushUtil {
         return PushPayload
                 .newBuilder()
                 .setPlatform(Platform.all())
+
                 .setAudience(Audience.tag(tags))
                 .setNotification(
                         Notification
