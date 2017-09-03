@@ -19,7 +19,7 @@
         <!--password="${jdbc.password}">-->
         <!--</jdbcConnection>-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://123.206.75.78/ecare?characterEncoding=UTF-8"
+                        connectionURL="jdbc:mysql://localhost:3306/ecare?characterEncoding=UTF-8"
                         userId="root"
                         password="root">
         </jdbcConnection>
